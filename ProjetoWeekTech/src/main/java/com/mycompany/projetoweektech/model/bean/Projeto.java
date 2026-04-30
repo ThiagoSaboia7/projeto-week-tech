@@ -1,6 +1,5 @@
 package com.mycompany.projetoweektech.model.bean;
 
-import java.util.Date;
 import java.util.List;
 
 public class Projeto {
@@ -8,7 +7,6 @@ public class Projeto {
     private int idProjeto;
     private String nomeProjeto;
     private String descricao;
-    private Date dataCriacao;
 
     // Relacionamento (1 projeto → vários integrantes)
     private List<Integrante> integrantes;
@@ -37,14 +35,6 @@ public class Projeto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Date getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(Date dataCriacao) {
-        this.dataCriacao = dataCriacao;
     }
 
     public List<Integrante> getIntegrantes() {
