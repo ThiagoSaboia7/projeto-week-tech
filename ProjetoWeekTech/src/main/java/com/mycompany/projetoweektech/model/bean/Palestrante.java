@@ -9,6 +9,8 @@ public class Palestrante {
     private String telefone;
     private String email;
     private String tema;
+    private String curriculoPath;
+    private String briefing;
     private Date dataHoraInscricao;
 
     // GETTERS E SETTERS
@@ -51,6 +53,22 @@ public class Palestrante {
 
     public void setTema(String tema) {
         this.tema = tema;
+    }
+
+    public String getCurriculoPath() {
+        return curriculoPath;
+    }
+
+    public void setCurriculoPath(String curriculoPath) {
+        this.curriculoPath = curriculoPath;
+    }
+
+    public String getBriefing() {
+        return briefing;
+    }
+
+    public void setBriefing(String briefing) {
+        this.briefing = briefing;
     }
 
     public Date getDataHoraInscricao() {
