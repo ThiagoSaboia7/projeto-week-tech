@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AlunoController", urlPatterns = {"/aluno"})
 public class AlunoController extends HttpServlet {
@@ -21,9 +22,17 @@ public class AlunoController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
         if (action == null) {
             action = "listar";
+        }
+
+        // PROTEÇÃO: Se a ação for 'listar', verifica se é ADM
+        if (action.equals("listar")) {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("adminLogado") == null) {
+                response.sendRedirect("login.jsp"); // Se não for ADM, manda pro login
+                return;
+            }
         }
 
         switch (action) {
