@@ -7,28 +7,23 @@ import java.sql.*;
 
 public class AdministradorDAO {
 
-    public Administrador login(String email, String senha) {
-        String sql = "SELECT * FROM administrador WHERE email = ?";
-
-        try (Connection conn = Conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public Administrador autenticar(String email, String senha) {
+        String sql = "SELECT * FROM administrador WHERE email = ? AND senha = ?";
+        try (Connection conn = Conexao.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);
+            stmt.setString(2, senha);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                if (rs.getString("senha").equals(senha)) {
-                    Administrador adm = new Administrador();
-                    adm.setIdAdministrador(rs.getInt("id_administrador"));
-                    adm.setEmail(rs.getString("email"));
-                    return adm;
-                }
+                Administrador admin = new Administrador();
+                admin.setIdAdministrador(rs.getInt("id_administrador"));
+                admin.setEmail(rs.getString("email"));
+                return admin;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }
