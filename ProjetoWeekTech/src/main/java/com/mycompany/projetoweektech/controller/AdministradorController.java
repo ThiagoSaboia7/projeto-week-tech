@@ -36,7 +36,7 @@ public class AdministradorController extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
 
-        Administrador admin = dao.login(email, senha);
+        Administrador admin = dao.autenticar(email, senha);
 
         if (admin != null) {
             HttpSession session = request.getSession();
