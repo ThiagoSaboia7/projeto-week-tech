@@ -18,12 +18,12 @@ public class AdministradorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String uri = request.getRequestURI();
-        
+
         if (uri.endsWith("/logout")) {
-            request.getSession().invalidate(); 
-            response.sendRedirect("index.html"); 
+            request.getSession().invalidate();
+            response.sendRedirect("index.jsp");
         } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
@@ -40,8 +40,8 @@ public class AdministradorController extends HttpServlet {
 
         if (admin != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("adminLogado", admin); 
-            response.sendRedirect("aluno?action=listar"); 
+            session.setAttribute("adminLogado", admin);
+            response.sendRedirect("aluno?action=listar");
         } else {
             request.setAttribute("erro", "Acesso negado: Credenciais inválidas.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
