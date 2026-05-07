@@ -622,30 +622,29 @@
                 <button class="modal-close" id="close-login">✕</button>
 
                 <div class="modal-logo">
-                    <div class="logo-icon" style="border-color:var(--accent)"></div>
+                    <div><img src="img/logo-unicesumar.jpeg" alt="Logo UniCesumar" style="height:40px;"></div>
                     <div class="logo-text">
                         <div class="brand" style="color:var(--navy)">UniCesumar</div>
                         <div class="sub">Tech Week</div>
                     </div>
                 </div>
 
-                <div class="modal-eyebrow">Área Restrita</div>
-                <h2>Bem-vindo de volta,<br>sentimos a tua falta!</h2>
-                <p class="modal-sub">Faça seu Login para continuar</p>
+                <div class="modal-eyebrow">Área Administrativa</div>
+                <h2>Acesse o Painel de Controle</h2>
+                <p class="modal-sub">Faça login para acessar o sistema administrativo</p>
 
                 <div id="login-form-wrap">
                     <div class="field-group">
                         <div class="field">
-                            <label for="login-email">Email</label>
-                            <input type="email" id="login-email" placeholder="admin@techweek.com"
-                                autocomplete="email" />
+                            <label for="login-email">E-mail</label>
+                            <input type="email" id="login-email" placeholder="admin@gmail.com" autocomplete="email" />
                         </div>
                         <div class="field">
                             <label for="login-senha">Senha</label>
-                            <input type="password" id="login-senha" placeholder="••••••••"
+                            <input type="password" id="login-senha" placeholder="Digite sua senha"
                                 autocomplete="current-password" />
                         </div>
-                        <div class="form-error" id="login-error">E-mail ou senha incorretos.</div>
+                        <div class="form-error" id="login-error">E-mail ou Senha Incorretos!</div>
                         <button class="btn-submit" id="btn-do-login">Entrar</button>
                     </div>
                 </div>
