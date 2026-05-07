@@ -1,11 +1,868 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+    <!DOCTYPE html>
+    <html lang="pt-br">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tech Week UniCesumar</title>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="css/index.css" />
     </head>
+
     <body>
-        <h1>Hello World!</h1>
+
+        <!-- ═══════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════ -->
+        <nav>
+            <a class="logo" href="#topo">
+                <img src="img/logo-unicesumar.jpeg" alt="Logo UniCesumar" style="height:40px;">
+                <div class="logo-text">
+                    <div class="brand">UniCesumar</div>
+                    <div class="sub">Tech Week</div>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#palestrantes">Palestrantes</a></li>
+                <li><a href="#patrocinadores">Patrocinadores</a></li>
+                <li><a href="#inscricoes">Inscrições</a></li>
+                <li><a href="#localizacao">Localização</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+            </ul>
+
+            <button class="btn-login" id="btn-open-login">
+                Login
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+        <section class="hero" id="topo">
+            <div class="hero-bg"></div>
+
+            <h1>Tech Week<br>UniCesumar</h1>
+
+            <p class="hero-sub">
+                Três dias de palestras e networking com os<br>
+                melhores profissionais do mercado de tecnologia.
+            </p>
+
+            <div class="hero-meta">
+                <span class="icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)"
+                        stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    01 a 03 de Junho, 2026
+                </span>
+                <div class="div"></div>
+                <span class="icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)"
+                        stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    UniCesumar – Londrina, PR
+                </span>
+            </div>
+
+            <div class="cd-label">Contagem Regressiva</div>
+
+            <div class="countdown" id="countdown">
+                <div class="cd-block">
+                    <div class="cd-num" id="cd-d">00</div>
+                    <div class="cd-unit">Dias</div>
+                </div>
+                <div class="cd-colon">:</div>
+                <div class="cd-block">
+                    <div class="cd-num" id="cd-h">00</div>
+                    <div class="cd-unit">Horas</div>
+                </div>
+                <div class="cd-colon">:</div>
+                <div class="cd-block">
+                    <div class="cd-num" id="cd-m">00</div>
+                    <div class="cd-unit">Min</div>
+                </div>
+                <div class="cd-colon">:</div>
+                <div class="cd-block">
+                    <div class="cd-num" id="cd-s">00</div>
+                    <div class="cd-unit">Seg</div>
+                </div>
+            </div>
+
+            <p class="finished-msg" id="fin-msg">🎉 O evento começou!</p>
+
+            <div class="hero-btns">
+                <button class="btn-solid" id="btn-hero-inscricao">Garantir minha vaga</button>
+                <button class="btn-ghost" id="btn-hero-programacao">Ver programação</button>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════
+     SPEAKERS
+════════════════════════════════════════════════ -->
+        <section class="speakers" id="palestrantes">
+            <div class="section-eyebrow">Palestrantes</div>
+
+            <div class="speakers-hd">
+                <h2>Conheça quem vai te inspirar</h2>
+                <div class="speakers-hd-right">
+                    <a class="see-all" href="#palestrantes">Ver todos os palestrantes
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow" id="prev" aria-label="Anterior">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <button class="carousel-arrow" id="next" aria-label="Próximo">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 6l6 6-6 6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-wrap">
+                <div class="carousel-outer">
+                    <div class="carousel-track" id="track">
+                        <div class="speaker-card">
+                            <div class="card-img ph1"></div>
+                            <div class="card-body">
+                                <h3>A small card</h3>
+                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                            </div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="card-img ph2"></div>
+                            <div class="card-body">
+                                <h3>A little glimpse</h3>
+                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                            </div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="card-img ph3"></div>
+                            <div class="card-body">
+                                <h3>A quick peek</h3>
+                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                            </div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="card-img ph4"></div>
+                            <div class="card-body">
+                                <h3>Uma visão geral</h3>
+                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                            </div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="card-img ph5"></div>
+                            <div class="card-body">
+                                <h3>Destaque especial</h3>
+                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-dots" id="dots"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════
+     PATROCINADORES
+════════════════════════════════════════════════ -->
+        <section class="sponsors" id="patrocinadores">
+            <div class="section-eyebrow">Patrocinadores</div>
+            <h2 class="sponsors-title">Empresas que acreditam no futuro!</h2>
+
+            <div class="logos-track-wrap">
+                <div class="logos-track" id="logos-track">
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">LOGOIPSUM</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">LogoIPSUM</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">logoipsum</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">LOGOIPSUM</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">LogoIPSUM</text>
+                        </svg></div>
+                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
+                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
+                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
+                                font-weight="700" fill="#8c9bbf">logoipsum</text>
+                        </svg></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════
+     INSCRIÇÕES
+════════════════════════════════════════════════ -->
+        <section class="inscricoes" id="inscricoes">
+            <div class="insc-left">
+                <div class="section-eyebrow">Inscrições</div>
+                <h2>Participe e<br>Compartilhe<br>Conhecimento</h2>
+                <p>Participe do evento da forma que mais combina com você. Confira as opções disponíveis e faça a sua
+                    inscrição em poucos passos.</p>
+            </div>
+
+            <div class="insc-cards">
+
+                <!-- card participante -->
+                <div class="insc-card">
+                    <div class="insc-card-head">
+                        <div class="insc-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="4" />
+                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Participante</h3>
+                            <span class="insc-sub">Apenas para alunos</span>
+                        </div>
+                    </div>
+                    <p class="insc-desc">Participe do evento, acompanhe as atividades e aproveite o networking e o
+                        conhecimento.</p>
+
+                    <div class="insc-block">
+                        <p class="insc-block-title">O que você precisa informar:</p>
+                        <ul>
+                            <li>Nome Completo</li>
+                            <li>R.A.</li>
+                            <li>Curso</li>
+                            <li>Série</li>
+                            <li>Inscrição para o Coffee Break</li>
+                        </ul>
+                    </div>
+
+                    <div class="insc-block">
+                        <p class="insc-block-title">Benefícios:</p>
+                        <ul class="check">
+                            <li>Acesso a todas as palestras</li>
+                            <li>Horas Complementares</li>
+                            <li>Coffee Break opcional</li>
+                            <li>Networking com profissionais e estudantes</li>
+                        </ul>
+                    </div>
+
+                    <button class="insc-btn" id="btn-open-part">Inscreva-se como Participante</button>
+                </div>
+
+                <!-- card palestrante -->
+                <div class="insc-card">
+                    <div class="insc-card-head">
+                        <div class="insc-icon accent">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Palestrante</h3>
+                            <span class="insc-sub">Submissão de proposta</span>
+                        </div>
+                    </div>
+                    <p class="insc-desc">Compartilhe seu conhecimento e inspire nossa comunidade com uma palestra.</p>
+
+                    <div class="insc-block">
+                        <p class="insc-block-title">Você precisará enviar:</p>
+                        <ul>
+                            <li>Nome Completo</li>
+                            <li>Telefone</li>
+                            <li>E-mail</li>
+                            <li>Tema da palestra</li>
+                            <li>Currículo</li>
+                            <li>Briefing da proposta</li>
+                            <li>Tempo estimado (60 min)</li>
+                        </ul>
+                    </div>
+
+                    <div class="insc-block">
+                        <p class="insc-block-title">Benefícios:</p>
+                        <ul class="check open">
+                            <li>Visibilidade para a sua marca ou carreira</li>
+                            <li>Certificação de palestrante</li>
+                            <li>Divulgação da sua palestra no evento</li>
+                            <li>Contribuição para a formação dos alunos</li>
+                        </ul>
+                    </div>
+
+                    <button class="insc-btn outline" id="btn-open-pal">Inscreva-se como Palestrante</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════
+     MAPA
+════════════════════════════════════════════════ -->
+        <section class="mapa-section" id="localizacao">
+            <div class="mapa-header">
+                <div>
+                    <div class="section-eyebrow">Mapa Tech Week</div>
+                    <h2 class="mapa-title">Encontre-nos no Evento</h2>
+                    <p class="mapa-desc">Confira detalhes do local, horários, transporte e tudo o que você precisa saber
+                        para aproveitar a Tech Week UniCesumar ao máximo.</p>
+                </div>
+                <a class="btn-maps" href="https://maps.google.com/?q=UniCesumar+Campus+Londrina" target="_blank"
+                    rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Ver no Google Maps
+                </a>
+            </div>
+
+            <div class="map-container">
+                <iframe id="gmap" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.5!2d-51.1733!3d-23.3045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94eb48e4cce3b171%3A0x4b3db3a5f7a2a3d0!2sUniCesumar%20-%20Londrina!5e0!3m2!1spt-BR!2sbr!4v1683000000000!5m2!1spt-BR!2sbr"
+                    title="UniCesumar – Campus Londrina">
+                </iframe>
+                <div class="map-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    UniCesumar – Campus Londrina, PR
+                </div>
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info-card">
+                    <div class="info-card-head">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Informações do Evento</h4>
+                            <span>Dados importantes para sua participação</span>
+                        </div>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <div><strong>UniCesumar – Campus Londrina</strong><br><small>Av. Santa Mônica, 450 –
+                                    Londrina, PR, 86027-610</small></div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            <div><strong>Data do Evento</strong><br><small>01 a 03 de Junho de 2026</small></div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                            <div><strong>Horário</strong><br><small>18h às 22h</small></div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg>
+                            <div><strong>Estacionamento</strong><br><small>Disponível no local com vagas
+                                    gratuitas</small></div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg>
+                            <div><strong>Transporte Público</strong><br><small>Linhas: 102 e 092</small></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-head">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Infraestrutura Disponível</h4>
+                            <span>Ambiente planejado para o seu conforto</span>
+                        </div>
+                    </div>
+                    <ul class="infra-list">
+                        <li>
+                            <div class="infra-text">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                </svg>
+                                <div><strong>Auditório Moderno</strong><small>Ambiente climatizado e
+                                        confortável</small></div>
+                            </div>
+                            <div class="check-badge">✓</div>
+                        </li>
+                        <li>
+                            <div class="infra-text">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                                    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                                    <line x1="12" y1="20" x2="12.01" y2="20" />
+                                </svg>
+                                <div><strong>Wi-Fi Gratuito</strong><small>Internet rápida em todo espaço</small>
+                                </div>
+                            </div>
+                            <div class="check-badge">✓</div>
+                        </li>
+                        <li>
+                            <div class="infra-text">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
+                                    height="16">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 8v4l3 3" />
+                                </svg>
+                                <div><strong>Acessibilidade Completa</strong><small>Espaço adaptado e
+                                        inclusivo</small></div>
+                            </div>
+                            <div class="check-badge">✓</div>
+                        </li>
+                        <li>
+                            <div class="infra-text">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                                    <line x1="6" y1="1" x2="6" y2="4" />
+                                    <line x1="10" y1="1" x2="10" y2="4" />
+                                    <line x1="14" y1="1" x2="14" y2="4" />
+                                </svg>
+                                <div><strong>Alimentação</strong><small>Coffee break opcional</small></div>
+                            </div>
+                            <div class="check-badge">✓</div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════
+     SOBRE O EVENTO
+════════════════════════════════════════════════ -->
+        <section class="sobre" id="sobre">
+            <div class="sobre-inner">
+                <div class="section-eyebrow">Sobre o Evento</div>
+                <h2>O que é a TECH WEEK?</h2>
+                <div class="sobre-body">
+                    <p>A II Tech Week conecta teoria e prática ao explorar a Inteligência Artificial de forma aplicada.
+                        Com o tema "Inteligência Artificial em Ação", o evento destaca tecnologias que já impactam o
+                        presente.</p>
+                    <p>A integração entre dados, inovação e transformação digital está no centro das discussões,
+                        mostrando como a IA torna decisões mais estratégicas e eficientes.</p>
+                    <p>Mais do que tendência, a Inteligência Artificial já é uma realidade em diversas áreas, exigindo
+                        profissionais preparados, críticos e adaptáveis a um mundo em constante evolução.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+        <footer class="footer">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a class="footer-logo logo" href="#topo">
+                        <div class="logo-icon"></div>
+                        <div class="logo-text">
+                            <div class="brand">UniCesumar</div>
+                            <div class="sub">Tech Week</div>
+                        </div>
+                    </a>
+                    <p class="footer-tagline">Transformando vidas por meio da educação e da tecnologia. Conectando
+                        pessoas e impulsionando o futuro.</p>
+                    <p class="footer-tagline">Acompanhe nas redes e fique por dentro de todas as novidades e projetos.
+                    </p>
+                    <div class="footer-social-label">Redes Sociais</div>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg></a>
+                        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4l16 16M4 20 20 4" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" fill="none" />
+                            </svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="20" height="20" rx="5" />
+                                <circle cx="12" cy="12" r="4" />
+                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                            </svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></a>
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"
+                                    stroke="none" />
+                            </svg></a>
+                        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.16 8.16 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                            </svg></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a href="#">Conheça a UniCesumar</a></li>
+                        <li><a href="#">Fundação UniCesumar</a></li>
+                        <li><a href="#">Comunidade</a></li>
+                        <li><a href="#">Notícias</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Atendimento</h4>
+                    <ul>
+                        <li><a href="#">Fale Conosco</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Central de Atendimento</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copy">2026 UniCesumar. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+        <!-- ══════════════════════════════════════════════════════════
+     MODAL: LOGIN ADMIN
+══════════════════════════════════════════════════════════ -->
+        <div class="modal-overlay" id="modal-login">
+            <div class="modal-box">
+                <button class="modal-close" id="close-login">✕</button>
+
+                <div class="modal-logo">
+                    <div class="logo-icon" style="border-color:var(--accent)"></div>
+                    <div class="logo-text">
+                        <div class="brand" style="color:var(--navy)">UniCesumar</div>
+                        <div class="sub">Tech Week</div>
+                    </div>
+                </div>
+
+                <div class="modal-eyebrow">Área Restrita</div>
+                <h2>Bem-vindo de volta,<br>sentimos a tua falta!</h2>
+                <p class="modal-sub">Faça seu Login para continuar</p>
+
+                <div id="login-form-wrap">
+                    <div class="field-group">
+                        <div class="field">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="admin@techweek.com"
+                                autocomplete="email" />
+                        </div>
+                        <div class="field">
+                            <label for="login-senha">Senha</label>
+                            <input type="password" id="login-senha" placeholder="••••••••"
+                                autocomplete="current-password" />
+                        </div>
+                        <div class="form-error" id="login-error">E-mail ou senha incorretos.</div>
+                        <button class="btn-submit" id="btn-do-login">Entrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════
+     MODAL: INSCRIÇÃO PARTICIPANTE
+══════════════════════════════════════════════════════════ -->
+        <div class="modal-overlay" id="modal-part">
+            <div class="modal-box" style="max-width:520px; max-height:90vh; overflow-y:auto;">
+                <button class="modal-close" id="close-part">✕</button>
+
+                <div id="form-part-wrap">
+                    <div class="modal-eyebrow">Inscrições</div>
+                    <h2>Inscrição como Participante</h2>
+                    <p class="modal-sub">Preencha os dados abaixo para garantir sua vaga no evento.</p>
+
+                    <div class="field-group">
+                        <div class="field">
+                            <label for="p-nome">Nome Completo *</label>
+                            <input type="text" id="p-nome" placeholder="Seu nome completo" />
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="p-ra">R.A. (Registro Acadêmico) *</label>
+                                <input type="text" id="p-ra" placeholder="Ex: 2024001234" />
+                            </div>
+                            <div class="field">
+                                <label for="p-email">E-mail *</label>
+                                <input type="email" id="p-email" placeholder="seu@email.com" />
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="p-curso">Curso *</label>
+                                <select id="p-curso">
+                                    <option value="">Selecione...</option>
+                                    <option>Ciência da Computação</option>
+                                    <option>Sistemas de Informação</option>
+                                    <option>Engenharia de Software</option>
+                                    <option>Análise e Des. de Sistemas</option>
+                                    <option>Engenharia da Computação</option>
+                                    <option>Outro</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="p-serie">Série / Período *</label>
+                                <select id="p-serie">
+                                    <option value="">Selecione...</option>
+                                    <option>1º Período</option>
+                                    <option>2º Período</option>
+                                    <option>3º Período</option>
+                                    <option>4º Período</option>
+                                    <option>5º Período</option>
+                                    <option>6º Período</option>
+                                    <option>7º Período</option>
+                                    <option>8º Período</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="checkbox-field">
+                            <input type="checkbox" id="p-coffee" />
+                            <label for="p-coffee">Quero me inscrever para o Coffee Break (gratuito, vagas
+                                limitadas)</label>
+                        </div>
+                        <div class="form-error" id="part-error">Preencha todos os campos obrigatórios.</div>
+                        <button class="btn-submit" id="btn-do-part">Confirmar Inscrição</button>
+                    </div>
+                </div>
+
+                <div class="form-success" id="success-part" style="display:none">
+                    <div class="success-icon">🎉</div>
+                    <h3>Inscrição Confirmada!</h3>
+                    <p>Sua inscrição como <strong>Participante</strong> foi registrada com sucesso.<br>Nos vemos na Tech
+                        Week!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════
+     MODAL: INSCRIÇÃO PALESTRANTE
+══════════════════════════════════════════════════════════ -->
+        <div class="modal-overlay" id="modal-pal">
+            <div class="modal-box" style="max-width:540px; max-height:90vh; overflow-y:auto;">
+                <button class="modal-close" id="close-pal">✕</button>
+
+                <div id="form-pal-wrap">
+                    <div class="modal-eyebrow">Inscrições</div>
+                    <h2>Inscrição como Palestrante</h2>
+                    <p class="modal-sub">Submeta sua proposta de palestra para o evento.</p>
+
+                    <div class="field-group">
+                        <div class="field">
+                            <label for="s-nome">Nome Completo *</label>
+                            <input type="text" id="s-nome" placeholder="Seu nome completo" />
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="s-email">E-mail *</label>
+                                <input type="email" id="s-email" placeholder="seu@email.com" />
+                            </div>
+                            <div class="field">
+                                <label for="s-tel">Telefone *</label>
+                                <input type="tel" id="s-tel" placeholder="(43) 9 0000-0000" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="s-tema">Tema da Palestra *</label>
+                            <input type="text" id="s-tema" placeholder="Ex: IA Generativa no Mercado de Trabalho" />
+                        </div>
+                        <div class="field">
+                            <label for="s-briefing">Briefing da Proposta *</label>
+                            <textarea id="s-briefing" rows="4"
+                                placeholder="Descreva brevemente o conteúdo da sua palestra, objetivos e público-alvo..."></textarea>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="s-tempo">Tempo Estimado *</label>
+                                <select id="s-tempo">
+                                    <option value="">Selecione...</option>
+                                    <option>30 minutos</option>
+                                    <option>45 minutos</option>
+                                    <option value="60 minutos" selected>60 minutos</option>
+                                    <option>90 minutos</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="s-curr">Currículo / LinkedIn *</label>
+                                <input type="text" id="s-curr" placeholder="linkedin.com/in/seu-perfil" />
+                            </div>
+                        </div>
+                        <div class="form-error" id="pal-error">Preencha todos os campos obrigatórios.</div>
+                        <button class="btn-submit" id="btn-do-pal">Enviar Proposta</button>
+                    </div>
+                </div>
+
+                <div class="form-success" id="success-pal" style="display:none">
+                    <div class="success-icon">🚀</div>
+                    <h3>Proposta Enviada!</h3>
+                    <p>Sua proposta de palestra foi recebida com sucesso.<br>Nossa equipe entrará em contato em breve.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════
+     PAINEL ADMIN
+══════════════════════════════════════════════════════════ -->
+        <div id="admin-panel">
+            <nav class="admin-nav">
+                <a class="logo" href="#" onclick="closeAdmin()">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <div class="brand">UniCesumar</div>
+                        <div class="sub">Tech Week</div>
+                    </div>
+                </a>
+                <div style="display:flex;align-items:center;gap:12px">
+                    <span class="admin-badge">🔐 Administrador</span>
+                    <button class="admin-logout" onclick="logout()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Sair
+                    </button>
+                </div>
+            </nav>
+
+            <div class="admin-main">
+                <div class="admin-header">
+                    <h1>Painel de Inscrições</h1>
+                    <button class="btn-export" onclick="exportCSV()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Exportar CSV
+                    </button>
+                </div>
+
+                <div class="admin-stats" id="admin-stats">
+                    <!-- preenchido via JS -->
+                </div>
+
+                <div class="admin-tabs">
+                    <button class="admin-tab active" onclick="switchTab('todos', this)">Todos</button>
+                    <button class="admin-tab" onclick="switchTab('participante', this)">Participantes</button>
+                    <button class="admin-tab" onclick="switchTab('palestrante', this)">Palestrantes</button>
+                </div>
+
+                <div class="admin-table-wrap">
+                    <div class="admin-table-header">
+                        <span class="admin-table-title" id="table-title">Todas as inscrições</span>
+                        <div class="admin-search">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                            </svg>
+                            <input type="text" id="admin-search-input" placeholder="Buscar por nome ou e-mail..."
+                                oninput="renderTable()" />
+                        </div>
+                    </div>
+                    <div id="admin-table-container"><!-- preenchido via JS --></div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="script.js" defer></script>
     </body>
-</html>
+    <script src="js/index.js"></script>
+
+    </html>
