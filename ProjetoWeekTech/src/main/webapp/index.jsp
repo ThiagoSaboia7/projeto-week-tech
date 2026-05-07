@@ -18,7 +18,7 @@
 ════════════════════════════════════════════════ -->
         <nav>
             <a class="logo" href="#topo">
-                <img src="img/logo-unicesumar.jpeg" alt="Logo UniCesumar" style="height:40px;">
+                <img src="img/UniCesumarLogoAzul.jpg" alt="Logo UniCesumar" style="height:40px;">
                 <div class="logo-text">
                     <div class="brand">UniCesumar</div>
                     <div class="sub">Tech Week</div>
@@ -142,38 +142,38 @@
                 <div class="carousel-outer">
                     <div class="carousel-track" id="track">
                         <div class="speaker-card">
-                            <div class="card-img ph1"></div>
+                            <img class="card-img" src="img/palestrantes/palestrante-fernando.jpeg" alt="Palestrante-Fernando">
                             <div class="card-body">
-                                <h3>A small card</h3>
-                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                                <h3>Fernando Batista</h3>
+                                <p>Consultor Executivo em Cibersegurança</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <div class="card-img ph2"></div>
+                            <img class="card-img" src="img/palestrantes/palestrante-helena.jpeg" alt="Palestrante-Helena">
                             <div class="card-body">
-                                <h3>A little glimpse</h3>
-                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                                <h3>Helena Duarte</h3>
+                                <p>Gerente Sênior de Engenharia de Software</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <div class="card-img ph3"></div>
+                            <img class="card-img" src="img/palestrantes/palestrante-carlos.jpeg" alt="Palestrante-Carlos">
                             <div class="card-body">
-                                <h3>A quick peek</h3>
-                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                                <h3>Carlos Henrique Moura</h3>
+                                <p>Arquiteto de Software Corporativo</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <div class="card-img ph4"></div>
+                            <img class="card-img" src="img/palestrantes/palestrante-patricia.jpeg" alt="Palestrante-Patricia">
                             <div class="card-body">
-                                <h3>Uma visão geral</h3>
-                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                                <h3>Patrícia Menezes</h3>
+                                <p>Diretora de Inovação Digital</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <div class="card-img ph5"></div>
+                            <img class="card-img" src="img/palestrantes/palestrante-roberto.jpeg" alt="Palestrante-Roberto">
                             <div class="card-body">
-                                <h3>Destaque especial</h3>
-                                <p>Call out a feature, benefit, or value of your site that can stand on its own.</p>
+                                <h3>Roberto Almeida</h3>
+                                <p>Diretor de Tecnologia (CTO)</p>
                             </div>
                         </div>
                     </div>
@@ -541,7 +541,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <a class="footer-logo logo" href="#topo">
-                        <div class="logo-icon"></div>
+                        <img src="img/UniCesumarLogoBranca.png" alt="Logo UniCesumar" style="height:40px;">
                         <div class="logo-text">
                             <div class="brand">UniCesumar</div>
                             <div class="sub">Tech Week</div>
@@ -553,58 +553,41 @@
                     </p>
                     <div class="footer-social-label">Redes Sociais</div>
                     <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                            </svg></a>
-                        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 4l16 16M4 20 20 4" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" fill="none" />
-                            </svg></a>
-                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="2" width="20" height="20" rx="5" />
-                                <circle cx="12" cy="12" r="4" />
-                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                            </svg></a>
-                        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg></a>
-                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-                                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"
-                                    stroke="none" />
-                            </svg></a>
-                        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.16 8.16 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
-                            </svg></a>
+                        <a target="_blank" href="https://www.facebook.com/UniCesumar"><img src="img/icons-redes-sociais/icons8-facebook-50.png" alt="Facebook" style="height:32px;"></a>
+                        <a target="_blank" href="https://x.com/unicesumar"><img src="img/icons-redes-sociais/icons8-x-50.png" alt="X" style="height:32px;"></a>
+                        <a target="_blank" href="https://www.instagram.com/unicesumaroficial/"><img src="img/icons-redes-sociais/icons8-instagram-50.png" alt="Instagram" style="height:32px;"></a>
+                        <a target="_blank" href="https://www.linkedin.com/school/unicesumaroficial/posts/?feedView=all"><img src="img/icons-redes-sociais/icons8-linkedin-50.png" alt="LinkedIn" style="height:32px" style="height:32px;"></a>
+                        <a target="_blank" href="https://www.youtube.com/@EADUnicesumarOficial"><img src="img/icons-redes-sociais/icons8-youtube-50.png" alt="Youtube" style="height:32px;"></a>
+                        <a target="_blank" href="https://www.tiktok.com/@unicesumaroficial"><img src="img/icons-redes-sociais/icons8-tiktok-50.png" alt="TikTok" style="height:32px;"></a>
                     </div>
                 </div>
 
                 <div class="footer-col">
                     <h4>Institucional</h4>
                     <ul>
-                        <li><a href="#">Conheça a UniCesumar</a></li>
-                        <li><a href="#">Fundação UniCesumar</a></li>
-                        <li><a href="#">Comunidade</a></li>
-                        <li><a href="#">Notícias</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/conheca-a-unicesumar/">Conheça a
+                                UniCesumar</a></li>
+                        <li><a target="_blank"
+                                href="https://www.unicesumar.edu.br/conheca-a-unicesumar/fundacao-unicesumar/">Fundação
+                                UniCesumar</a></li>
+                        <li><a target="_blank"
+                                href="https://www.unicesumar.edu.br/presencial/comunidade/">Comunidade</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/noticias/">Notícias</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/blog/">Blog</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/">Política de
+                                Privacidade</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Atendimento</h4>
                     <ul>
-                        <li><a href="#">Fale Conosco</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Central de Atendimento</a></li>
+                        <li><a target="_blank" href="https://api.whatsapp.com/send?phone=554491036999">Fale Conosco</a>
+                        </li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/">Termos de
+                                Uso</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/atendimento/">Central de
+                                Atendimento</a></li>
                     </ul>
                 </div>
             </div>
@@ -622,7 +605,7 @@
                 <button class="modal-close" id="close-login">✕</button>
 
                 <div class="modal-logo">
-                    <div><img src="img/logo-unicesumar.jpeg" alt="Logo UniCesumar" style="height:40px;"></div>
+                    <div><img src="img/UniCesumarLogoAzul.jpg" alt="Logo UniCesumar" style="height:40px;"></div>
                     <div class="logo-text">
                         <div class="brand" style="color:var(--navy)">UniCesumar</div>
                         <div class="sub">Tech Week</div>
@@ -796,8 +779,8 @@
 ══════════════════════════════════════════════════════════ -->
         <div id="admin-panel">
             <nav class="admin-nav">
-                <a class="logo" href="#" onclick="closeAdmin()">
-                    <div class="logo-icon"></div>
+                <a class="logo">
+                    <img src="img/UniCesumarLogoBranca.png" alt="Logo UniCesumar" style="height:40px;">
                     <div class="logo-text">
                         <div class="brand">UniCesumar</div>
                         <div class="sub">Tech Week</div>
