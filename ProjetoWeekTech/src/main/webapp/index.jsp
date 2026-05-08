@@ -45,7 +45,6 @@
      HERO
 ════════════════════════════════════════════════ -->
         <section class="hero" id="topo">
-            <div class="hero-bg"></div>
 
             <h1>Tech Week<br>UniCesumar</h1>
 
@@ -226,7 +225,7 @@
                             alt="Patrocinador DELL"></div>
                     <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
                             alt="Patrocinador GDG"></div>
-                            <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                    <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
                             alt="Patrocinador Adilson"></div>
@@ -235,7 +234,7 @@
                             alt="Patrocinador DELL"></div>
                     <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
                             alt="Patrocinador GDG"></div>
-                            <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                    <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
                             alt="Patrocinador Adilson"></div>
@@ -371,10 +370,10 @@
             </div>
 
             <div class="map-container">
-                <iframe id="gmap" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.5!2d-51.1733!3d-23.3045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94eb48e4cce3b171%3A0x4b3db3a5f7a2a3d0!2sUniCesumar%20-%20Londrina!5e0!3m2!1spt-BR!2sbr!4v1683000000000!5m2!1spt-BR!2sbr"
-                    title="UniCesumar – Campus Londrina">
-                </iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3664.33270642479!2d-51.14333442448001!3d-23.303684452176558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94eb437a3d1d44af%3A0x9c9f46adfc62d1eb!2sUniCesumar%20-%20Londrina!5e0!3m2!1spt-BR!2sbr!4v1778202069167!5m2!1spt-BR!2sbr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div class="map-pill">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                         <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />

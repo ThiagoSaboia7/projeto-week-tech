@@ -38,13 +38,20 @@ nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--white);
-    border-bottom: 1px solid #e4e8f4;
+
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.96) 0%,
+            rgba(245, 247, 251, 0.92) 100%);
+
+    backdrop-filter: blur(10px);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 52px;
-    height: 62px;
+    height: 80px;
+
+    border-bottom: none;
 }
 
 .logo {
@@ -141,9 +148,27 @@ nav {
 /* ════════════════════════════════════════
    HERO
 ════════════════════════════════════════ */
+
 .hero {
     position: relative;
-    background: var(--navy);
+
+    background:
+        radial-gradient(circle at top,
+            rgba(255, 255, 255, 0.55) 0%,
+            rgba(255, 255, 255, 0.12) 22%,
+            transparent 40%),
+
+        linear-gradient(180deg,
+            #f7f9fd 0%,
+            #edf2ff 10%,
+            #d7e3ff 18%,
+            #9dbbff 28%,
+            #4f84ea 38%,
+            #1f56c8 48%,
+            #0c3a9e 60%,
+            #082d7f 72%,
+            #071f5c 100%);
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -151,16 +176,6 @@ nav {
     padding: 80px 24px 92px;
     text-align: center;
     overflow: hidden;
-}
-
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-        radial-gradient(ellipse 75% 55% at 15% 20%, #1d40c4 0%, transparent 60%),
-        radial-gradient(ellipse 55% 65% at 88% 75%, #091648 0%, transparent 65%),
-        radial-gradient(ellipse 100% 100% at 50% 50%, #0f2290 0%, #050d2e 100%);
 }
 
 .hero>* {
@@ -1216,6 +1231,7 @@ nav {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
