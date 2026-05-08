@@ -293,8 +293,8 @@
                         <ul class="check">
                             <li> <img class="icon-check" src="img/icons-inscri-user/acesso.png" alt="Ícone-Acesso"
                                     width="12" height="12">Acesso a todas as palestras</li>
-                            <li><img class="icon-check" src="img/icons-inscri-user/certificado.png" alt="Ícone-Certificado"
-                                    width="12" height="12">Horas Complementares</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/certificado.png"
+                                    alt="Ícone-Certificado" width="12" height="12">Horas Complementares</li>
                             <li><img class="icon-check" src="img/icons-inscri-user/xicara.png" alt="Ícone-Xícara"
                                     width="12" height="12">Coffee Break opcional</li>
                             <li><img class="icon-check" src="img/icons-inscri-user/coracao.png" alt="Ícone-Coração"
@@ -309,12 +309,8 @@
                 <div class="insc-card">
                     <div class="insc-card-head">
                         <div class="insc-icon accent">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
+                            <img src="img/icons-inscri-palest/microfone.png" alt="Ícone-Microfone" width="22"
+                                height="22">
                         </div>
                         <div>
                             <h3>Palestrante</h3>
@@ -326,23 +322,34 @@
                     <div class="insc-block">
                         <p class="insc-block-title">Você precisará enviar:</p>
                         <ul>
-                            <li>Nome Completo</li>
-                            <li>Telefone</li>
-                            <li>E-mail</li>
-                            <li>Tema da palestra</li>
-                            <li>Currículo</li>
-                            <li>Briefing da proposta</li>
-                            <li>Tempo estimado (60 min)</li>
+                            <li> <img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Completo</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Telefone</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">E-mail</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Tema da palestra</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Currículo</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Briefing da proposta</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Tempo estimado (60 min)</li>
                         </ul>
                     </div>
 
                     <div class="insc-block">
                         <p class="insc-block-title">Benefícios:</p>
                         <ul class="check open">
-                            <li>Visibilidade para a sua marca ou carreira</li>
-                            <li>Certificação de palestrante</li>
-                            <li>Divulgação da sua palestra no evento</li>
-                            <li>Contribuição para a formação dos alunos</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/estrela.png" alt="Ícone-Estrela"
+                                    width="12" height="12">Visibilidade para a sua marca ou carreira</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/certificado.png"
+                                    alt="Ícone-Certificado" width="12" height="12">Certificação de palestrante</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/alto-falante.png"
+                                    alt="Ícone-Falante" width="12" height="12">Divulgação da sua palestra no evento</li>
+                            <li><img class="icon-check" src="img/icons-inscri-palest/coracao.png" alt="Ícone-Coração"
+                                    width="12" height="12">Contribuição para a formação dos alunos</li>
                         </ul>
                     </div>
 
