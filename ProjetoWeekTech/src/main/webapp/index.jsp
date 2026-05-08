@@ -142,35 +142,40 @@
                 <div class="carousel-outer">
                     <div class="carousel-track" id="track">
                         <div class="speaker-card">
-                            <img class="card-img" src="img/palestrantes/palestrante-fernando.jpeg" alt="Palestrante-Fernando">
+                            <img class="card-img" src="img/palestrantes/palestrante-fernando.jpeg"
+                                alt="Palestrante-Fernando">
                             <div class="card-body">
                                 <h3>Fernando Batista</h3>
                                 <p>Consultor Executivo em Cibersegurança</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <img class="card-img" src="img/palestrantes/palestrante-helena.jpeg" alt="Palestrante-Helena">
+                            <img class="card-img" src="img/palestrantes/palestrante-helena.jpeg"
+                                alt="Palestrante-Helena">
                             <div class="card-body">
                                 <h3>Helena Duarte</h3>
                                 <p>Gerente Sênior de Engenharia de Software</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <img class="card-img" src="img/palestrantes/palestrante-carlos.jpeg" alt="Palestrante-Carlos">
+                            <img class="card-img" src="img/palestrantes/palestrante-carlos.jpeg"
+                                alt="Palestrante-Carlos">
                             <div class="card-body">
                                 <h3>Carlos Henrique Moura</h3>
                                 <p>Arquiteto de Software Corporativo</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <img class="card-img" src="img/palestrantes/palestrante-patricia.jpeg" alt="Palestrante-Patricia">
+                            <img class="card-img" src="img/palestrantes/palestrante-patricia.jpeg"
+                                alt="Palestrante-Patricia">
                             <div class="card-body">
                                 <h3>Patrícia Menezes</h3>
                                 <p>Diretora de Inovação Digital</p>
                             </div>
                         </div>
                         <div class="speaker-card">
-                            <img class="card-img" src="img/palestrantes/palestrante-roberto.jpeg" alt="Palestrante-Roberto">
+                            <img class="card-img" src="img/palestrantes/palestrante-roberto.jpeg"
+                                alt="Palestrante-Roberto">
                             <div class="card-body">
                                 <h3>Roberto Almeida</h3>
                                 <p>Diretor de Tecnologia (CTO)</p>
@@ -192,56 +197,53 @@
 
             <div class="logos-track-wrap">
                 <div class="logos-track" id="logos-track">
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">LOGOIPSUM</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">LogoIPSUM</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">logoipsum</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">LOGOIPSUM</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">Logoipsum</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">LogoIPSUM</text>
-                        </svg></div>
-                    <div class="logo-item"><svg viewBox="0 0 80 28" fill="none">
-                            <rect width="80" height="28" rx="6" fill="#e8eaf6" /><text x="40" y="19"
-                                text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11"
-                                font-weight="700" fill="#8c9bbf">logoipsum</text>
-                        </svg></div>
+
+                    <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                            alt="Patrocinador Caco-Alimentação"></div>
+                    <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                            alt="Patrocinador Adilson"></div>
+                    <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                    <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                            alt="Patrocinador DELL"></div>
+                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
+                            alt="Patrocinador GDG"></div>
+
+                    <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                            alt="Patrocinador Caco-Alimentação"></div>
+                    <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                            alt="Patrocinador Adilson"></div>
+                    <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                    <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                            alt="Patrocinador DELL"></div>
+                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
+                            alt="Patrocinador GDG"></div>
+                    <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                            alt="Patrocinador Caco-Alimentação"></div>
+                    <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                            alt="Patrocinador Adilson"></div>
+                    <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                    <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                            alt="Patrocinador DELL"></div>
+                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
+                            alt="Patrocinador GDG"></div>
+                            <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                            alt="Patrocinador Caco-Alimentação"></div>
+                    <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                            alt="Patrocinador Adilson"></div>
+                    <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                    <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                            alt="Patrocinador DELL"></div>
+                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
+                            alt="Patrocinador GDG"></div>
+                            <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                            alt="Patrocinador Caco-Alimentação"></div>
+                    <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                            alt="Patrocinador Adilson"></div>
+                    <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                    <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                            alt="Patrocinador DELL"></div>
+                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
+                            alt="Patrocinador GDG"></div>
                 </div>
             </div>
         </section>
@@ -553,12 +555,24 @@
                     </p>
                     <div class="footer-social-label">Redes Sociais</div>
                     <div class="footer-social">
-                        <a target="_blank" href="https://www.facebook.com/UniCesumar"><img src="img/icons-redes-sociais/icons8-facebook-50.png" alt="Facebook" style="height:32px;"></a>
-                        <a target="_blank" href="https://x.com/unicesumar"><img src="img/icons-redes-sociais/icons8-x-50.png" alt="X" style="height:32px;"></a>
-                        <a target="_blank" href="https://www.instagram.com/unicesumaroficial/"><img src="img/icons-redes-sociais/icons8-instagram-50.png" alt="Instagram" style="height:32px;"></a>
-                        <a target="_blank" href="https://www.linkedin.com/school/unicesumaroficial/posts/?feedView=all"><img src="img/icons-redes-sociais/icons8-linkedin-50.png" alt="LinkedIn" style="height:32px" style="height:32px;"></a>
-                        <a target="_blank" href="https://www.youtube.com/@EADUnicesumarOficial"><img src="img/icons-redes-sociais/icons8-youtube-50.png" alt="Youtube" style="height:32px;"></a>
-                        <a target="_blank" href="https://www.tiktok.com/@unicesumaroficial"><img src="img/icons-redes-sociais/icons8-tiktok-50.png" alt="TikTok" style="height:32px;"></a>
+                        <a target="_blank" href="https://www.facebook.com/UniCesumar"><img
+                                src="img/icons-redes-sociais/icons8-facebook-50.png" alt="Facebook"
+                                style="height:32px;"></a>
+                        <a target="_blank" href="https://x.com/unicesumar"><img
+                                src="img/icons-redes-sociais/icons8-x-50.png" alt="X" style="height:32px;"></a>
+                        <a target="_blank" href="https://www.instagram.com/unicesumaroficial/"><img
+                                src="img/icons-redes-sociais/icons8-instagram-50.png" alt="Instagram"
+                                style="height:32px;"></a>
+                        <a target="_blank"
+                            href="https://www.linkedin.com/school/unicesumaroficial/posts/?feedView=all"><img
+                                src="img/icons-redes-sociais/icons8-linkedin-50.png" alt="LinkedIn" style="height:32px"
+                                style="height:32px;"></a>
+                        <a target="_blank" href="https://www.youtube.com/@EADUnicesumarOficial"><img
+                                src="img/icons-redes-sociais/icons8-youtube-50.png" alt="Youtube"
+                                style="height:32px;"></a>
+                        <a target="_blank" href="https://www.tiktok.com/@unicesumaroficial"><img
+                                src="img/icons-redes-sociais/icons8-tiktok-50.png" alt="TikTok"
+                                style="height:32px;"></a>
                     </div>
                 </div>
 
