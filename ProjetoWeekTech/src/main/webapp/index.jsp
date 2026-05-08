@@ -661,12 +661,8 @@
                                 <label for="p-curso">Curso *</label>
                                 <select id="p-curso">
                                     <option value="">Selecione...</option>
-                                    <option>Ciência da Computação</option>
-                                    <option>Sistemas de Informação</option>
                                     <option>Engenharia de Software</option>
                                     <option>Análise e Des. de Sistemas</option>
-                                    <option>Engenharia da Computação</option>
-                                    <option>Outro</option>
                                 </select>
                             </div>
                             <div class="field">
@@ -727,7 +723,7 @@
                             </div>
                             <div class="field">
                                 <label for="s-tel">Telefone *</label>
-                                <input type="tel" id="s-tel" placeholder="(43) 9 0000-0000" />
+                                <input type="tel" id="s-tel" placeholder="(43) 0 0000-0000" />
                             </div>
                         </div>
                         <div class="field">
@@ -735,24 +731,25 @@
                             <input type="text" id="s-tema" placeholder="Ex: IA Generativa no Mercado de Trabalho" />
                         </div>
                         <div class="field">
-                            <label for="s-briefing">Briefing da Proposta *</label>
-                            <textarea id="s-briefing" rows="4"
-                                placeholder="Descreva brevemente o conteúdo da sua palestra, objetivos e público-alvo..."></textarea>
+                            <div class="field">
+                                <label for="s-briefing">Upload do Briefing *</label>
+                                <input type="file" id="s-briefing" accept=".pdf,.doc,.docx,.ppt,.pptx"/>
+                            </div>
                         </div>
                         <div class="field-row">
                             <div class="field">
                                 <label for="s-tempo">Tempo Estimado *</label>
                                 <select id="s-tempo">
                                     <option value="">Selecione...</option>
-                                    <option>30 minutos</option>
                                     <option>45 minutos</option>
                                     <option value="60 minutos" selected>60 minutos</option>
-                                    <option>90 minutos</option>
                                 </select>
                             </div>
                             <div class="field">
-                                <label for="s-curr">Currículo / LinkedIn *</label>
-                                <input type="text" id="s-curr" placeholder="linkedin.com/in/seu-perfil" />
+                                <div class="field">
+                                    <label for="s-curr">Upload do Currículo *</label>
+                                    <input type="file" id="s-curr" accept=".pdf,.doc,.docx"/>
+                                </div>
                             </div>
                         </div>
                         <div class="form-error" id="pal-error">Preencha todos os campos obrigatórios.</div>
