@@ -196,7 +196,6 @@
 
             <div class="logos-track-wrap">
                 <div class="logos-track" id="logos-track">
-
                     <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
@@ -206,7 +205,6 @@
                             alt="Patrocinador DELL"></div>
                     <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
                             alt="Patrocinador GDG"></div>
-
                     <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
@@ -384,14 +382,10 @@
             </div>
 
             <div class="info-grid">
-
                 <div class="info-card">
                     <div class="info-card-head">
                         <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 8v4l3 3" />
-                            </svg>
+                            <img src="img/Icones-info-evento/informacoes.png" alt="Informações" width="20" height="20">
                         </div>
                         <div>
                             <h4>Informações do Evento</h4>
@@ -400,46 +394,30 @@
                     </div>
                     <ul class="info-list">
                         <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
+                            <img class="info-event-icon" src="img/Icones-info-evento/local.png" alt="Localização"
+                                width="20" height="20">
                             <div><strong>UniCesumar – Campus Londrina</strong><br><small>Av. Santa Mônica, 450 –
                                     Londrina, PR, 86027-610</small></div>
                         </li>
                         <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" />
-                                <line x1="16" y1="2" x2="16" y2="6" />
-                                <line x1="8" y1="2" x2="8" y2="6" />
-                                <line x1="3" y1="10" x2="21" y2="10" />
-                            </svg>
+                            <img class="info-event-icon" src="img/Icones-info-evento/calendario.png" alt="Localização"
+                                width="16" height="16">
                             <div><strong>Data do Evento</strong><br><small>01 a 03 de Junho de 2026</small></div>
                         </li>
                         <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 8v4l3 3" />
-                            </svg>
+                            <img class="info-event-icon" src="img/Icones-info-evento/relogio.png" alt="Localização"
+                                width="16" height="16">
                             <div><strong>Horário</strong><br><small>18h às 22h</small></div>
                         </li>
                         <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                                <rect x="1" y="3" width="15" height="13" rx="2" />
-                                <path d="M16 8h4l3 3v5h-7V8z" />
-                                <circle cx="5.5" cy="18.5" r="2.5" />
-                                <circle cx="18.5" cy="18.5" r="2.5" />
-                            </svg>
+                            <img class="info-event-icon" src="img/Icones-info-evento/carro.png" alt="Localização"
+                                width="16" height="16">
                             <div><strong>Estacionamento</strong><br><small>Disponível no local com vagas
                                     gratuitas</small></div>
                         </li>
                         <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                                <rect x="1" y="3" width="15" height="13" rx="2" />
-                                <path d="M16 8h4l3 3v5h-7V8z" />
-                                <circle cx="5.5" cy="18.5" r="2.5" />
-                                <circle cx="18.5" cy="18.5" r="2.5" />
-                            </svg>
+                            <img class="info-event-icon" src="img/Icones-info-evento/onibus.png" alt="Localização"
+                                width="16" height="16">
                             <div><strong>Transporte Público</strong><br><small>Linhas: 102 e 092</small></div>
                         </li>
                     </ul>
