@@ -385,7 +385,7 @@
                 <div class="info-card">
                     <div class="info-card-head">
                         <div class="info-icon">
-                            <img src="img/Icones-info-evento/informacoes.png" alt="Informações" width="20" height="20">
+                            <img src="img/icons-info-evento/informacoes.png" alt="Informações" width="20" height="20">
                         </div>
                         <div>
                             <h4>Informações do Evento</h4>
@@ -394,29 +394,29 @@
                     </div>
                     <ul class="info-list">
                         <li>
-                            <img class="info-event-icon" src="img/Icones-info-evento/local.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/local.png" alt="Localização"
                                 width="20" height="20">
                             <div><strong>UniCesumar – Campus Londrina</strong><br><small>Av. Santa Mônica, 450 –
                                     Londrina, PR, 86027-610</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/Icones-info-evento/calendario.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/calendario.png" alt="Localização"
                                 width="16" height="16">
                             <div><strong>Data do Evento</strong><br><small>01 a 03 de Junho de 2026</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/Icones-info-evento/relogio.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/relogio.png" alt="Localização"
                                 width="16" height="16">
                             <div><strong>Horário</strong><br><small>18h às 22h</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/Icones-info-evento/carro.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/carro.png" alt="Localização"
                                 width="16" height="16">
                             <div><strong>Estacionamento</strong><br><small>Disponível no local com vagas
                                     gratuitas</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/Icones-info-evento/onibus.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/onibus.png" alt="Localização"
                                 width="16" height="16">
                             <div><strong>Transporte Público</strong><br><small>Linhas: 102 e 092</small></div>
                         </li>
