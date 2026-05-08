@@ -483,7 +483,7 @@
         <section class="sobre" id="sobre">
             <div class="sobre-inner">
                 <div class="section-eyebrow">Sobre o Evento</div>
-                <h2>O que é a TECH WEEK?</h2>
+                <h2>O que é a Tech Week?</h2>
                 <div class="sobre-body">
                     <p>A II Tech Week conecta teoria e prática ao explorar a Inteligência Artificial de forma aplicada.
                         Com o tema "Inteligência Artificial em Ação", o evento destaca tecnologias que já impactam o
@@ -539,16 +539,21 @@
                 <div class="footer-col">
                     <h4>Institucional</h4>
                     <ul>
-                        <li><a target="_blank" href="https://www.unicesumar.edu.br/conheca-a-unicesumar/">Conheça a
-                                UniCesumar</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/conheca-a-unicesumar/"> <img
+                                    src="./img/quadrado.png" width="12" height="12"> Conheça
+                                a UniCesumar</a></li>
                         <li><a target="_blank"
-                                href="https://www.unicesumar.edu.br/conheca-a-unicesumar/fundacao-unicesumar/">Fundação
+                                href="https://www.unicesumar.edu.br/conheca-a-unicesumar/fundacao-unicesumar/"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Fundação
                                 UniCesumar</a></li>
-                        <li><a target="_blank"
-                                href="https://www.unicesumar.edu.br/presencial/comunidade/">Comunidade</a></li>
-                        <li><a target="_blank" href="https://www.unicesumar.edu.br/noticias/">Notícias</a></li>
-                        <li><a target="_blank" href="https://www.unicesumar.edu.br/blog/">Blog</a></li>
-                        <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/">Política de
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/presencial/comunidade/"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Comunidade</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/noticias/"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Notícias</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/blog/"> <img src="./img/quadrado.png"
+                                    width="12" height="12">Blog</a></li>
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Política de
                                 Privacidade</a></li>
                     </ul>
                 </div>
@@ -556,11 +561,14 @@
                 <div class="footer-col">
                     <h4>Atendimento</h4>
                     <ul>
-                        <li><a target="_blank" href="https://api.whatsapp.com/send?phone=554491036999">Fale Conosco</a>
+                        <li><a target="_blank" href="https://api.whatsapp.com/send?phone=554491036999"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Fale Conosco</a>
                         </li>
-                        <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/">Termos de
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Termos de
                                 Uso</a></li>
-                        <li><a target="_blank" href="https://www.unicesumar.edu.br/atendimento/">Central de
+                        <li><a target="_blank" href="https://www.unicesumar.edu.br/atendimento/"> <img
+                                    src="./img/quadrado.png" width="12" height="12">Central de
                                 Atendimento</a></li>
                     </ul>
                 </div>
