@@ -1017,7 +1017,7 @@ nav {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 30px;
 }
 
 .infra-list li {
@@ -1033,6 +1033,10 @@ nav {
     gap: 10px;
 }
 
+.infra-icon {
+    margin-top: 5px;
+}
+
 .infra-text strong {
     font-size: 13px;
     color: var(--navy);
@@ -1043,19 +1047,6 @@ nav {
 .infra-text small {
     font-size: 11.5px;
     color: #6b7590;
-}
-
-.check-badge {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #eef6ee;
-    color: #2a8a3a;
-    display: grid;
-    place-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    flex-shrink: 0;
 }
 
 /* ════════════════════════════════════════

@@ -385,7 +385,8 @@
                 <div class="info-card">
                     <div class="info-card-head">
                         <div class="info-icon">
-                            <img src="img/icons-info-evento/informacoes.png" alt="Informações" width="20" height="20">
+                            <img src="img/icons-info-evento/informacoes.png" alt="Ícone-Informações" width="20"
+                                height="20">
                         </div>
                         <div>
                             <h4>Informações do Evento</h4>
@@ -394,29 +395,29 @@
                     </div>
                     <ul class="info-list">
                         <li>
-                            <img class="info-event-icon" src="img/icons-info-evento/local.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/local.png" alt="Ícone-Localização"
                                 width="20" height="20">
                             <div><strong>UniCesumar – Campus Londrina</strong><br><small>Av. Santa Mônica, 450 –
                                     Londrina, PR, 86027-610</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/icons-info-evento/calendario.png" alt="Localização"
-                                width="16" height="16">
+                            <img class="info-event-icon" src="img/icons-info-evento/calendario.png"
+                                alt="Ícone-Calendário" width="16" height="16">
                             <div><strong>Data do Evento</strong><br><small>01 a 03 de Junho de 2026</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/icons-info-evento/relogio.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/relogio.png" alt="Ícone-Relógio"
                                 width="16" height="16">
                             <div><strong>Horário</strong><br><small>18h às 22h</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/icons-info-evento/carro.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/carro.png" alt="Ícone-Carro"
                                 width="16" height="16">
                             <div><strong>Estacionamento</strong><br><small>Disponível no local com vagas
                                     gratuitas</small></div>
                         </li>
                         <li>
-                            <img class="info-event-icon" src="img/icons-info-evento/onibus.png" alt="Localização"
+                            <img class="info-event-icon" src="img/icons-info-evento/onibus.png" alt="Ícone-Ônibus"
                                 width="16" height="16">
                             <div><strong>Transporte Público</strong><br><small>Linhas: 102 e 092</small></div>
                         </li>
@@ -426,10 +427,8 @@
                 <div class="info-card">
                     <div class="info-card-head">
                         <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                <polyline points="9 22 9 12 15 12 15 22" />
-                            </svg>
+                            <img src="img/icons-infraestrutura/faculdade.png" alt="Ícone-Faculdade" width="20"
+                                height="20">
                         </div>
                         <div>
                             <h4>Infraestrutura Disponível</h4>
@@ -439,54 +438,38 @@
                     <ul class="infra-list">
                         <li>
                             <div class="infra-text">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
-                                    height="16">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                </svg>
+                                <img class="infra-icon" src="img/icons-infraestrutura/auditorio.png"
+                                    alt="Ícone-Auditório" width="16" height="16">
                                 <div><strong>Auditório Moderno</strong><small>Ambiente climatizado e
                                         confortável</small></div>
                             </div>
-                            <div class="check-badge">✓</div>
+                            <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
                         </li>
                         <li>
                             <div class="infra-text">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
-                                    height="16">
-                                    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-                                    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-                                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-                                    <line x1="12" y1="20" x2="12.01" y2="20" />
-                                </svg>
+                                <img class="infra-icon" src="img/icons-infraestrutura/wifi.png" alt="Ícone-Wifi"
+                                    width="16" height="16">
                                 <div><strong>Wi-Fi Gratuito</strong><small>Internet rápida em todo espaço</small>
                                 </div>
                             </div>
-                            <div class="check-badge">✓</div>
+                            <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
                         </li>
                         <li>
                             <div class="infra-text">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
-                                    height="16">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 8v4l3 3" />
-                                </svg>
+                                <img class="infra-icon" src="img/icons-infraestrutura/cadeira-de-rodas.png"
+                                    alt="Ícone-Cadeira-de-rodas" width="16" height="16">
                                 <div><strong>Acessibilidade Completa</strong><small>Espaço adaptado e
                                         inclusivo</small></div>
                             </div>
-                            <div class="check-badge">✓</div>
+                            <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
                         </li>
                         <li>
                             <div class="infra-text">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="16"
-                                    height="16">
-                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
-                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
-                                    <line x1="6" y1="1" x2="6" y2="4" />
-                                    <line x1="10" y1="1" x2="10" y2="4" />
-                                    <line x1="14" y1="1" x2="14" y2="4" />
-                                </svg>
+                                <img class="infra-icon" src="img/icons-infraestrutura/xicara.png" alt="Ícone-Xícara"
+                                    width="16" height="16">
                                 <div><strong>Alimentação</strong><small>Coffee break opcional</small></div>
                             </div>
-                            <div class="check-badge">✓</div>
+                            <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
                         </li>
                     </ul>
                 </div>
