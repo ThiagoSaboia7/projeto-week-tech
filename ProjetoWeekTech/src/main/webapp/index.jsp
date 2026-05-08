@@ -262,10 +262,7 @@
                 <div class="insc-card">
                     <div class="insc-card-head">
                         <div class="insc-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                            </svg>
+                            <img src="img/icons-inscri-user/user.png" alt="Ícone-Usuário" width="20" height="20">
                         </div>
                         <div>
                             <h3>Participante</h3>
@@ -278,21 +275,30 @@
                     <div class="insc-block">
                         <p class="insc-block-title">O que você precisa informar:</p>
                         <ul>
-                            <li>Nome Completo</li>
-                            <li>R.A.</li>
-                            <li>Curso</li>
-                            <li>Série</li>
-                            <li>Inscrição para o Coffee Break</li>
+                            <li> <img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Nome Completo</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check"
+                                    width="12" height="12">R.A</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Curso</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Série</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check"
+                                    width="12" height="12">Inscrição para o Coffee Break</li>
                         </ul>
                     </div>
 
                     <div class="insc-block">
                         <p class="insc-block-title">Benefícios:</p>
                         <ul class="check">
-                            <li>Acesso a todas as palestras</li>
-                            <li>Horas Complementares</li>
-                            <li>Coffee Break opcional</li>
-                            <li>Networking com profissionais e estudantes</li>
+                            <li> <img class="icon-check" src="img/icons-inscri-user/acesso.png" alt="Ícone-Acesso"
+                                    width="12" height="12">Acesso a todas as palestras</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/certificado.png" alt="Ícone-Certificado"
+                                    width="12" height="12">Horas Complementares</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/xicara.png" alt="Ícone-Xícara"
+                                    width="12" height="12">Coffee Break opcional</li>
+                            <li><img class="icon-check" src="img/icons-inscri-user/coracao.png" alt="Ícone-Coração"
+                                    width="12" height="12">Networking com profissionais e estudantes</li>
                         </ul>
                     </div>
 

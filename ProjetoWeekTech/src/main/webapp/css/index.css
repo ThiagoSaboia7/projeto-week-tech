@@ -714,7 +714,7 @@ nav {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background: #eef1fb;
+    background: #00467A;
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -775,17 +775,8 @@ nav {
     line-height: 1.45;
 }
 
-.insc-block ul li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: #a0aad0;
-}
-
-.insc-block ul.check li::before {
-    content: '✓';
-    color: #1535a8;
-    font-weight: 700;
+.icon-check {
+    margin-right: 5px;
 }
 
 .insc-block ul.check.open li::before {
