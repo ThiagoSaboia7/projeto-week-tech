@@ -443,7 +443,7 @@ document.getElementById('btn-do-part').addEventListener('click', () => {
 });
 
 document.getElementById('close-part').addEventListener('click', () => {
-    alert('Modal fechado (integre com seu overlay).');
+  document.querySelector('.modal-box').style.display = 'none';
 });
 const submitContainer = document.getElementById('submit-container');
 const projetoFieldGroup = projetoSection.querySelector('.field-group');

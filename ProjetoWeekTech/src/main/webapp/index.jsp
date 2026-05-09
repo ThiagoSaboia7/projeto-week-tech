@@ -203,8 +203,8 @@
                     <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
                     <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
                             alt="Patrocinador DELL"></div>
-                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
-                            alt="Patrocinador GDG"></div>
+                    <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                            alt="Patrocinador Vitorios"></div>
                     <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
@@ -212,8 +212,8 @@
                     <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
                     <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
                             alt="Patrocinador DELL"></div>
-                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
-                            alt="Patrocinador GDG"></div>
+                    <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                            alt="Patrocinador Vitorios"></div>
                     <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
@@ -221,8 +221,8 @@
                     <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
                     <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
                             alt="Patrocinador DELL"></div>
-                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
-                            alt="Patrocinador GDG"></div>
+                    <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                            alt="Patrocinador Vitorios"></div>
                     <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
@@ -230,8 +230,8 @@
                     <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
                     <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
                             alt="Patrocinador DELL"></div>
-                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
-                            alt="Patrocinador GDG"></div>
+                    <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                            alt="Patrocinador Vitorios"></div>
                     <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
                             alt="Patrocinador Caco-Alimentação"></div>
                     <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
@@ -239,8 +239,8 @@
                     <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
                     <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
                             alt="Patrocinador DELL"></div>
-                    <div id="logo-gdg" class="logo-item"><img src="img/patrocinadores/logo-gdg.png"
-                            alt="Patrocinador GDG"></div>
+                    <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                            alt="Patrocinador Vitorios"></div>
                 </div>
             </div>
         </section>
