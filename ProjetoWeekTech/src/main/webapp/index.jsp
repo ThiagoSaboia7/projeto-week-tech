@@ -103,8 +103,8 @@
             <p class="finished-msg" id="fin-msg">🎉 O evento começou!</p>
 
             <div class="hero-btns">
-                <button class="btn-solid" id="btn-hero-inscricao">Garantir minha vaga</button>
-                <button class="btn-ghost" id="btn-hero-programacao">Ver programação</button>
+                <button class="btn-solid" id="btn-hero-inscricao">Inscreva-se agora</button>
+                <button class="btn-ghost" id="btn-hero-programacao">Confira a programação</button>
             </div>
         </section>
 

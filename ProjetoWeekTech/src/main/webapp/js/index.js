@@ -178,9 +178,9 @@ function renderTable() {
     const isPal = currentTab === 'palestrante';
     const isTodos = currentTab === 'todos';
 
-    let cols = `<th>#</th><th>Nome</th><th>E-mail</th><th>Tipo</th><th>Data</th>`;
+    let cols = `<th>#</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Tema</th><th>Briefing</th><th>Currículo</th><th>Data</th>`;
     if (isPart) cols = `<th>#</th><th>Nome</th><th>R.A.</th><th>E-mail</th><th>Curso</th><th>Série</th><th>Coffee</th><th>Data</th>`;
-    if (isPal) cols = `<th>#</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Tema da Palestra</th><th>Tempo</th><th>Data</th>`;
+    if (isPal) cols = `<th style="width:50px">#</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Tema da Palestra</th><th style="width:140px">Tempo</th><th style="width:120px">Briefing</th><th style="width:120px">Currículo</th><th style="width:170px">Data</th>`;
 
     const rows = data.map((i, idx) => {
         if (isPart) return `
@@ -194,16 +194,47 @@ function renderTable() {
         <td>${i.coffee ? '✅' : '—'}</td>
         <td style="color:#8a93b8;font-size:12px">${i.data}</td>
       </tr>`;
+
         if (isPal) return `
-      <tr>
-        <td>${idx + 1}</td>
-        <td><strong>${i.nome}</strong></td>
-        <td>${i.email}</td>
-        <td>${i.telefone || '—'}</td>
-        <td>${i.tema || '—'}</td>
-        <td>${i.tempo || '—'}</td>
-        <td style="color:#8a93b8;font-size:12px">${i.data}</td>
-      </tr>`;
+<tr>
+    <td>${idx + 1}</td>
+
+    <td>
+        <strong>${i.nome}</strong>
+    </td>
+
+    <td>${i.email}</td>
+
+    <td>${i.telefone || '—'}</td>
+
+    <td>${i.tema || '—'}</td>
+
+    <td>${i.tempo || '—'}</td>
+
+    <td>
+        <a 
+            href="${i.briefingArquivo}" 
+            download="${i.briefingNome}"
+            class="file-download"
+        >
+            📄 Briefing
+        </a>
+    </td>
+
+    <td>
+        <a 
+            href="${i.curriculoArquivo}" 
+            download="${i.curriculoNome}"
+            class="file-download"
+        >
+            📎 Currículo
+        </a>
+    </td>
+
+    <td style="color:#8a93b8;font-size:12px">
+        ${i.data}
+    </td>
+</tr>`;
         return `
       <tr>
         <td>${idx + 1}</td>
@@ -279,21 +310,46 @@ function resetPalForm() {
     document.getElementById('pal-error').classList.remove('show');
 }
 
-document.getElementById('btn-do-pal').onclick = () => {
+document.getElementById('btn-do-pal').onclick = async () => {
+
     const nome = document.getElementById('s-nome').value.trim();
     const email = document.getElementById('s-email').value.trim();
     const telefone = document.getElementById('s-tel').value.trim();
     const tema = document.getElementById('s-tema').value.trim();
-    const briefing = document.getElementById('s-briefing').value.trim();
+
+    const briefingFile = document.getElementById('s-briefing').files[0];
+    const curriculoFile = document.getElementById('s-curr').files[0];
+
     const tempo = document.getElementById('s-tempo').value;
-    const curriculo = document.getElementById('s-curr').value.trim();
+
     const err = document.getElementById('pal-error');
 
-    if (!nome || !email || !telefone || !tema || !briefing || !tempo || !curriculo) {
-        err.classList.add('show'); return;
+    if (!nome || !email || !telefone || !tema || !briefingFile || !tempo || !curriculoFile) {
+        err.classList.add('show');
+        return;
     }
+
     err.classList.remove('show');
-    addInscrito({ tipo: 'palestrante', nome, email, telefone, tema, briefing, tempo, curriculo });
+
+    // converter arquivos para base64
+    const briefingBase64 = await fileToBase64(briefingFile);
+    const curriculoBase64 = await fileToBase64(curriculoFile);
+
+    addInscrito({
+        tipo: 'palestrante',
+        nome,
+        email,
+        telefone,
+        tema,
+        tempo,
+
+        briefingNome: briefingFile.name,
+        briefingArquivo: briefingBase64,
+
+        curriculoNome: curriculoFile.name,
+        curriculoArquivo: curriculoBase64
+    });
+
     document.getElementById('form-pal-wrap').style.display = 'none';
     document.getElementById('success-pal').style.display = 'block';
 };
@@ -443,11 +499,22 @@ document.getElementById('btn-do-part').addEventListener('click', () => {
 });
 
 document.getElementById('close-part').addEventListener('click', () => {
-  document.querySelector('.modal-box').style.display = 'none';
+    document.querySelector('.modal-box').style.display = 'none';
 });
 const submitContainer = document.getElementById('submit-container');
 const projetoFieldGroup = projetoSection.querySelector('.field-group');
 
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
 
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = () => resolve(reader.result);
+
+        reader.onerror = error => reject(error);
+    });
+}
 
 

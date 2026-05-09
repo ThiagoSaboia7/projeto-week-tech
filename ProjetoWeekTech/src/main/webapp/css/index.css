@@ -2306,3 +2306,17 @@ nav {
     margin-top: 10px;
     line-height: 1.5;
 }
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.admin-table th,
+.admin-table td{
+    padding:18px 16px;
+    text-align:left;
+    vertical-align:middle;
+    word-break:break-word;
+}
