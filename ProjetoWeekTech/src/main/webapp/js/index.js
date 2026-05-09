@@ -378,3 +378,76 @@ track.addEventListener('pointerdown', e => { dragStart = e.clientX; dragDelta = 
 track.addEventListener('pointermove', e => { if (dragStart === null) return; dragDelta = e.clientX - dragStart; });
 track.addEventListener('pointerup', () => { if (dragStart === null) return; track.classList.remove('dragging'); dragStart = null; if (dragDelta < -60) goTo(cur + 1); else if (dragDelta > 60) goTo(cur - 1); else goTo(cur); });
 
+// Toggle projeto section
+const cbApresentar = document.getElementById('p-apresentar');
+const projetoSection = document.getElementById('projeto-section');
+
+cbApresentar.addEventListener('change', () => {
+    if (cbApresentar.checked) {
+        projetoSection.classList.add('open');
+    } else {
+        projetoSection.classList.remove('open');
+    }
+});
+
+// Stepper
+const intInput = document.getElementById('p-integrantes');
+const intLabel = document.getElementById('integrantes-label');
+const limiteAviso = document.getElementById('limite-aviso');
+const btnDec = document.getElementById('dec-int');
+const btnInc = document.getElementById('inc-int');
+const MAX_INT = 5;
+
+function updateStepper(val) {
+    intInput.value = val;
+    intLabel.textContent = val === 1 ? '1 integrante' : `${val} integrantes`;
+    btnDec.disabled = val <= 1;
+    btnInc.disabled = val >= MAX_INT;
+    limiteAviso.classList.toggle('show', val >= MAX_INT);
+}
+
+btnDec.addEventListener('click', () => {
+    let v = parseInt(intInput.value);
+    if (v > 1) updateStepper(v - 1);
+});
+btnInc.addEventListener('click', () => {
+    let v = parseInt(intInput.value);
+    if (v < MAX_INT) updateStepper(v + 1);
+});
+
+updateStepper(1);
+
+// Submit
+document.getElementById('btn-do-part').addEventListener('click', () => {
+    const nome = document.getElementById('p-nome').value.trim();
+    const ra = document.getElementById('p-ra').value.trim();
+    const email = document.getElementById('p-email').value.trim();
+    const curso = document.getElementById('p-curso').value;
+    const serie = document.getElementById('p-serie').value;
+    const errEl = document.getElementById('part-error');
+
+    let valid = nome && ra && email && curso && serie;
+
+    if (cbApresentar.checked) {
+        const link = document.getElementById('p-link').value.trim();
+        if (!link) valid = false;
+    }
+
+    if (!valid) {
+        errEl.classList.add('show');
+        return;
+    }
+    errEl.classList.remove('show');
+    document.getElementById('form-part-wrap').style.display = 'none';
+    document.getElementById('success-part').style.display = 'block';
+});
+
+document.getElementById('close-part').addEventListener('click', () => {
+    alert('Modal fechado (integre com seu overlay).');
+});
+const submitContainer = document.getElementById('submit-container');
+const projetoFieldGroup = projetoSection.querySelector('.field-group');
+
+
+
+

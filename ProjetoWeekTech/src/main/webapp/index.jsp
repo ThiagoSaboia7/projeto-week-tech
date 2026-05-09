@@ -685,18 +685,81 @@
                             <label for="p-coffee">Quero me inscrever para o Coffee Break (gratuito, vagas
                                 limitadas)</label>
                         </div>
-                        <div class="form-error" id="part-error">Preencha todos os campos obrigatórios.</div>
-                        <button class="btn-submit" id="btn-do-part">Confirmar Inscrição</button>
+                    </div>
+                    <!-- Apresentar Projeto -->
+                    <div class="checkbox-field" style="border-color:#c5cae0; background:#f5f7ff;">
+                        <input type="checkbox" id="p-apresentar" />
+                        <label for="p-apresentar"><strong style="color:#1a2455;">Quero apresentar meu projeto no
+                                evento</strong><br>
+                            <span style="color:#9ca3af; font-size:12px;">Marque para preencher os dados do seu
+                                projeto</span>
+                        </label>
+                    </div>
+                    <div id="submit-container">
+                        <div class="form-error" id="part-error">
+                            Preencha todos os campos obrigatórios.
+                        </div>
+
+                        <button class="btn-submit" id="btn-do-part">
+                            Confirmar Inscrição
+                        </button>
+                    </div>
+                    <!-- PROJETO SECTION (collapsible) -->
+                    <div class="projeto-section" id="projeto-section">
+                        <div class="projeto-divider"><span>Dados do Projeto</span></div>
+
+                        <div class="field-group">
+
+                            <!-- 2. Número de integrantes -->
+                            <div class="field">
+                                <label>Número de Integrantes do Grupo * <span
+                                        style="color:#9ca3af; font-weight:400; font-size:12px;">(máx. 5)</span></label>
+                                <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                                    <div class="stepper">
+                                        <button type="button" id="dec-int">−</button>
+                                        <input type="number" id="p-integrantes" value="1" min="1" max="5" readonly />
+                                        <button type="button" id="inc-int">+</button>
+                                    </div>
+                                    <span class="field-note" id="integrantes-label"
+                                        style="font-size:13px; color:#6b7280;">1 integrante</span>
+                                </div>
+                                <div class="limite-aviso" id="limite-aviso">⚠️ Limite máximo de 5 integrantes atingido.
+                                </div>
+                            </div>
+
+                            <!-- 3. Link GitHub / LinkedIn -->
+                            <div class="field">
+                                <label for="p-link">Link do GitHub ou LinkedIn *</label>
+                                <div class="link-prefix">
+                                    <span class="link-icon">🔗</span>
+                                    <input type="url" id="p-link"
+                                        placeholder="https://github.com/seu-usuario ou linkedin.com/in/..." />
+                                </div>
+                                <span class="field-note">Cole o link do repositório do projeto ou perfil do líder do
+                                    grupo.</span>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-success" id="success-part" style="display:none">
-                    <div class="success-icon">🎉</div>
-                    <h3>Inscrição Confirmada!</h3>
-                    <p>Sua inscrição como <strong>Participante</strong> foi registrada com sucesso.<br>Nos vemos na Tech
-                        Week!</p>
-                </div>
             </div>
+
+            <div class="form-success" id="success-part" style="display:none">
+                <div class="success-icon">🎉</div>
+                <h3>Inscrição Confirmada!</h3>
+                <p>Sua inscrição como <strong>Participante</strong> foi registrada com sucesso.<br>Nos vemos na Tech
+                    Week!</p>
+            </div>
+        </div>
+        </div>
+
+        <div class="form-success" id="success-part" style="display:none">
+            <div class="success-icon">🎉</div>
+            <h3>Inscrição Confirmada!</h3>
+            <p>Sua inscrição como <strong>Participante</strong> foi registrada com sucesso.<br>Nos vemos na Tech
+                Week!</p>
+        </div>
+        </div>
         </div>
 
         <!-- ══════════════════════════════════════════════════════════
@@ -733,7 +796,7 @@
                         <div class="field">
                             <div class="field">
                                 <label for="s-briefing">Upload do Briefing *</label>
-                                <input type="file" id="s-briefing" accept=".pdf,.doc,.docx,.ppt,.pptx"/>
+                                <input type="file" id="s-briefing" accept=".pdf,.doc,.docx,.ppt,.pptx" />
                             </div>
                         </div>
                         <div class="field-row">
@@ -748,7 +811,7 @@
                             <div class="field">
                                 <div class="field">
                                     <label for="s-curr">Upload do Currículo *</label>
-                                    <input type="file" id="s-curr" accept=".pdf,.doc,.docx"/>
+                                    <input type="file" id="s-curr" accept=".pdf,.doc,.docx" />
                                 </div>
                             </div>
                         </div>
