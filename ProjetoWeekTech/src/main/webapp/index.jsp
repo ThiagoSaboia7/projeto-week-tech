@@ -830,6 +830,64 @@
         </div>
 
         <!-- ══════════════════════════════════════════════════════════
+    FAQ
+══════════════════════════════════════════════════════════ -->
+        <!-- Conteúdo da sua página aqui -->
+
+        <div class="faq-floating-container">
+            <!-- Checkbox que controla se o FAQ está aberto ou fechado -->
+            <input type="checkbox" id="faq-toggle" class="faq-checkbox">
+
+            <!-- O botão circular (FAB) que o usuário clica -->
+            <label for="faq-toggle" class="faq-fab">
+                <span class="icon-question">?</span>
+                <span class="icon-close">×</span>
+            </label>
+
+            <!-- O Card de FAQ -->
+            <div class="faq-card">
+                <div class="faq-header">
+                    <span class="label">Suporte</span>
+                    <h2 class="title">Perguntas Frequentes</h2>
+                </div>
+
+                <div class="faq-content">
+                    <details>
+                        <summary>Onde exatamente será realizado o evento?</summary>
+                        <p>O evento acontecerá no auditório principal do Campus da UniCesumar em Londrina - PR,
+                            localizado na Av. Santa Mônica, 450.</p>
+                    </details>
+
+                    <details>
+                        <summary>O evento é gratuito?</summary>
+                        <p>Sim! A Tech Week é gratuita para alunos UniCesumar.</p>
+                    </details>
+
+                    <details>
+                        <summary>Haverá emissão de certificado de horas complementares?</summary>
+                        <p>Sim. Todos os participantes que registrarem presença durante os três dias de evento receberão
+                            um certificado digital com a carga horária correspondente.</p>
+                    </details>
+
+                    <details>
+                        <summary>Como recebo o certificado?</summary>
+                        <p>O certificado será anexado ao Studeo após a confirmação de presença no evento.</p>
+                    </details>
+
+                    <details>
+                        <summary>Onde será o Coffee Break?</summary>
+                        <p>Será servido na última sala a esquerda no corredor do auditório.</p>
+                    </details>
+
+                    <details>
+                        <summary>Como posso me inscrever como palestrante?</summary>
+                        <p>Basta clicar no botão "Inscreva-se como Palestrante" na seção de inscrições e preencher o
+                            formulário.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+        <!-- ══════════════════════════════════════════════════════════
      PAINEL ADMIN
 ══════════════════════════════════════════════════════════ -->
         <div id="admin-panel">
