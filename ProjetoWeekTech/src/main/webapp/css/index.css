@@ -1349,11 +1349,9 @@ nav {
     outline: none;
 }
 
-.field input:focus,
 .field select:focus,
 .field textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(21, 53, 168, .1);
 }
 
 .field textarea {
@@ -1880,25 +1878,30 @@ nav {
 
 /* === PROJETO SECTION === */
 .projeto-section {
+    display: none;
     overflow: hidden;
     max-height: 0;
     opacity: 0;
-    transition: max-height 0.45s ease, opacity 0.35s ease, margin 0.3s ease;
+    transition:
+        max-height 0.45s ease,
+        opacity 0.35s ease,
+        margin 0.3s ease;
     margin-top: 0;
 }
 
 .projeto-section.open {
-    max-height: 600px;
+    display: block;
+    max-height: 1000px;
     opacity: 1;
-    margin-top: 0;
+    will-change: max-height, opacity;
 }
 
 .projeto-divider {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 14px;
-    margin-top: 14px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .projeto-divider span {
@@ -1964,25 +1967,6 @@ nav {
     outline: none;
 }
 
-/* Aviso limite */
-.limite-aviso {
-    display: none;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #e05555;
-    font-weight: 600;
-    background: #fff5f5;
-    border: 1px solid #fecdcd;
-    border-radius: 6px;
-    padding: 6px 10px;
-    animation: shake .3s ease;
-}
-
-.limite-aviso.show {
-    display: flex;
-}
-
 @keyframes shake {
 
     0%,
@@ -2046,6 +2030,7 @@ nav {
     border-radius: 6px;
     padding: 8px 12px;
     display: none;
+    margin-top: 20px;
 }
 
 .form-error.show {
@@ -2063,7 +2048,7 @@ nav {
     font-weight: 700;
     cursor: pointer;
     transition: background .2s, transform .1s;
-    margin-top: 4px;
+    margin-top: 20px;
 }
 
 .btn-submit:hover {
@@ -2109,7 +2094,7 @@ nav {
     border: 1.5px solid #dde1ea;
     border-radius: 8px;
     padding: 12px 14px;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .checkbox-field input[type="checkbox"] {
@@ -2162,9 +2147,9 @@ nav {
 
 
 :root {
-    --primary-blue: #003366; 
+    --primary-blue: #003366;
     --accent-blue: #0055aa;
-    --shadow: 0 8px 24px rgba(0,0,0,0.15);
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* Container que fixa o FAQ no canto da tela */
@@ -2227,17 +2212,17 @@ nav {
 }
 
 /* Lógica de exibição ao clicar */
-.faq-checkbox:checked ~ .faq-card {
+.faq-checkbox:checked~.faq-card {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.faq-checkbox:checked ~ .faq-fab .icon-question {
+.faq-checkbox:checked~.faq-fab .icon-question {
     display: none;
 }
 
-.faq-checkbox:checked ~ .faq-fab .icon-close {
+.faq-checkbox:checked~.faq-fab .icon-close {
     display: block;
 }
 
@@ -2307,16 +2292,16 @@ nav {
     line-height: 1.5;
 }
 
-.admin-table{
-    width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .admin-table th,
-.admin-table td{
-    padding:18px 16px;
-    text-align:left;
-    vertical-align:middle;
-    word-break:break-word;
+.admin-table td {
+    padding: 18px 16px;
+    text-align: left;
+    vertical-align: middle;
+    word-break: break-word;
 }

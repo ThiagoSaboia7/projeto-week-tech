@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Week UniCesumar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="shortcut icon" href="./img/UniCesumarLogoAzulTrans.png" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════ -->
+    <nav>
+        <a class="logo" href="#topo">
+            <img src="img/UniCesumarLogoAzul.jpg" alt="Logo UniCesumar" style="height:40px;">
+            <div class="logo-text">
+                <div class="brand">UniCesumar</div>
+                <div class="sub">Tech Week</div>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#palestrantes">Palestrantes</a></li>
+            <li><a href="#patrocinadores">Patrocinadores</a></li>
+            <li><a href="#inscricoes">Inscrições</a></li>
+            <li><a href="#localizacao">Localização</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+        </ul>
+
+        <button class="btn-login" id="btn-open-login">
+            Login
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+    <section class="hero" id="topo">
+
+        <h1>Tech Week<br>UniCesumar</h1>
+
+        <p class="hero-sub">
+            Três dias de palestras e networking com os<br>
+            melhores profissionais do mercado de tecnologia.
+        </p>
+
+        <div class="hero-meta">
+            <span class="icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)"
+                    stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                01 a 03 de Junho, 2026
+            </span>
+            <div class="div"></div>
+            <span class="icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)"
+                    stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                UniCesumar – Londrina, PR
+            </span>
+        </div>
+
+        <div class="cd-label">Contagem Regressiva</div>
+
+        <div class="countdown" id="countdown">
+            <div class="cd-block">
+                <div class="cd-num" id="cd-d">00</div>
+                <div class="cd-unit">Dias</div>
+            </div>
+            <div class="cd-colon">:</div>
+            <div class="cd-block">
+                <div class="cd-num" id="cd-h">00</div>
+                <div class="cd-unit">Horas</div>
+            </div>
+            <div class="cd-colon">:</div>
+            <div class="cd-block">
+                <div class="cd-num" id="cd-m">00</div>
+                <div class="cd-unit">Min</div>
+            </div>
+            <div class="cd-colon">:</div>
+            <div class="cd-block">
+                <div class="cd-num" id="cd-s">00</div>
+                <div class="cd-unit">Seg</div>
+            </div>
+        </div>
+
+        <p class="finished-msg" id="fin-msg">🎉 O evento começou!</p>
+
+        <div class="hero-btns">
+            <button class="btn-solid" id="btn-hero-inscricao">Inscreva-se agora</button>
+            <button class="btn-ghost" id="btn-hero-programacao">Confira a programação</button>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     SPEAKERS
+════════════════════════════════════════════════ -->
+    <section class="speakers" id="palestrantes">
+        <div class="section-eyebrow">Palestrantes</div>
+
+        <div class="speakers-hd">
+            <h2>Conheça quem vai te inspirar</h2>
+            <div class="speakers-hd-right">
+                <a class="see-all" href="#palestrantes">Ver todos os palestrantes
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.2">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </a>
+                <div class="carousel-arrows">
+                    <button class="carousel-arrow" id="prev" aria-label="Anterior">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                    </button>
+                    <button class="carousel-arrow" id="next" aria-label="Próximo">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 6l6 6-6 6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-wrap">
+            <div class="carousel-outer">
+                <div class="carousel-track" id="track">
+                    <div class="speaker-card">
+                        <img class="card-img" src="img/palestrantes/palestrante-fernando.jpeg"
+                            alt="Palestrante-Fernando">
+                        <div class="card-body">
+                            <h3>Fernando Batista</h3>
+                            <p>Consultor Executivo em Cibersegurança</p>
+                        </div>
+                    </div>
+                    <div class="speaker-card">
+                        <img class="card-img" src="img/palestrantes/palestrante-helena.jpeg" alt="Palestrante-Helena">
+                        <div class="card-body">
+                            <h3>Helena Duarte</h3>
+                            <p>Gerente Sênior de Engenharia de Software</p>
+                        </div>
+                    </div>
+                    <div class="speaker-card">
+                        <img class="card-img" src="img/palestrantes/palestrante-carlos.jpeg" alt="Palestrante-Carlos">
+                        <div class="card-body">
+                            <h3>Carlos Henrique Moura</h3>
+                            <p>Arquiteto de Software Corporativo</p>
+                        </div>
+                    </div>
+                    <div class="speaker-card">
+                        <img class="card-img" src="img/palestrantes/palestrante-patricia.jpeg"
+                            alt="Palestrante-Patricia">
+                        <div class="card-body">
+                            <h3>Patrícia Menezes</h3>
+                            <p>Diretora de Inovação Digital</p>
+                        </div>
+                    </div>
+                    <div class="speaker-card">
+                        <img class="card-img" src="img/palestrantes/palestrante-roberto.jpeg" alt="Palestrante-Roberto">
+                        <div class="card-body">
+                            <h3>Roberto Almeida</h3>
+                            <p>Diretor de Tecnologia (CTO)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-dots" id="dots"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     PATROCINADORES
+════════════════════════════════════════════════ -->
+    <section class="sponsors" id="patrocinadores">
+        <div class="section-eyebrow">Patrocinadores</div>
+        <h2 class="sponsors-title">Empresas que acreditam no futuro!</h2>
+
+        <div class="logos-track-wrap">
+            <div class="logos-track" id="logos-track">
+                <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                        alt="Patrocinador Caco-Alimentação"></div>
+                <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                        alt="Patrocinador Adilson"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                        alt="Patrocinador DELL"></div>
+                <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                        alt="Patrocinador Vitorios"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                        alt="Patrocinador Caco-Alimentação"></div>
+                <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                        alt="Patrocinador Adilson"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                        alt="Patrocinador DELL"></div>
+                <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                        alt="Patrocinador Vitorios"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                        alt="Patrocinador Caco-Alimentação"></div>
+                <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                        alt="Patrocinador Adilson"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                        alt="Patrocinador DELL"></div>
+                <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                        alt="Patrocinador Vitorios"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                        alt="Patrocinador Caco-Alimentação"></div>
+                <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                        alt="Patrocinador Adilson"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                        alt="Patrocinador DELL"></div>
+                <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                        alt="Patrocinador Vitorios"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-caco-alimentacao.jpg"
+                        alt="Patrocinador Caco-Alimentação"></div>
+                <div id="logo-adilson" class="logo-item"><img src="img/patrocinadores/logo-adilson.jpg"
+                        alt="Patrocinador Adilson"></div>
+                <div class="logo-item"><img src="img/patrocinadores/logo-tcs.jpg" alt="Patrocinador TCS"></div>
+                <div id="logo-dell" class="logo-item"><img src="img/patrocinadores/logo-dell.png"
+                        alt="Patrocinador DELL"></div>
+                <div id="logo-vitorios" class="logo-item"><img src="img/patrocinadores/vitorios.png"
+                        alt="Patrocinador Vitorios"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     INSCRIÇÕES
+════════════════════════════════════════════════ -->
+    <section class="inscricoes" id="inscricoes">
+        <div class="insc-left">
+            <div class="section-eyebrow">Inscrições</div>
+            <h2>Participe e<br>Compartilhe<br>Conhecimento</h2>
+            <p>Participe do evento da forma que mais combina com você. Confira as opções disponíveis e faça a sua
+                inscrição em poucos passos.</p>
+        </div>
+
+        <div class="insc-cards">
+
+            <!-- card participante -->
+            <div class="insc-card">
+                <div class="insc-card-head">
+                    <div class="insc-icon">
+                        <img src="img/icons-inscri-user/user.png" alt="Ícone-Usuário" width="20" height="20">
+                    </div>
+                    <div>
+                        <h3>Participante</h3>
+                        <span class="insc-sub">Apenas para alunos</span>
+                    </div>
+                </div>
+                <p class="insc-desc">Participe do evento, acompanhe as atividades e aproveite o networking e o
+                    conhecimento.</p>
+
+                <div class="insc-block">
+                    <p class="insc-block-title">O que você precisa informar:</p>
+                    <ul>
+                        <li> <img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check" width="12"
+                                height="12">Nome Completo</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check" width="12"
+                                height="12">R.A</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check" width="12"
+                                height="12">Curso</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check" width="12"
+                                height="12">Série</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/check.png" alt="Ícone-Check" width="12"
+                                height="12">Inscrição para o Coffee Break</li>
+                    </ul>
+                </div>
+
+                <div class="insc-block">
+                    <p class="insc-block-title">Benefícios:</p>
+                    <ul class="check">
+                        <li> <img class="icon-check" src="img/icons-inscri-user/acesso.png" alt="Ícone-Acesso"
+                                width="12" height="12">Acesso a todas as palestras</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/certificado.png" alt="Ícone-Certificado"
+                                width="12" height="12">Horas Complementares</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/xicara.png" alt="Ícone-Xícara" width="12"
+                                height="12">Coffee Break opcional</li>
+                        <li><img class="icon-check" src="img/icons-inscri-user/coracao.png" alt="Ícone-Coração"
+                                width="12" height="12">Networking com profissionais e estudantes</li>
+                    </ul>
+                </div>
+
+                <button class="insc-btn" id="btn-open-part">Inscreva-se como Participante</button>
+            </div>
+
+            <!-- card palestrante -->
+            <div class="insc-card">
+                <div class="insc-card-head">
+                    <div class="insc-icon accent">
+                        <img src="img/icons-inscri-palest/microfone.png" alt="Ícone-Microfone" width="22" height="22">
+                    </div>
+                    <div>
+                        <h3>Palestrante</h3>
+                        <span class="insc-sub">Submissão de proposta</span>
+                    </div>
+                </div>
+                <p class="insc-desc">Compartilhe seu conhecimento e inspire nossa comunidade com uma palestra.</p>
+
+                <div class="insc-block">
+                    <p class="insc-block-title">Você precisará enviar:</p>
+                    <ul>
+                        <li> <img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check"
+                                width="12" height="12">Completo</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check" width="12"
+                                height="12">Telefone</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check" width="12"
+                                height="12">E-mail</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check" width="12"
+                                height="12">Tema da palestra</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check" width="12"
+                                height="12">Currículo</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check" width="12"
+                                height="12">Briefing da proposta</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/check.png" alt="Ícone-Check" width="12"
+                                height="12">Tempo estimado (60 min)</li>
+                    </ul>
+                </div>
+
+                <div class="insc-block">
+                    <p class="insc-block-title">Benefícios:</p>
+                    <ul class="check open">
+                        <li><img class="icon-check" src="img/icons-inscri-palest/estrela.png" alt="Ícone-Estrela"
+                                width="12" height="12">Visibilidade para a sua marca ou carreira</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/certificado.png"
+                                alt="Ícone-Certificado" width="12" height="12">Certificação de palestrante</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/alto-falante.png" alt="Ícone-Falante"
+                                width="12" height="12">Divulgação da sua palestra no evento</li>
+                        <li><img class="icon-check" src="img/icons-inscri-palest/coracao.png" alt="Ícone-Coração"
+                                width="12" height="12">Contribuição para a formação dos alunos</li>
+                    </ul>
+                </div>
+
+                <button class="insc-btn outline" id="btn-open-pal">Inscreva-se como Palestrante</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     MAPA
+════════════════════════════════════════════════ -->
+    <section class="mapa-section" id="localizacao">
+        <div class="mapa-header">
+            <div>
+                <div class="section-eyebrow">Mapa Tech Week</div>
+                <h2 class="mapa-title">Encontre-nos no Evento</h2>
+                <p class="mapa-desc">Confira detalhes do local, horários, transporte e tudo o que você precisa saber
+                    para aproveitar a Tech Week UniCesumar ao máximo.</p>
+            </div>
+            <a class="btn-maps" href="https://maps.google.com/?q=UniCesumar+Campus+Londrina" target="_blank"
+                rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                Ver no Google Maps
+            </a>
+        </div>
+
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3664.33270642479!2d-51.14333442448001!3d-23.303684452176558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94eb437a3d1d44af%3A0x9c9f46adfc62d1eb!2sUniCesumar%20-%20Londrina!5e0!3m2!1spt-BR!2sbr!4v1778202069167!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                UniCesumar – Campus Londrina, PR
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-head">
+                    <div class="info-icon">
+                        <img src="img/icons-info-evento/informacoes.png" alt="Ícone-Informações" width="20" height="20">
+                    </div>
+                    <div>
+                        <h4>Informações do Evento</h4>
+                        <span>Dados importantes para sua participação</span>
+                    </div>
+                </div>
+                <ul class="info-list">
+                    <li>
+                        <img class="info-event-icon" src="img/icons-info-evento/local.png" alt="Ícone-Localização"
+                            width="20" height="20">
+                        <div><strong>UniCesumar – Campus Londrina</strong><br><small>Av. Santa Mônica, 450 –
+                                Londrina, PR, 86027-610</small></div>
+                    </li>
+                    <li>
+                        <img class="info-event-icon" src="img/icons-info-evento/calendario.png" alt="Ícone-Calendário"
+                            width="16" height="16">
+                        <div><strong>Data do Evento</strong><br><small>01 a 03 de Junho de 2026</small></div>
+                    </li>
+                    <li>
+                        <img class="info-event-icon" src="img/icons-info-evento/relogio.png" alt="Ícone-Relógio"
+                            width="16" height="16">
+                        <div><strong>Horário</strong><br><small>18h às 22h</small></div>
+                    </li>
+                    <li>
+                        <img class="info-event-icon" src="img/icons-info-evento/carro.png" alt="Ícone-Carro" width="16"
+                            height="16">
+                        <div><strong>Estacionamento</strong><br><small>Disponível no local com vagas
+                                gratuitas</small></div>
+                    </li>
+                    <li>
+                        <img class="info-event-icon" src="img/icons-info-evento/onibus.png" alt="Ícone-Ônibus"
+                            width="16" height="16">
+                        <div><strong>Transporte Público</strong><br><small>Linhas: 102 e 092</small></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-head">
+                    <div class="info-icon">
+                        <img src="img/icons-infraestrutura/faculdade.png" alt="Ícone-Faculdade" width="20" height="20">
+                    </div>
+                    <div>
+                        <h4>Infraestrutura Disponível</h4>
+                        <span>Ambiente planejado para o seu conforto</span>
+                    </div>
+                </div>
+                <ul class="infra-list">
+                    <li>
+                        <div class="infra-text">
+                            <img class="infra-icon" src="img/icons-infraestrutura/auditorio.png" alt="Ícone-Auditório"
+                                width="16" height="16">
+                            <div><strong>Auditório Moderno</strong><small>Ambiente climatizado e
+                                    confortável</small></div>
+                        </div>
+                        <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
+                    </li>
+                    <li>
+                        <div class="infra-text">
+                            <img class="infra-icon" src="img/icons-infraestrutura/wifi.png" alt="Ícone-Wifi" width="16"
+                                height="16">
+                            <div><strong>Wi-Fi Gratuito</strong><small>Internet rápida em todo espaço</small>
+                            </div>
+                        </div>
+                        <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
+                    </li>
+                    <li>
+                        <div class="infra-text">
+                            <img class="infra-icon" src="img/icons-infraestrutura/cadeira-de-rodas.png"
+                                alt="Ícone-Cadeira-de-rodas" width="16" height="16">
+                            <div><strong>Acessibilidade Completa</strong><small>Espaço adaptado e
+                                    inclusivo</small></div>
+                        </div>
+                        <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
+                    </li>
+                    <li>
+                        <div class="infra-text">
+                            <img class="infra-icon" src="img/icons-infraestrutura/xicara.png" alt="Ícone-Xícara"
+                                width="16" height="16">
+                            <div><strong>Alimentação</strong><small>Coffee break opcional</small></div>
+                        </div>
+                        <img src="./img/icons-infraestrutura/correto.png" alt="" width="20" height="20">
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     SOBRE O EVENTO
+════════════════════════════════════════════════ -->
+    <section class="sobre" id="sobre">
+        <div class="sobre-inner">
+            <div class="section-eyebrow">Sobre o Evento</div>
+            <h2>O que é a Tech Week?</h2>
+            <div class="sobre-body">
+                <p>A II Tech Week conecta teoria e prática ao explorar a Inteligência Artificial de forma aplicada.
+                    Com o tema "Inteligência Artificial em Ação", o evento destaca tecnologias que já impactam o
+                    presente.</p>
+                <p>A integração entre dados, inovação e transformação digital está no centro das discussões,
+                    mostrando como a IA torna decisões mais estratégicas e eficientes.</p>
+                <p>Mais do que tendência, a Inteligência Artificial já é uma realidade em diversas áreas, exigindo
+                    profissionais preparados, críticos e adaptáveis a um mundo em constante evolução.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a class="footer-logo logo" href="#topo">
+                    <img src="img/UniCesumarLogoBranca.png" alt="Logo UniCesumar" style="height:40px;">
+                    <div class="logo-text">
+                        <div class="brand">UniCesumar</div>
+                        <div class="sub">Tech Week</div>
+                    </div>
+                </a>
+                <p class="footer-tagline">Transformando vidas por meio da educação e da tecnologia. Conectando
+                    pessoas e impulsionando o futuro.</p>
+                <p class="footer-tagline">Acompanhe nas redes e fique por dentro de todas as novidades e projetos.
+                </p>
+                <div class="footer-social-label">Redes Sociais</div>
+                <div class="footer-social">
+                    <a target="_blank" href="https://www.facebook.com/UniCesumar"><img
+                            src="img/icons-redes-sociais/icons8-facebook-50.png" alt="Facebook"
+                            style="height:32px;"></a>
+                    <a target="_blank" href="https://x.com/unicesumar"><img
+                            src="img/icons-redes-sociais/icons8-x-50.png" alt="X" style="height:32px;"></a>
+                    <a target="_blank" href="https://www.instagram.com/unicesumaroficial/"><img
+                            src="img/icons-redes-sociais/icons8-instagram-50.png" alt="Instagram"
+                            style="height:32px;"></a>
+                    <a target="_blank" href="https://www.linkedin.com/school/unicesumaroficial/posts/?feedView=all"><img
+                            src="img/icons-redes-sociais/icons8-linkedin-50.png" alt="LinkedIn" style="height:32px"
+                            style="height:32px;"></a>
+                    <a target="_blank" href="https://www.youtube.com/@EADUnicesumarOficial"><img
+                            src="img/icons-redes-sociais/icons8-youtube-50.png" alt="Youtube" style="height:32px;"></a>
+                    <a target="_blank" href="https://www.tiktok.com/@unicesumaroficial"><img
+                            src="img/icons-redes-sociais/icons8-tiktok-50.png" alt="TikTok" style="height:32px;"></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/conheca-a-unicesumar/"> <img
+                                src="./img/quadrado.png" width="12" height="12"> Conheça
+                            a UniCesumar</a></li>
+                    <li><a target="_blank"
+                            href="https://www.unicesumar.edu.br/conheca-a-unicesumar/fundacao-unicesumar/"> <img
+                                src="./img/quadrado.png" width="12" height="12">Fundação
+                            UniCesumar</a></li>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/presencial/comunidade/"> <img
+                                src="./img/quadrado.png" width="12" height="12">Comunidade</a></li>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/noticias/"> <img src="./img/quadrado.png"
+                                width="12" height="12">Notícias</a></li>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/blog/"> <img src="./img/quadrado.png"
+                                width="12" height="12">Blog</a></li>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/"> <img
+                                src="./img/quadrado.png" width="12" height="12">Política de
+                            Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a target="_blank" href="https://api.whatsapp.com/send?phone=554491036999"> <img
+                                src="./img/quadrado.png" width="12" height="12">Fale Conosco</a>
+                    </li>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/politica-de-privacidade/"> <img
+                                src="./img/quadrado.png" width="12" height="12">Termos de
+                            Uso</a></li>
+                    <li><a target="_blank" href="https://www.unicesumar.edu.br/atendimento/"> <img
+                                src="./img/quadrado.png" width="12" height="12">Central de
+                            Atendimento</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">2026 UniCesumar. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ══════════════════════════════════════════════════════════
+     MODAL: LOGIN ADMIN
+══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="modal-login">
+        <div class="modal-box">
+            <button class="modal-close" id="close-login">✕</button>
+
+            <div class="modal-logo">
+                <div><img src="img/UniCesumarLogoAzul.jpg" alt="Logo UniCesumar" style="height:40px;"></div>
+                <div class="logo-text">
+                    <div class="brand" style="color:var(--navy)">UniCesumar</div>
+                    <div class="sub">Tech Week</div>
+                </div>
+            </div>
+
+            <div class="modal-eyebrow">Área Administrativa</div>
+            <h2>Acesse o Painel de Controle</h2>
+            <p class="modal-sub">Faça login para acessar o sistema administrativo</p>
+
+            <div id="login-form-wrap">
+                <div class="field-group">
+                    <div class="field">
+                        <label for="login-email">E-mail</label>
+                        <input type="email" id="login-email" placeholder="admin@gmail.com" autocomplete="email" />
+                    </div>
+                    <div class="field">
+                        <label for="login-senha">Senha</label>
+                        <input type="password" id="login-senha" placeholder="Digite sua senha"
+                            autocomplete="current-password" />
+                    </div>
+                    <div class="form-error" id="login-error">E-mail ou Senha Incorretos!</div>
+                    <button class="btn-submit" id="btn-do-login">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+     MODAL: INSCRIÇÃO PARTICIPANTE
+══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="modal-part">
+        <div class="modal-box" style="max-width:520px; max-height:90vh; overflow-y:auto;">
+            <button class="modal-close" id="close-part">✕</button>
+
+            <div id="form-part-wrap">
+                <div class="modal-eyebrow">Inscrições</div>
+                <h2>Inscrição como Participante</h2>
+                <p class="modal-sub">Preencha os dados abaixo para garantir sua vaga no evento.</p>
+                <form id="registroForm">
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Nome Completo *</label>
+                            <input type="text" id="p-nome" required placeholder="Seu nome completo" maxlength="150" />
+                        </div>
+                        
+                            <div class="field">
+                                <label>R.A. (Registro Acadêmico) *</label>
+                                <input type="text" id="p-ra" required placeholder="Ex: 25194543-2" maxlength="10" />
+                            </div>
+                        
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="p-curso">Curso *</label>
+                                <select id="p-curso" required>
+                                    <option value="">Selecione...</option>
+                                    <option>Engenharia de Software</option>
+                                    <option>Análise e Des. de Sistemas</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="p-serie">Período *</label>
+                                <select id="p-serie" required>
+                                    <option value="">Selecione...</option>
+                                    <option>1º Período</option>
+                                    <option>2º Período</option>
+                                    <option>3º Período</option>
+                                    <option>4º Período</option>
+                                    <option>5º Período</option>
+                                    <option>6º Período</option>
+                                    <option>7º Período</option>
+                                    <option>8º Período</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="checkbox-field">
+                            <input type="checkbox" id="p-coffee" />
+                            <label for="p-coffee">Quero me inscrever para o Coffee Break (gratuito, vagas
+                                limitadas)</label>
+                        </div>
+                    </div>
+                    <!-- Apresentar Projeto -->
+                    <div class="checkbox-field" style="border-color:#c5cae0; background:#f5f7ff;">
+                        <input type="checkbox" id="p-apresentar" />
+                        <label for="p-apresentar"><strong style="color:#1a2455;">Quero apresentar meu projeto no
+                                evento</strong><br>
+                            <span style="color:#9ca3af; font-size:12px;">Marque para preencher os dados do seu
+                                projeto</span>
+                        </label>
+                    </div>
+                    <!-- PROJETO SECTION (collapsible) -->
+                    <div class="projeto-section" id="projeto-section" style="display:block;">
+                        <div class="projeto-divider"><span>Dados do Projeto</span></div>
+                        <div class="field-group">
+                            <!-- 2. Número de integrantes -->
+                            <div class="field">
+                                <label>Número de Integrantes do Grupo * <span
+                                        style="color:#9ca3af; font-weight:400; font-size:12px;">(Máx. 5)</span></label>
+                                <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                                    <div class="stepper">
+                                        <button type="button" id="dec-int">−</button>
+                                        <input type="number" id="p-integrantes" value="1" min="1" max="5" readonly />
+                                        <button type="button" id="inc-int">+</button>
+                                    </div>
+                                    <span class="field-note" id="integrantes-label"
+                                        style="font-size:13px; color:#6b7280;">1
+                                        Integrante</span>
+                                </div>
+                            </div>
+                            <!-- 3. Link GitHub / LinkedIn -->
+                            <div class="field">
+                                <label for="p-link">Link do GitHub *</label>
+                                <div class="link-prefix">
+                                    <span class="link-icon">🔗</span>
+                                    <input type="url" id="p-link"
+                                        placeholder="github.com/seu-usuario/nome-projeto" />
+                                </div>
+                                <span class="field-note">Cole o link do repositório do projeto.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="submit-container">
+                        <div class="form-error" id="part-error">
+                            Preencha todos os campos obrigatórios.
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="btn-do-part">
+                            Confirmar Inscrição
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="form-success" id="success-part" style="display:none">
+                <div class="success-icon">🎉</div>
+                <h3>Inscrição Confirmada!</h3>
+                <p>Sua inscrição como <strong>Participante</strong> foi registrada com sucesso.<br>Nos vemos na Tech
+                    Week!</p>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════
+     MODAL: INSCRIÇÃO PALESTRANTE
+══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="modal-pal">
+        <div class="modal-box" style="max-width:540px; max-height:90vh; overflow-y:auto;">
+            <button class="modal-close" id="close-pal">✕</button>
+
+            <div id="form-pal-wrap">
+                <div class="modal-eyebrow">Inscrições</div>
+                <h2>Inscrição como Palestrante</h2>
+                <p class="modal-sub">Submeta sua proposta de palestra para o evento.</p>
+
+                <div class="field-group">
+                    <div class="field">
+                        <label for="s-nome">Nome Completo *</label>
+                        <input type="text" id="s-nome" required placeholder="Seu nome completo" />
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="s-email">E-mail *</label>
+                            <input type="email" id="s-email" placeholder="seu@email.com" />
+                        </div>
+                        <div class="field">
+                            <label for="s-tel">Telefone *</label>
+                            <input type="tel" id="s-tel" placeholder="(43) 0 0000-0000" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="s-tema">Tema da Palestra *</label>
+                        <input type="text" id="s-tema" placeholder="Ex: IA Generativa no Mercado de Trabalho" />
+                    </div>
+                    <div class="field">
+                        <label for="s-briefing">Upload do Briefing *</label>
+                        <input type="file" id="s-briefing" accept=".pdf,.doc,.docx,.ppt,.pptx" />
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="s-tempo">Tempo Estimado *</label>
+                            <select id="s-tempo">
+                                <option value="">Selecione...</option>
+                                <option>45 minutos</option>
+                                <option value="60 minutos" selected>60 minutos</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="s-curr">Upload do Currículo *</label>
+                            <input type="file" id="s-curr" accept=".pdf,.doc,.docx" />
+                        </div>
+                    </div>
+                    <div class="form-error" id="pal-error">Preencha todos os campos obrigatórios.</div>
+                    <button class="btn-submit" id="btn-do-pal">Enviar Proposta</button>
+                </div>
+            </div>
+
+            <div class="form-success" id="success-pal" style="display:none">
+                <div class="success-icon">🚀</div>
+                <h3>Proposta Enviada!</h3>
+                <p>Sua proposta de palestra foi recebida com sucesso.<br>Nossa equipe entrará em contato em breve.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+    FAQ
+══════════════════════════════════════════════════════════ -->
+    <!-- Conteúdo da sua página aqui -->
+
+    <div class="faq-floating-container">
+        <!-- Checkbox que controla se o FAQ está aberto ou fechado -->
+        <input type="checkbox" id="faq-toggle" class="faq-checkbox">
+
+        <!-- O botão circular (FAB) que o usuário clica -->
+        <label for="faq-toggle" class="faq-fab">
+            <span class="icon-question">?</span>
+            <span class="icon-close">×</span>
+        </label>
+
+        <!-- O Card de FAQ -->
+        <div class="faq-card">
+            <div class="faq-header">
+                <span class="label">Suporte</span>
+                <h2 class="title">Perguntas Frequentes</h2>
+            </div>
+
+            <div class="faq-content">
+                <details>
+                    <summary>Onde exatamente será realizado o evento?</summary>
+                    <p>O evento acontecerá no auditório principal do Campus da UniCesumar em Londrina - PR,
+                        localizado na Av. Santa Mônica, 450.</p>
+                </details>
+
+                <details>
+                    <summary>O evento é gratuito?</summary>
+                    <p>Sim! A Tech Week é gratuita para alunos UniCesumar.</p>
+                </details>
+
+                <details>
+                    <summary>Haverá emissão de certificado de horas complementares?</summary>
+                    <p>Sim. Todos os participantes que registrarem presença durante os três dias de evento receberão
+                        um certificado digital com a carga horária correspondente.</p>
+                </details>
+
+                <details>
+                    <summary>Como recebo o certificado?</summary>
+                    <p>O certificado será anexado ao Studeo após a confirmação de presença no evento.</p>
+                </details>
+
+                <details>
+                    <summary>Onde será o Coffee Break?</summary>
+                    <p>Será servido na última sala a esquerda no corredor do auditório.</p>
+                </details>
+
+                <details>
+                    <summary>Como posso me inscrever como palestrante?</summary>
+                    <p>Basta clicar no botão "Inscreva-se como Palestrante" na seção de inscrições e preencher o
+                        formulário.</p>
+                </details>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════
+     PAINEL ADMIN
+══════════════════════════════════════════════════════════ -->
+    <div id="admin-panel">
+        <nav class="admin-nav">
+            <a class="logo">
+                <img src="img/UniCesumarLogoBranca.png" alt="Logo UniCesumar" style="height:40px;">
+                <div class="logo-text">
+                    <div class="brand">UniCesumar</div>
+                    <div class="sub">Tech Week</div>
+                </div>
+            </a>
+            <div style="display:flex;align-items:center;gap:12px">
+                <span class="admin-badge">🔐 Administrador</span>
+                <button class="admin-logout" onclick="logout()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sair
+                </button>
+            </div>
+        </nav>
+
+        <div class="admin-main">
+            <div class="admin-header">
+                <h1>Painel de Inscrições</h1>
+                <button class="btn-export" onclick="exportCSV()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Exportar CSV
+                </button>
+            </div>
+
+            <div class="admin-stats" id="admin-stats">
+                <!-- preenchido via JS -->
+            </div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchTab('todos', this)">Todos</button>
+                <button class="admin-tab" onclick="switchTab('participante', this)">Participantes</button>
+                <button class="admin-tab" onclick="switchTab('palestrante', this)">Palestrantes</button>
+            </div>
+
+            <div class="admin-table-wrap">
+                <div class="admin-table-header">
+                    <span class="admin-table-title" id="table-title">Todas as inscrições</span>
+                    <div class="admin-search">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+                        <input type="text" id="admin-search-input" placeholder="Buscar por nome ou e-mail..."
+                            oninput="renderTable()" />
+                    </div>
+                </div>
+                <div id="admin-table-container"><!-- preenchido via JS --></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/index.js" defer></script>
+</body>
+
+</html>
