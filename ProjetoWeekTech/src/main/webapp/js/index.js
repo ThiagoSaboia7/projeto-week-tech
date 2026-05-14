@@ -192,6 +192,9 @@ function doLogin() {
 }
 
 function openAdmin() {
+    // Adiciona uma classe ao body informando que o admin está logado
+    document.body.classList.add('admin-logged-in');
+
     document.getElementById('admin-panel').style.display = 'block';
     renderStats();
     renderTable();

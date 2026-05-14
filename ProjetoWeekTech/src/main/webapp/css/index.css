@@ -2120,32 +2120,6 @@ nav {
     --shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :root {
     --primary-blue: #003366;
     --accent-blue: #0055aa;
@@ -2304,4 +2278,8 @@ nav {
     text-align: left;
     vertical-align: middle;
     word-break: break-word;
+}
+
+body.admin-logged-in .faq-floating-container {
+    display: none !important;
 }
