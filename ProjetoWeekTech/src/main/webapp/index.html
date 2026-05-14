@@ -716,7 +716,6 @@
                         <div class="form-error" id="part-error">
                             Preencha todos os campos obrigatórios.
                         </div>
-
                         <button type="submit" class="btn-submit" id="btn-do-part">
                             Confirmar Inscrição
                         </button>
@@ -738,52 +737,56 @@
         <div class="modal-box" style="max-width:540px; max-height:90vh; overflow-y:auto;">
             <button class="modal-close" id="close-pal">✕</button>
 
-            <div id="form-pal-wrap">
-                <div class="modal-eyebrow">Inscrições</div>
-                <h2>Inscrição como Palestrante</h2>
-                <p class="modal-sub">Submeta sua proposta de palestra para o evento.</p>
+            <form id="form-pal">
+                <div id="form-pal-wrap">
+                    <div class="modal-eyebrow">Inscrições</div>
+                    <h2>Inscrição como Palestrante</h2>
+                    <p class="modal-sub">Submeta sua proposta de palestra para o evento.</p>
 
-                <div class="field-group">
-                    <div class="field">
-                        <label for="s-nome">Nome Completo *</label>
-                        <input type="text" id="s-nome" required placeholder="Seu nome completo" />
-                    </div>
-                    <div class="field-row">
+                    <div class="field-group">
                         <div class="field">
-                            <label for="s-email">E-mail *</label>
-                            <input type="email" id="s-email" placeholder="seu@email.com" />
+                            <label for="s-nome">Nome Completo *</label>
+                            <input type="text" id="s-nome" required placeholder="Seu nome completo" maxlength="150" />
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="s-email">E-mail *</label>
+                                <input type="email" id="s-email" required placeholder="seu@email.com" maxlength="100" />
+                            </div>
+                            <div class="field">
+                                <label for="s-tel">Telefone *</label>
+                                <input type="tel" id="s-tel" required placeholder="(43) 0 0000-0000"
+                                    pattern="\(\d{2}\)\s\d\s\d{4}-\d{4}" maxlength="17" />
+                            </div>
                         </div>
                         <div class="field">
-                            <label for="s-tel">Telefone *</label>
-                            <input type="tel" id="s-tel" placeholder="(43) 0 0000-0000" />
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="s-tema">Tema da Palestra *</label>
-                        <input type="text" id="s-tema" placeholder="Ex: IA Generativa no Mercado de Trabalho" />
-                    </div>
-                    <div class="field">
-                        <label for="s-briefing">Upload do Briefing *</label>
-                        <input type="file" id="s-briefing" accept=".pdf,.doc,.docx,.ppt,.pptx" />
-                    </div>
-                    <div class="field-row">
-                        <div class="field">
-                            <label for="s-tempo">Tempo Estimado *</label>
-                            <select id="s-tempo">
-                                <option value="">Selecione...</option>
-                                <option>45 minutos</option>
-                                <option value="60 minutos" selected>60 minutos</option>
-                            </select>
+                            <label for="s-tema">Tema da Palestra *</label>
+                            <input type="text" id="s-tema" required
+                                placeholder="Ex: IA Generativa no Mercado de Trabalho" maxlength="100" />
                         </div>
                         <div class="field">
-                            <label for="s-curr">Upload do Currículo *</label>
-                            <input type="file" id="s-curr" accept=".pdf,.doc,.docx" />
+                            <label for="s-briefing">Upload do Briefing *</label>
+                            <input type="file" id="s-briefing" required accept=".pdf,.doc,.docx,.ppt,.pptx" />
                         </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="s-tempo">Tempo Estimado *</label>
+                                <select id="s-tempo">
+                                    <option value="">Selecione...</option>
+                                    <option value="45 minutos">45 minutos</option>
+                                    <option value="60 minutos">60 minutos</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="s-curr">Upload do Currículo *</label>
+                                <input type="file" id="s-curr" required accept=".pdf,.doc,.docx" />
+                            </div>
+                        </div>
+                        <div class="form-error" id="pal-error">Preencha todos os campos obrigatórios.</div>
+                        <button type="submit" class="btn-submit" id="btn-do-pal">Enviar Proposta</button>
                     </div>
-                    <div class="form-error" id="pal-error">Preencha todos os campos obrigatórios.</div>
-                    <button class="btn-submit" id="btn-do-pal">Enviar Proposta</button>
                 </div>
-            </div>
+            </form>
 
             <div class="form-success" id="success-pal" style="display:none">
                 <div class="success-icon">🚀</div>
@@ -921,6 +924,7 @@
     <script src="js/index.js" defer></script>
     <script src="js/participante.js" defer></script>
     <script src="js/utils.js" defer></script>
+    <script src="js/palestrante.js" defer></script>
 </body>
 
 </html>
