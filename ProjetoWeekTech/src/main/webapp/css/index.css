@@ -1444,20 +1444,6 @@ nav {
     transform: none;
 }
 
-.form-error {
-    font-size: 12px;
-    color: #d03030;
-    background: #fff0f0;
-    border: 1px solid #f5c6c6;
-    border-radius: 8px;
-    padding: 8px 12px;
-    display: none;
-}
-
-.form-error.show {
-    display: block;
-}
-
 .form-success {
     text-align: center;
     padding: 20px 0;

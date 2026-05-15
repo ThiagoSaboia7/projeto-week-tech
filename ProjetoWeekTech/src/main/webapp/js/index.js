@@ -155,16 +155,36 @@ function setupCarousel() {
    ADMIN E LOGIN
    ════════════════════════════════════════ */
 function doLogin() {
-    const email = document.getElementById('login-email').value.trim();
-    const senha = document.getElementById('login-senha').value;
+    const emailField = document.getElementById('login-email');
+    const senhaField = document.getElementById('login-senha');
+
+    const email = emailField.value.trim();
+    const senha = senhaField.value;
+
+    // 1. Validar se os campos estão vazios (o reportValidity mostrará o balão de required)
+    if (!emailField.reportValidity() || !senhaField.reportValidity()) {
+        return;
+    }
+
+    // 2. Validar credenciais
     if (email === ADMIN_EMAIL && senha === ADMIN_SENHA) {
         sessionStorage.setItem('tw_admin', '1');
         closeModal('modal-login');
         openAdmin();
     } else {
-        alert("E-mail ou Senha incorretos.");
+        // 3. Se estiver incorreto, aplica o erro customizado no campo de e-mail
+        emailField.setCustomValidity("E-mail ou Senha Incorretos.");
+        emailField.reportValidity(); // Mostra o balão com a mensagem acima
     }
 }
+
+document.getElementById('login-email')?.addEventListener('input', function () {
+    this.setCustomValidity("");
+});
+document.getElementById('login-senha')?.addEventListener('input', function () {
+    // Quando o usuário mexe na senha, também limpamos o erro do e-mail
+    document.getElementById('login-email').setCustomValidity("");
+});
 
 function openAdmin() {
     document.body.classList.add('admin-logged-in');
