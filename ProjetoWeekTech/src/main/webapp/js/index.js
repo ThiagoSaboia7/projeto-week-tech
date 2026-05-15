@@ -53,22 +53,128 @@ function closeModal(id) {
     }
 }
 
-// Fechar ao clicar fora
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', e => {
-        if (e.target === overlay) closeModal(overlay.id);
-    });
-});
+/* ════════════════════════════════════════
+   LOGICA DO CAROUSEL (DRAG + DOTS)
+   ════════════════════════════════════════ */
+/* ════════════════════════════════════════
+   LOGICA DO CAROUSEL (3 DOTS + TRAVA DE FIM)
+   ════════════════════════════════════════ */
+function setupCarousel() {
+    const track = document.getElementById('track');
+    const outer = track.parentElement;
+    const dotsContainer = document.getElementById('dots');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let currentIndex = 0;
+
+    // 1. Criar exatamente 3 bolinhas
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('button');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToPage(i));
+        dotsContainer.appendChild(dot);
+    }
+    const dots = Array.from(dotsContainer.children);
+
+    // 2. Calcular o limite máximo de arrasto (impede o espaço em branco)
+    function getMaxTranslate() {
+        // Largura total de todos os cards somados - largura da área visível
+        return track.scrollWidth - outer.offsetWidth;
+    }
+
+    function goToPage(index) {
+        const maxScroll = getMaxTranslate();
+        currentIndex = index;
+
+        // Ponto 0, Ponto Médio, Ponto Final
+        if (index === 0) currentTranslate = 0;
+        else if (index === 1) currentTranslate = -(maxScroll / 2);
+        else if (index === 2) currentTranslate = -maxScroll;
+
+        prevTranslate = currentTranslate;
+        applyPosition();
+        updateDots();
+    }
+
+    function applyPosition() {
+        track.style.transition = 'transform 0.4s ease-out';
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function updateDots() {
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    }
+
+    // 3. Eventos de Arraste com Trava (Boundaries)
+    track.addEventListener('mousedown', dragStart);
+    track.addEventListener('mousemove', dragMove);
+    track.addEventListener('mouseup', dragEnd);
+    track.addEventListener('mouseleave', dragEnd);
+    track.addEventListener('touchstart', dragStart);
+    track.addEventListener('touchmove', dragMove);
+    track.addEventListener('touchend', dragEnd);
+
+    function dragStart(e) {
+        isDragging = true;
+        startPos = getPositionX(e);
+        track.style.transition = 'none';
+        track.style.cursor = 'grabbing';
+    }
+
+    function dragMove(e) {
+        if (!isDragging) return;
+        const currentPosition = getPositionX(e);
+        let move = prevTranslate + currentPosition - startPos;
+
+        // Trava no início (Esquerda)
+        if (move > 0) move = 0;
+
+        // Trava no fim (Direita - evita o espaço em branco)
+        const maxScroll = getMaxTranslate();
+        if (move < -maxScroll) move = -maxScroll;
+
+        currentTranslate = move;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.cursor = 'grab';
+        prevTranslate = currentTranslate;
+
+        // Sincroniza a bolinha baseada na posição atual
+        const maxScroll = getMaxTranslate();
+        const percent = Math.abs(currentTranslate) / maxScroll;
+
+        if (percent < 0.25) currentIndex = 0;
+        else if (percent < 0.75) currentIndex = 1;
+        else currentIndex = 2;
+
+        applyPosition();
+        updateDots();
+    }
+
+    function getPositionX(e) {
+        return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    }
+
+    // Botões Next/Prev (ajustados para as 3 posições)
+    nextBtn.onclick = () => { if (currentIndex < 2) goToPage(currentIndex + 1); };
+    prevBtn.onclick = () => { if (currentIndex > 0) goToPage(currentIndex - 1); };
+}
 
 /* ════════════════════════════════════════
-   PARTICIPANTE (MÁSCARAS E VALIDAÇÃO)
+   PARTICIPANTE (VALIDAÇÕES)
    ════════════════════════════════════════ */
-const checkboxProjeto = document.getElementById('p-apresentar');
-const projetoSection = document.getElementById('projeto-section');
-const intInput = document.getElementById('p-integrantes');
-const intLabel = document.getElementById('integrantes-label');
-
-// Máscaras
+// Máscara R.A.
 document.getElementById('p-ra')?.addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, "");
     if (v.length > 8) v = v.replace(/^(\d{8})(\d{1}).*/, "$1-$2");
@@ -81,41 +187,13 @@ document.getElementById('p-nome')?.addEventListener('input', function () {
     this.setCustomValidity("");
 });
 
-// Toggle Projeto
-checkboxProjeto?.addEventListener('change', function () {
-    const submitContainer = document.getElementById('submit-container');
-    const linkInput = document.getElementById('p-link');
-    if (this.checked) {
-        projetoSection.style.display = 'block';
-        setTimeout(() => projetoSection.classList.add('open'), 10);
-        projetoSection.after(submitContainer);
-        linkInput.required = true;
-    } else {
-        projetoSection.classList.remove('open');
-        setTimeout(() => { if (!this.checked) projetoSection.style.display = 'none'; }, 400);
-        document.getElementById('registroForm').appendChild(submitContainer);
-        linkInput.required = false;
-        linkInput.value = "";
-    }
-});
-
-// Stepper
-document.getElementById('inc-int')?.addEventListener('click', () => {
-    let v = parseInt(intInput.value);
-    if (v < 5) { intInput.value = v + 1; intLabel.textContent = `${v + 1} Integrantes`; }
-});
-document.getElementById('dec-int')?.addEventListener('click', () => {
-    let v = parseInt(intInput.value);
-    if (v > 1) { intInput.value = v - 1; intLabel.textContent = (v - 1) === 1 ? '1 Integrante' : `${v - 1} Integrantes`; }
-});
-
 // Submit Participante
 document.getElementById('registroForm')?.addEventListener('submit', function (e) {
     const nomeField = document.getElementById('p-nome');
     const raField = document.getElementById('p-ra');
     const inscritos = getInscritos();
 
-    if (nomeField.value.trim().split(" ").length < 2) {
+    if (nomeField.value.trim().split(/\s+/).length < 2) {
         e.preventDefault();
         nomeField.setCustomValidity("Informe seu nome e pelo menos um sobrenome.");
         nomeField.reportValidity();
@@ -153,54 +231,40 @@ document.getElementById('registroForm')?.addEventListener('submit', function (e)
 });
 
 /* ════════════════════════════════════════
-   PALESTRANTE (LOGICA)
+   PALESTRANTE (VALIDAÇÕES)
    ════════════════════════════════════════ */
-document.getElementById('s-tel')?.addEventListener('input', function (e) {
-    let v = e.target.value.replace(/\D/g, '');
-    if (v.length > 11) v = v.substring(0, 11);
-    if (v.length > 0) v = '(' + v;
-    if (v.length > 3) v = v.substring(0, 3) + ') ' + v.substring(3);
-    if (v.length > 9) v = v.substring(0, 10) + '-' + v.substring(10);
-    e.target.value = v;
-    this.setCustomValidity("");
-});
-
 document.getElementById('form-pal')?.addEventListener('submit', async function (e) {
     const nomeField = document.getElementById('s-nome');
     const telField = document.getElementById('s-tel');
     const emailField = document.getElementById('s-email');
-    const emailValue = emailField.value.trim();
-
-    // Regex que exige: texto + @ + texto + . + texto (mínimo 2 letras após o ponto)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    if (!emailRegex.test(emailValue)) {
+    if (nomeField.value.trim().split(/\s+/).length < 2) {
         e.preventDefault();
-        emailField.setCustomValidity("Informe um e-mail válido com domínio (ex: seunome@email.com).");
-        emailField.reportValidity();
-        return;
-    }
-
-    // 1. Limpa erros de validações anteriores (ESSENCIAL)
-    nomeField.setCustomValidity("");
-    telField.setCustomValidity("");
-
-    // 2. Validação de Nome Completo (Palestrante)
-    // Usamos um filtro para ignorar espaços duplos
-    const partesNome = nomeField.value.trim().split(/\s+/);
-    if (partesNome.length < 2) {
-        e.preventDefault();
-        nomeField.setCustomValidity("Por favor, informe o nome e pelo menos um sobrenome.");
+        nomeField.setCustomValidity("Informe o nome completo do palestrante.");
         nomeField.reportValidity();
         return;
     }
 
-    
+    if (!emailRegex.test(emailField.value.trim())) {
+        e.preventDefault();
+        emailField.setCustomValidity("Informe um e-mail válido com domínio .com");
+        emailField.reportValidity();
+        return;
+    }
 
-    // Se o navegador passar pelos 'required' do HTML e pelas validações acima:
+    const telLimpo = telField.value.replace(/\D/g, "");
+    if (telLimpo.length < 11) {
+        e.preventDefault();
+        telField.setCustomValidity("Informe o telefone completo com DDD.");
+        telField.reportValidity();
+        return;
+    }
+
     e.preventDefault();
     const btn = document.getElementById('btn-do-pal');
     btn.disabled = true;
+    btn.innerText = "Enviando...";
 
     try {
         const b64B = await fileToBase64(document.getElementById('s-briefing').files[0]);
@@ -209,7 +273,7 @@ document.getElementById('form-pal')?.addEventListener('submit', async function (
         addInscrito({
             tipo: 'palestrante',
             nome: nomeField.value.trim(),
-            email: document.getElementById('s-email').value.trim(),
+            email: emailField.value.trim(),
             telefone: telField.value,
             tema: document.getElementById('s-tema').value.trim(),
             tempo: document.getElementById('s-tempo').value,
@@ -220,25 +284,16 @@ document.getElementById('form-pal')?.addEventListener('submit', async function (
         document.getElementById('form-pal-wrap').style.display = 'none';
         document.getElementById('success-pal').style.display = 'block';
     } catch (err) {
-        alert("Erro ao processar arquivos. Tente novamente.");
+        alert("Erro ao processar arquivos.");
     } finally {
         btn.disabled = false;
         btn.innerText = "Enviar Proposta";
     }
 });
 
-// Bloqueia números e caracteres especiais no nome do palestrante
-document.getElementById('s-nome')?.addEventListener('input', function () {
-    // Mantém apenas letras e espaços
-    this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
-    this.setCustomValidity("");
-});
-
 /* ════════════════════════════════════════
    ADMIN E UI GERAL
    ════════════════════════════════════════ */
-let currentTab = 'todos';
-
 function openAdmin() {
     document.body.classList.add('admin-logged-in');
     const panel = document.getElementById('admin-panel');
@@ -305,6 +360,7 @@ function switchTab(tab, btn) {
     renderTable();
 }
 
+let currentTab = 'todos';
 function renderStats() {
     const all = getInscritos();
     const statsEl = document.getElementById('admin-stats');
@@ -320,22 +376,21 @@ function exportCSV() {
 }
 
 /* ════════════════════════════════════════
-   INICIALIZAÇÃO E EVENTOS DE CLIQUE
+   INICIALIZAÇÃO FINAL
    ════════════════════════════════════════ */
 function init() {
-    // Esconder seção projeto por padrão
-    if (projetoSection) projetoSection.style.display = 'none';
+    setupCarousel();
 
-    // Botão Login
     document.getElementById('btn-open-login').onclick = () => sessionStorage.getItem('tw_admin') === '1' ? openAdmin() : openModal('modal-login');
     document.getElementById('btn-do-login').onclick = doLogin;
     document.getElementById('close-login').onclick = () => closeModal('modal-login');
 
-    document.getElementById('s-email')?.addEventListener('input', function () {
-        this.setCustomValidity(""); // Limpa o erro assim que o usuário volta a digitar
+    document.getElementById('s-email')?.addEventListener('input', function () { this.setCustomValidity(""); });
+    document.getElementById('s-nome')?.addEventListener('input', function () {
+        this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
+        this.setCustomValidity("");
     });
 
-    // Botão Participante
     document.getElementById('btn-open-part').onclick = () => {
         document.getElementById('registroForm').reset();
         document.getElementById('form-part-wrap').style.display = 'block';
@@ -345,7 +400,6 @@ function init() {
     };
     document.getElementById('close-part').onclick = () => closeModal('modal-part');
 
-    // Botão Palestrante
     document.getElementById('btn-open-pal').onclick = () => {
         document.getElementById('form-pal').reset();
         document.getElementById('form-pal-wrap').style.display = 'block';
@@ -354,10 +408,25 @@ function init() {
     };
     document.getElementById('close-pal').onclick = () => closeModal('modal-pal');
 
-    // Admin Session Check
+    checkboxProjeto?.addEventListener('change', function () {
+        const submitContainer = document.getElementById('submit-container');
+        const linkInput = document.getElementById('p-link');
+        if (this.checked) {
+            projetoSection.style.display = 'block';
+            setTimeout(() => projetoSection.classList.add('open'), 10);
+            projetoSection.after(submitContainer);
+            linkInput.required = true;
+        } else {
+            projetoSection.classList.remove('open');
+            setTimeout(() => { if (!this.checked) projetoSection.style.display = 'none'; }, 400);
+            document.getElementById('registroForm').appendChild(submitContainer);
+            linkInput.required = false;
+        }
+    });
+
     if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
 
-    // Outros Componentes
+    // Countdown
     const TARGET = new Date('2026-06-01T00:00:00-03:00').getTime();
     setInterval(() => {
         const diff = TARGET - Date.now();
@@ -369,11 +438,6 @@ function init() {
             const s = document.getElementById('cd-s'); if (s) s.textContent = String(t % 60).padStart(2, '0');
         }
     }, 1000);
-
-    const track = document.getElementById('track');
-    let cur = 0;
-    document.getElementById('next').onclick = () => { if (cur < 2) { cur++; track.style.transform = `translateX(-${cur * 33.3}%)`; } };
-    document.getElementById('prev').onclick = () => { if (cur > 0) { cur--; track.style.transform = `translateX(-${cur * 33.3}%)`; } };
 }
 
 window.onload = init;
