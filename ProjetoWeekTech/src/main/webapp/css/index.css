@@ -616,16 +616,60 @@ nav {
     transition: all 0.3s ease;
 }
 
-#logo-adilson img {
+#logo-caco-alimentacao img {
     height: 40px;
 }
 
-#logo-dell img {
+#logo-cantina-custodio img {
     height: 45px;
 }
 
 #logo-vitorios img {
     height: 50px;
+}
+
+#logo-emporio img {
+    height: 50px;
+}
+
+#logo-estma img {
+    height: 45px;
+}
+
+#logo-oculos-express img {
+    height: 50px;
+}
+
+#logo-zona-country img {
+    height: 45px;
+}
+
+#logo-hanke img {
+    height: 35px;
+}
+
+#logo-m2 img {
+    height: 45px;
+}
+
+#logo-quali-mais img {
+    height: 70px;
+}
+
+#logo-vr img {
+    height: 150px;
+}
+
+#logo-elite-solar img {
+    height: 45px;
+}
+
+#logo-restaurante-araguaia img {
+    height: 35px;
+}
+
+#logo-video-maker img {
+    height: 35px;
 }
 
 .logo-item img:hover {
@@ -644,12 +688,6 @@ nav {
 .logo-item:hover {
     opacity: 1;
     transform: scale(1.08);
-}
-
-.logo-item svg {
-    height: 32px;
-    width: auto;
-    display: block;
 }
 
 /* ════════════════════════════════════════

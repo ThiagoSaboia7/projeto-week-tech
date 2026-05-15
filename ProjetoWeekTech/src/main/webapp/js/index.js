@@ -54,9 +54,6 @@ function closeModal(id) {
 }
 
 /* ════════════════════════════════════════
-   LOGICA DO CAROUSEL (DRAG + DOTS)
-   ════════════════════════════════════════ */
-/* ════════════════════════════════════════
    LOGICA DO CAROUSEL (3 DOTS + TRAVA DE FIM)
    ════════════════════════════════════════ */
 function setupCarousel() {
