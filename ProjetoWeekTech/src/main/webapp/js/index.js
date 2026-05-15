@@ -422,19 +422,39 @@ function init() {
     });
 
     if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
-
-    // Countdown
-    const TARGET = new Date('2026-06-01T00:00:00-03:00').getTime();
-    setInterval(() => {
-        const diff = TARGET - Date.now();
-        if (diff > 0) {
-            const t = Math.floor(diff / 1000);
-            const d = document.getElementById('cd-d'); if (d) d.textContent = String(Math.floor(t / 86400)).padStart(2, '0');
-            const h = document.getElementById('cd-h'); if (h) h.textContent = String(Math.floor(t / 3600) % 24).padStart(2, '0');
-            const m = document.getElementById('cd-m'); if (m) m.textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
-            const s = document.getElementById('cd-s'); if (s) s.textContent = String(t % 60).padStart(2, '0');
-        }
-    }, 1000);
 }
+
+// === LOGICA DO COUNTDOWN ===
+const TARGET = new Date('2026-06-01T19:00:00-03:00').getTime();
+
+function updateCountdown() {
+    const diff = TARGET - Date.now();
+    const dEl = document.getElementById('cd-d');
+    const hEl = document.getElementById('cd-h');
+    const mEl = document.getElementById('cd-m');
+    const sEl = document.getElementById('cd-s');
+    const finMsg = document.getElementById('fin-msg');
+
+    if (!dEl || !hEl || !mEl || !sEl) return;
+
+    if (diff > 0) {
+        const t = Math.floor(diff / 1000);
+        dEl.textContent = String(Math.floor(t / 86400)).padStart(2, '0');
+        hEl.textContent = String(Math.floor(t / 3600) % 24).padStart(2, '0');
+        mEl.textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
+        sEl.textContent = String(t % 60).padStart(2, '0');
+    } else {
+        if (finMsg) finMsg.style.display = 'block';
+        const cdArea = document.getElementById('countdown');
+        if (cdArea) cdArea.style.display = 'none';
+        // Esconde o rótulo "Contagem Regressiva" 
+        const cdLabel = document.querySelector('.cd-label');
+        if (cdLabel) cdLabel.style.display = 'none';
+    }
+}
+
+// INICIA O CONTADOR IMEDIATAMENTE
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
 window.onload = init;
