@@ -60,31 +60,31 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 /* ════════════════════════════════════════
-   PARTICIPANTE (MÁSCARAS E VALIDAÇÕES)
+   PARTICIPANTE (LOGICA COM VALIDAÇÃO NATIVA)
    ════════════════════════════════════════ */
 const checkboxProjeto = document.getElementById('p-apresentar');
 const projetoSection = document.getElementById('projeto-section');
 const intInput = document.getElementById('p-integrantes');
 const intLabel = document.getElementById('integrantes-label');
-const partError = document.getElementById('part-error');
 
 if (projetoSection) projetoSection.style.display = 'none';
 
-// Máscara R.A.
+// Máscara R.A. e Limpeza de Erro customizado
 document.getElementById('p-ra')?.addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, "");
     if (v.length > 8) v = v.replace(/^(\d{8})(\d{1}).*/, "$1-$2");
     e.target.value = v;
-    partError.classList.remove('show');
+
+    // IMPORTANTE: Limpa a mensagem de erro enquanto o usuário digita
+    this.setCustomValidity("");
 });
 
-// Máscara Nome: Bloqueia números e limpa erro
 document.getElementById('p-nome')?.addEventListener('input', function () {
     this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
-    partError.classList.remove('show');
+    this.setCustomValidity("");
 });
 
-// Toggle Projeto: Apenas mostra/esconde (O erro Focusable foi resolvido removendo o required manual)
+// Toggle Projeto
 checkboxProjeto?.addEventListener('change', function () {
     const submitContainer = document.getElementById('submit-container');
     const linkInput = document.getElementById('p-link');
@@ -93,76 +93,71 @@ checkboxProjeto?.addEventListener('change', function () {
         projetoSection.style.display = 'block';
         setTimeout(() => projetoSection.classList.add('open'), 10);
         projetoSection.after(submitContainer);
+        linkInput.required = true;
     } else {
         projetoSection.classList.remove('open');
         setTimeout(() => { if (!this.checked) projetoSection.style.display = 'none'; }, 400);
         document.getElementById('registroForm').appendChild(submitContainer);
+        linkInput.required = false;
         linkInput.value = "";
     }
-    partError.classList.remove('show');
 });
 
 // Stepper Integrantes
 document.getElementById('inc-int')?.addEventListener('click', () => {
     let v = parseInt(intInput.value);
-    if (v < 5) {
-        intInput.value = v + 1;
-        intLabel.textContent = `${v + 1} Integrantes`;
-    }
+    if (v < 5) { intInput.value = v + 1; intLabel.textContent = `${v + 1} Integrantes`; }
 });
 document.getElementById('dec-int')?.addEventListener('click', () => {
     let v = parseInt(intInput.value);
-    if (v > 1) {
-        intInput.value = v - 1;
-        intLabel.textContent = (v - 1) === 1 ? '1 Integrante' : `${v - 1} Integrantes`;
-    }
+    if (v > 1) { intInput.value = v - 1; intLabel.textContent = (v - 1) === 1 ? '1 Integrante' : `${v - 1} Integrantes`; }
 });
 
-// SUBMIT PARTICIPANTE (Validação unificada com faixa vermelha)
+// SUBMIT PARTICIPANTE
 document.getElementById('registroForm')?.addEventListener('submit', function (e) {
-    e.preventDefault(); // Impede o balão "required" padrão para os campos de texto se houver conflito
 
-    const nome = document.getElementById('p-nome');
-    const ra = document.getElementById('p-ra');
-    const curso = document.getElementById('p-curso');
-    const serie = document.getElementById('p-serie');
-    const link = document.getElementById('p-link');
+    const nomeField = document.getElementById('p-nome');
+    const nomeValor = nomeField.value.trim();
+
+    // Verifica se tem pelo menos 2 palavras (Nome e Sobrenome)
+    if (nomeValor.split(" ").length < 2) {
+        e.preventDefault();
+        nomeField.setCustomValidity("Por favor, informe seu nome e pelo menos um sobrenome.");
+        nomeField.reportValidity();
+        return;
+    }
+    
+    const raField = document.getElementById('p-ra');
     const inscritos = getInscritos();
 
-    const dispararErro = (msg, campo) => {
-        partError.innerText = msg;
-        partError.classList.add('show');
-        campo.focus();
-        return false;
-    };
-
-    // 1. Validar Nome
-    if (nome.value.trim().length < 3) return dispararErro("O campo Nome Completo é obrigatório.", nome);
-
-    // 2. Validar R.A.
-    if (!ra.value) return dispararErro("O campo R.A. é obrigatório.", ra);
-    if (ra.value.length < 10) return dispararErro("O R.A. deve ter 9 dígitos.", ra);
-
-    // 3. Validar Duplicidade
-    if (inscritos.some(i => i.ra === ra.value)) return dispararErro("Este R.A. já está cadastrado no evento!", ra);
-
-    // 6. Validar Link do Projeto (SÓ SE O CHECKBOX ESTIVER MARCADO)
-    if (checkboxProjeto.checked && !link.value.trim()) {
-        return dispararErro("O link do GitHub é obrigatório para quem apresenta projeto.", link);
+    // 1. Validação de Tamanho do R.A. (8 números + traço + 1 número = 10 caracteres)
+    if (raField.value.length < 10) {
+        e.preventDefault();
+        raField.setCustomValidity("O R.A. deve estar completo.");
+        raField.reportValidity(); // Força o balão do navegador a aparecer
+        return;
     }
 
-    // TUDO CERTO - SALVAR
-    partError.classList.remove('show');
+    // 2. Validação de Duplicidade
+    if (inscritos.some(i => i.ra === raField.value)) {
+        e.preventDefault();
+        raField.setCustomValidity("Este R.A. já está cadastrado.");
+        raField.reportValidity();
+        return;
+    }
+
+    // Se passou, salva
+    e.preventDefault();
     addInscrito({
         tipo: 'participante',
-        nome: nome.value.trim(),
-        ra: ra.value,
-        curso: curso.value,
-        serie: serie.value,
+        nome: document.getElementById('p-nome').value.trim(),
+        ra: raField.value,
+        curso: document.getElementById('p-curso').value,
+        serie: document.getElementById('p-serie').value,
         coffee: document.getElementById('p-coffee').checked,
         projeto: checkboxProjeto.checked,
         integrantes: checkboxProjeto.checked ? intInput.value : '',
-        link: checkboxProjeto.checked ? link.value.trim() : ''
+        link: checkboxProjeto.checked ? document.getElementById('p-link').value.trim() : ''
     });
 
     document.getElementById('form-part-wrap').style.display = 'none';
@@ -170,18 +165,13 @@ document.getElementById('registroForm')?.addEventListener('submit', function (e)
 });
 
 /* ════════════════════════════════════════
-   PALESTRANTE (LÓGICA)
+   PALESTRANTE (LOGICA SIMPLIFICADA)
    ════════════════════════════════════════ */
 function resetPalForm() {
     document.getElementById('form-pal-wrap').style.display = 'block';
     document.getElementById('success-pal').style.display = 'none';
-    document.getElementById('pal-error').classList.remove('show');
     document.getElementById('form-pal').reset();
 }
-
-document.getElementById('s-nome')?.addEventListener('input', function () {
-    this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
-});
 
 document.getElementById('s-tel')?.addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, '');
@@ -190,45 +180,47 @@ document.getElementById('s-tel')?.addEventListener('input', function (e) {
     if (v.length > 3) v = v.substring(0, 3) + ') ' + v.substring(3);
     if (v.length > 9) v = v.substring(0, 10) + '-' + v.substring(10);
     e.target.value = v;
+    this.setCustomValidity("");
 });
 
 document.getElementById('form-pal')?.addEventListener('submit', async function (e) {
     e.preventDefault();
-    const btn = document.getElementById('btn-do-pal');
-    const errEl = document.getElementById('pal-error');
+    const telField = document.getElementById('s-tel');
+    const telLimpo = telField.value.replace(/\D/g, "");
 
-    try {
-        btn.disabled = true;
-        btn.innerText = "Enviando...";
-        const bFile = document.getElementById('s-briefing').files[0];
-        const cFile = document.getElementById('s-curr').files[0];
-        const b64B = await fileToBase64(bFile);
-        const b64C = await fileToBase64(cFile);
-
-        addInscrito({
-            tipo: 'palestrante',
-            nome: document.getElementById('s-nome').value.trim(),
-            email: document.getElementById('s-email').value.trim(),
-            telefone: document.getElementById('s-tel').value,
-            tema: document.getElementById('s-tema').value.trim(),
-            tempo: document.getElementById('s-tempo').value,
-            briefing: b64B,
-            curriculo: b64C
-        });
-
-        document.getElementById('form-pal-wrap').style.display = 'none';
-        document.getElementById('success-pal').style.display = 'block';
-    } catch (err) {
-        errEl.innerText = "Erro ao processar arquivos.";
-        errEl.classList.add('show');
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "Enviar Proposta";
+    // Validação de tamanho do telefone
+    if (telLimpo.length < 11) {
+        telField.setCustomValidity("O telefone deve ter 11 dígitos.");
+        telField.reportValidity();
+        return;
     }
+
+    const btn = document.getElementById('btn-do-pal');
+    btn.disabled = true;
+    btn.innerText = "Enviando...";
+
+    const b64B = await fileToBase64(document.getElementById('s-briefing').files[0]);
+    const b64C = await fileToBase64(document.getElementById('s-curr').files[0]);
+
+    addInscrito({
+        tipo: 'palestrante',
+        nome: document.getElementById('s-nome').value.trim(),
+        email: document.getElementById('s-email').value.trim(),
+        telefone: telField.value,
+        tema: document.getElementById('s-tema').value.trim(),
+        tempo: document.getElementById('s-tempo').value,
+        briefing: b64B,
+        curriculo: b64C
+    });
+
+    document.getElementById('form-pal-wrap').style.display = 'none';
+    document.getElementById('success-pal').style.display = 'block';
+    btn.disabled = false;
+    btn.innerText = "Enviar Proposta";
 });
 
 /* ════════════════════════════════════════
-   ADMIN E LOGIN
+   ADMIN E UI GERAL
    ════════════════════════════════════════ */
 let currentTab = 'todos';
 
@@ -250,7 +242,7 @@ function doLogin() {
         closeModal('modal-login');
         openAdmin();
     } else {
-        document.getElementById('login-error').classList.add('show');
+        alert("E-mail ou Senha incorretos.");
     }
 }
 
@@ -275,7 +267,7 @@ function renderTable() {
     let html = `<thead><tr><th>#</th><th>Nome</th>`;
     if (currentTab === 'participante') html += `<th>R.A</th><th>Curso</th><th>Coffee</th><th>Projeto</th><th>GitHub</th>`;
     else if (currentTab === 'palestrante') html += `<th>Email</th><th>Telefone</th><th>Tema</th>`;
-    else html += `<th>Identificador</th><th>Tipo</th>`;
+    else html += `<th>Doc/Tel</th><th>Tipo</th>`;
     html += `<th>Data</th></tr></thead><tbody>`;
 
     data.forEach((i, idx) => {
@@ -332,7 +324,7 @@ function exportCSV() {
 }
 
 /* ════════════════════════════════════════
-   INICIALIZAÇÃO DE EVENTOS UI
+   BOTÕES E EVENTOS UI
    ════════════════════════════════════════ */
 document.getElementById('btn-open-login').onclick = () => sessionStorage.getItem('tw_admin') === '1' ? openAdmin() : openModal('modal-login');
 
@@ -340,7 +332,6 @@ document.getElementById('btn-open-part').onclick = () => {
     document.getElementById('registroForm').reset();
     document.getElementById('form-part-wrap').style.display = 'block';
     document.getElementById('success-part').style.display = 'none';
-    document.getElementById('part-error').classList.remove('show');
     if (projetoSection) projetoSection.style.display = 'none';
     openModal('modal-part');
 };
