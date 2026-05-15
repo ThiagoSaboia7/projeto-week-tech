@@ -622,7 +622,8 @@
                 <div class="field-group">
                     <div class="field">
                         <label for="login-email">E-mail</label>
-                        <input type="email" id="login-email" required placeholder="admin@gmail.com" autocomplete="email" maxlength="100"/>
+                        <input type="email" id="login-email" required placeholder="admin@gmail.com" autocomplete="email"
+                            maxlength="100" />
                     </div>
                     <div class="field">
                         <label for="login-senha">Senha</label>
@@ -835,7 +836,8 @@
             <div class="faq-content">
                 <details>
                     <summary>Onde exatamente será realizado o evento?</summary>
-                    <p>O evento acontecerá no auditório principal, localizado no último andar do Campus da UniCesumar em Londrina - PR, na Av. Santa Mônica, 450.</p>
+                    <p>O evento acontecerá no auditório principal, localizado no último andar do Campus da UniCesumar em
+                        Londrina - PR, na Av. Santa Mônica, 450.</p>
                 </details>
 
                 <details>
@@ -910,7 +912,6 @@
             </div>
 
             <div class="admin-tabs">
-                <button class="admin-tab active" onclick="switchTab('todos', this)">Todos</button>
                 <button class="admin-tab" onclick="switchTab('participante', this)">Participantes</button>
                 <button class="admin-tab" onclick="switchTab('palestrante', this)">Palestrantes</button>
             </div>
@@ -924,8 +925,7 @@
                             <circle cx="11" cy="11" r="8" />
                             <path d="m21 21-4.35-4.35" />
                         </svg>
-                        <input type="text" id="admin-search-input" placeholder="Buscar por nome ou e-mail..."
-                            oninput="renderTable()" />
+                        <input type="text" id="admin-search-input" placeholder="Buscar" oninput="renderTable()" />
                     </div>
                 </div>
                 <div id="admin-table-container"><!-- preenchido via JS --></div>

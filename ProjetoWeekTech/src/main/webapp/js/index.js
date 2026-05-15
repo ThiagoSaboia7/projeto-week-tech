@@ -56,7 +56,7 @@ function closeModal(id) {
 }
 
 /* ════════════════════════════════════════
-   LOGICA DO CAROUSEL (3 DOTS + TRAVA DE FIM)
+   LOGICA DO CAROUSEL
    ════════════════════════════════════════ */
 function setupCarousel() {
     const track = document.getElementById('track');
@@ -107,45 +107,37 @@ function setupCarousel() {
         dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
     }
 
-    track.addEventListener('mousedown', dragStart);
-    track.addEventListener('mousemove', dragMove);
-    track.addEventListener('mouseup', dragEnd);
-    track.addEventListener('mouseleave', dragEnd);
-    track.addEventListener('touchstart', dragStart);
-    track.addEventListener('touchmove', dragMove);
-    track.addEventListener('touchend', dragEnd);
-
-    function dragStart(e) {
+    track.addEventListener('mousedown', (e) => {
         isDragging = true;
-        startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        startPos = e.pageX;
         track.style.transition = 'none';
         track.style.cursor = 'grabbing';
-    }
+    });
 
-    function dragMove(e) {
+    window.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
-        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const currentPosition = e.pageX;
         let move = prevTranslate + currentPosition - startPos;
         if (move > 0) move = 0;
         const maxScroll = getMaxTranslate();
         if (move < -maxScroll) move = -maxScroll;
         currentTranslate = move;
         track.style.transform = `translateX(${currentTranslate}px)`;
-    }
+    });
 
-    function dragEnd() {
+    window.addEventListener('mouseup', () => {
         if (!isDragging) return;
         isDragging = false;
         track.style.cursor = 'grab';
         prevTranslate = currentTranslate;
         const maxScroll = getMaxTranslate();
-        const percent = Math.abs(currentTranslate) / maxScroll;
+        const percent = Math.abs(currentTranslate) / (maxScroll || 1);
         if (percent < 0.25) currentIndex = 0;
         else if (percent < 0.75) currentIndex = 1;
         else currentIndex = 2;
         applyPosition();
         updateDots();
-    }
+    });
 
     if (nextBtn) nextBtn.onclick = () => { if (currentIndex < 2) goToPage(currentIndex + 1); };
     if (prevBtn) prevBtn.onclick = () => { if (currentIndex > 0) goToPage(currentIndex - 1); };
@@ -157,34 +149,15 @@ function setupCarousel() {
 function doLogin() {
     const emailField = document.getElementById('login-email');
     const senhaField = document.getElementById('login-senha');
-
-    const email = emailField.value.trim();
-    const senha = senhaField.value;
-
-    // 1. Validar se os campos estão vazios (o reportValidity mostrará o balão de required)
-    if (!emailField.reportValidity() || !senhaField.reportValidity()) {
-        return;
-    }
-
-    // 2. Validar credenciais
-    if (email === ADMIN_EMAIL && senha === ADMIN_SENHA) {
+    if (emailField.value.trim() === ADMIN_EMAIL && senhaField.value === ADMIN_SENHA) {
         sessionStorage.setItem('tw_admin', '1');
         closeModal('modal-login');
         openAdmin();
     } else {
-        // 3. Se estiver incorreto, aplica o erro customizado no campo de e-mail
-        emailField.setCustomValidity("E-mail ou Senha Incorretos.");
-        emailField.reportValidity(); // Mostra o balão com a mensagem acima
+        emailField.setCustomValidity("E-mail ou Senha incorretos.");
+        emailField.reportValidity();
     }
 }
-
-document.getElementById('login-email')?.addEventListener('input', function () {
-    this.setCustomValidity("");
-});
-document.getElementById('login-senha')?.addEventListener('input', function () {
-    // Quando o usuário mexe na senha, também limpamos o erro do e-mail
-    document.getElementById('login-email').setCustomValidity("");
-});
 
 function openAdmin() {
     document.body.classList.add('admin-logged-in');
@@ -192,6 +165,8 @@ function openAdmin() {
     const faq = document.querySelector('.faq-floating-container');
     if (panel) panel.style.display = 'block';
     if (faq) faq.style.display = 'none';
+    renderStats();
+    renderTable();
 }
 
 function logout() {
@@ -199,31 +174,145 @@ function logout() {
     window.location.reload();
 }
 
+// Alterado para começar em 'participante' em vez de 'todos'
+let currentTab = 'participante';
+
+function switchTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable();
+}
+
+function renderStats() {
+    const all = getInscritos();
+    const parts = all.filter(i => i.tipo === 'participante').length;
+    const pals = all.filter(i => i.tipo === 'palestrante').length;
+    const total = all.length; // Soma de todos
+
+    const statsEl = document.getElementById('admin-stats');
+    if (statsEl) {
+        statsEl.innerHTML = `
+            <div class="stat-card">
+                <div class="stat-label">Total Geral</div>
+                <div class="stat-value">${total}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Participantes</div>
+                <div class="stat-value">${parts}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Palestrantes</div>
+                <div class="stat-value">${pals}</div>
+            </div>
+        `;
+    }
+}
+
+function renderTable() {
+    const container = document.getElementById('admin-table-container');
+    const all = getInscritos();
+    const q = document.getElementById('admin-search-input').value.toLowerCase();
+
+    // 1. Primeiro filtramos pela aba ativa
+    let data = all.filter(i => i.tipo === currentTab);
+
+    // 2. Aplicamos a pesquisa separada por categoria
+    if (q) {
+        data = data.filter(i => {
+            const nomeMatch = i.nome.toLowerCase().includes(q);
+
+            if (currentTab === 'participante') {
+                // Participante: Busca APENAS por Nome ou R.A.
+                const raMatch = i.ra && i.ra.toLowerCase().includes(q);
+                return nomeMatch || raMatch;
+            } else {
+                // Palestrante: Busca APENAS por Nome ou E-mail
+                const emailMatch = i.email && i.email.toLowerCase().includes(q);
+                return nomeMatch || emailMatch;
+            }
+        });
+    }
+
+    if (!data.length) {
+        container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado para esta pesquisa.</p>";
+        return;
+    }
+
+    // 3. Montagem do cabeçalho da tabela
+    let html = `<thead><tr><th>#</th><th>Nome</th>`;
+    if (currentTab === 'participante') {
+        html += `<th>R.A</th><th>Curso</th><th>Coffee</th><th>Projeto</th><th>GitHub</th>`;
+    } else {
+        html += `<th>Email</th><th>Telefone</th><th>Tema</th>`;
+    }
+    html += `<th>Data</th></tr></thead><tbody>`;
+
+    // 4. Montagem das linhas da tabela
+    data.forEach((i, idx) => {
+        html += `<tr><td>${idx + 1}</td><td><strong>${i.nome}</strong></td>`;
+        if (currentTab === 'participante') {
+            const projInfo = i.projeto ? `Sim (${i.integrantes})` : 'Não';
+            html += `<td>${i.ra}</td><td>${i.curso}</td><td>${i.coffee ? '✅' : '❌'}</td><td>${projInfo}</td><td>${i.link ? `<a href="${i.link}" target="_blank">Ver</a>` : '-'}</td>`;
+        } else {
+            html += `<td>${i.email}</td><td>${i.telefone}</td><td>${i.tema}</td>`;
+        }
+        html += `<td>${i.data}</td></tr>`;
+    });
+
+    container.innerHTML = `<table class="admin-table">${html}</tbody></table>`;
+}
+
+function exportCSV() {
+    const all = getInscritos();
+    const header = 'Nome,Documento,Tipo,Curso,Coffee,Projeto,Integrantes,GitHub,Data\n';
+    const rows = all.map(i => `"${i.nome}","${i.ra || i.telefone}","${i.tipo}","${i.curso || ''}","${i.coffee ? 'Sim' : 'Nao'}","${i.projeto ? 'Sim' : 'Nao'}","${i.integrantes || ''}","${i.link || ''}","${i.data}"`).join('\n');
+    const blob = new Blob(['\ufeff' + header + rows], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'inscritos.csv'; a.click();
+}
+
 /* ════════════════════════════════════════
-   INICIALIZAÇÃO FINAL
+   INICIALIZAÇÃO E EVENTOS
    ════════════════════════════════════════ */
 function init() {
     setupCarousel();
 
     const projetoSection = document.getElementById('projeto-section');
-    if (projetoSection) projetoSection.style.display = 'none';
+    const intInput = document.getElementById('p-integrantes');
+    const intLabel = document.getElementById('integrantes-label');
 
-    // --- BOTÕES DO HERO ---
-    document.getElementById('btn-hero-inscricao').onclick = () => {
-        document.getElementById('inscricoes')?.scrollIntoView({ behavior: 'smooth' });
+    // LOGICA DO STEPPER 
+    document.getElementById('inc-int').onclick = (e) => {
+        e.preventDefault();
+        let v = parseInt(intInput.value);
+        if (v < 5) { intInput.value = v + 1; intLabel.textContent = (v + 1) + " Integrantes"; }
+    };
+    document.getElementById('dec-int').onclick = (e) => {
+        e.preventDefault();
+        let v = parseInt(intInput.value);
+        if (v > 1) { intInput.value = v - 1; intLabel.textContent = (v - 1 === 1) ? "1 Integrante" : (v - 1) + " Integrantes"; }
     };
 
-    document.getElementById('btn-hero-programacao').onclick = () => {
-        document.getElementById('palestrantes')?.scrollIntoView({ behavior: 'smooth' });
-    };
+    // FAQ: Fechar ao clicar fora
+    window.addEventListener('click', function (e) {
+        const faqContainer = document.querySelector('.faq-floating-container');
+        const faqToggle = document.getElementById('faq-toggle');
+        if (faqToggle?.checked && faqContainer && !faqContainer.contains(e.target)) {
+            faqToggle.checked = false;
+        }
+    });
 
-    // --- BOTÕES DE MODAL ---
     document.getElementById('btn-open-login').onclick = () => sessionStorage.getItem('tw_admin') === '1' ? openAdmin() : openModal('modal-login');
     document.getElementById('btn-do-login').onclick = doLogin;
     document.getElementById('close-login').onclick = () => closeModal('modal-login');
 
+    document.getElementById('btn-hero-inscricao').onclick = () => document.getElementById('inscricoes')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('btn-hero-programacao').onclick = () => document.getElementById('palestrantes')?.scrollIntoView({ behavior: 'smooth' });
+
     document.getElementById('btn-open-part').onclick = () => {
         document.getElementById('registroForm').reset();
+        intInput.value = 1;
+        intLabel.textContent = "1 Integrante";
         document.getElementById('form-part-wrap').style.display = 'block';
         document.getElementById('success-part').style.display = 'none';
         if (projetoSection) projetoSection.style.display = 'none';
@@ -239,37 +328,18 @@ function init() {
     };
     document.getElementById('close-pal').onclick = () => closeModal('modal-pal');
 
-    // --- FECHAR FAQ AO CLICAR FORA ---
-    window.addEventListener('click', function (e) {
-        const faqContainer = document.querySelector('.faq-floating-container');
-        const faqCheckbox = document.getElementById('faq-toggle');
-
-        // Se o FAQ estiver aberto e o clique for fora do container do FAQ
-        if (faqCheckbox && faqCheckbox.checked && faqContainer && !faqContainer.contains(e.target)) {
-            faqCheckbox.checked = false; // Desmarca o checkbox, fechando o card
-        }
-    });
-
-    // --- VALIDAÇÕES EM TEMPO REAL ---
-    document.getElementById('s-email')?.addEventListener('input', function () { this.setCustomValidity(""); });
-    document.getElementById('s-nome')?.addEventListener('input', function () {
-        this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
-        this.setCustomValidity("");
-    });
-    document.getElementById('p-nome')?.addEventListener('input', function () {
-        this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
-        this.setCustomValidity("");
-    });
+    // Máscaras e Limpezas
+    document.getElementById('p-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); this.setCustomValidity(""); });
+    document.getElementById('s-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); this.setCustomValidity(""); });
     document.getElementById('p-ra')?.addEventListener('input', function (e) {
         let v = e.target.value.replace(/\D/g, "");
         if (v.length > 8) v = v.replace(/^(\d{8})(\d{1}).*/, "$1-$2");
-        e.target.value = v;
-        this.setCustomValidity("");
+        e.target.value = v; this.setCustomValidity("");
     });
+    document.getElementById('s-email')?.addEventListener('input', function () { this.setCustomValidity(""); });
 
-    // --- TOGGLE PROJETO ---
-    const checkboxProjeto = document.getElementById('p-apresentar');
-    checkboxProjeto?.addEventListener('change', function () {
+    // Toggle Projeto
+    document.getElementById('p-apresentar')?.addEventListener('change', function () {
         const submitContainer = document.getElementById('submit-container');
         const linkInput = document.getElementById('p-link');
         if (this.checked) {
@@ -285,39 +355,74 @@ function init() {
         }
     });
 
+    // Submits
+    document.getElementById('registroForm').onsubmit = function (e) {
+        const nomeField = document.getElementById('p-nome');
+        const raField = document.getElementById('p-ra');
+        if (nomeField.value.trim().split(/\s+/).length < 2) {
+            e.preventDefault(); nomeField.setCustomValidity("Informe nome e sobrenome."); nomeField.reportValidity(); return;
+        }
+        if (raField.value.length < 10) {
+            e.preventDefault(); raField.setCustomValidity("O R.A. deve estar completo."); raField.reportValidity(); return;
+        }
+        if (getInscritos().some(i => i.ra === raField.value)) {
+            e.preventDefault(); raField.setCustomValidity("Este R.A. já está cadastrado."); raField.reportValidity(); return;
+        }
+        e.preventDefault();
+        addInscrito({
+            tipo: 'participante', nome: nomeField.value.trim(), ra: raField.value,
+            curso: document.getElementById('p-curso').value, serie: document.getElementById('p-serie').value,
+            coffee: document.getElementById('p-coffee').checked, projeto: document.getElementById('p-apresentar').checked,
+            integrantes: document.getElementById('p-apresentar').checked ? intInput.value : '0',
+            link: document.getElementById('p-apresentar').checked ? document.getElementById('p-link').value.trim() : ''
+        });
+        document.getElementById('form-part-wrap').style.display = 'none';
+        document.getElementById('success-part').style.display = 'block';
+        renderStats(); // Atualiza painel admin se aberto
+    };
+
+    document.getElementById('form-pal').onsubmit = async function (e) {
+        const nomeField = document.getElementById('s-nome');
+        const emailField = document.getElementById('s-email');
+        if (nomeField.value.trim().split(/\s+/).length < 2) {
+            e.preventDefault(); nomeField.setCustomValidity("Informe nome e sobrenome."); nomeField.reportValidity(); return;
+        }
+        e.preventDefault();
+        const btn = document.getElementById('btn-do-pal');
+        btn.disabled = true;
+        try {
+            const b64B = await fileToBase64(document.getElementById('s-briefing').files[0]);
+            const b64C = await fileToBase64(document.getElementById('s-curr').files[0]);
+            addInscrito({
+                tipo: 'palestrante', nome: nomeField.value.trim(), email: emailField.value.trim(),
+                telefone: document.getElementById('s-tel').value, tema: document.getElementById('s-tema').value.trim(),
+                tempo: document.getElementById('s-tempo').value, briefing: b64B, curriculo: b64C
+            });
+            document.getElementById('form-pal-wrap').style.display = 'none';
+            document.getElementById('success-pal').style.display = 'block';
+            renderStats(); // Atualiza painel admin se aberto
+        } catch (err) { alert("Erro nos arquivos."); } finally { btn.disabled = false; }
+    };
+
     if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
+
+    // Countdown
+    const TARGET = new Date('2026-06-01T19:00:00-03:00').getTime();
+    setInterval(() => {
+        const diff = TARGET - Date.now();
+        if (diff > 0) {
+            const t = Math.floor(diff / 1000);
+            document.getElementById('cd-d').textContent = String(Math.floor(t / 86400)).padStart(2, '0');
+            document.getElementById('cd-h').textContent = String(Math.floor(t / 3600) % 24).padStart(2, '0');
+            document.getElementById('cd-m').textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
+            document.getElementById('cd-s').textContent = String(t % 60).padStart(2, '0');
+        } else {
+            const msg = document.getElementById('fin-msg');
+            if (msg) msg.style.display = 'block';
+            const cd = document.getElementById('countdown');
+            if (cd) cd.style.display = 'none';
+        }
+    }, 1000);
 }
 
-// === LOGICA DO COUNTDOWN ===
-const TARGET = new Date('2026-06-01T18:30:00-03:00').getTime();
-
-function updateCountdown() {
-    const dEl = document.getElementById('cd-d');
-    const hEl = document.getElementById('cd-h');
-    const mEl = document.getElementById('cd-m');
-    const sEl = document.getElementById('cd-s');
-    const finMsg = document.getElementById('fin-msg');
-
-    if (!dEl) return;
-
-    const diff = TARGET - Date.now();
-
-    if (diff > 0) {
-        const t = Math.floor(diff / 1000);
-        dEl.textContent = String(Math.floor(t / 86400)).padStart(2, '0');
-        hEl.textContent = String(Math.floor(t / 3600) % 24).padStart(2, '0');
-        mEl.textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
-        sEl.textContent = String(t % 60).padStart(2, '0');
-    } else {
-        if (finMsg) finMsg.style.display = 'block';
-        const cdArea = document.getElementById('countdown');
-        if (cdArea) cdArea.style.display = 'none';
-        const cdLabel = document.querySelector('.cd-label');
-        if (cdLabel) cdLabel.style.display = 'none';
-    }
-}
-
-// INICIALIZAÇÃO
-updateCountdown();
-setInterval(updateCountdown, 1000);
 window.onload = init;
