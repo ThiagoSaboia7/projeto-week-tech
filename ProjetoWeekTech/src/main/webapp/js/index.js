@@ -53,6 +53,7 @@ function closeModal(id) {
     }
 }
 
+// Fechar ao clicar fora
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal(overlay.id);
@@ -60,22 +61,18 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 /* ════════════════════════════════════════
-   PARTICIPANTE (LOGICA COM VALIDAÇÃO NATIVA)
+   PARTICIPANTE (MÁSCARAS E VALIDAÇÃO)
    ════════════════════════════════════════ */
 const checkboxProjeto = document.getElementById('p-apresentar');
 const projetoSection = document.getElementById('projeto-section');
 const intInput = document.getElementById('p-integrantes');
 const intLabel = document.getElementById('integrantes-label');
 
-if (projetoSection) projetoSection.style.display = 'none';
-
-// Máscara R.A. e Limpeza de Erro customizado
+// Máscaras
 document.getElementById('p-ra')?.addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, "");
     if (v.length > 8) v = v.replace(/^(\d{8})(\d{1}).*/, "$1-$2");
     e.target.value = v;
-
-    // IMPORTANTE: Limpa a mensagem de erro enquanto o usuário digita
     this.setCustomValidity("");
 });
 
@@ -88,7 +85,6 @@ document.getElementById('p-nome')?.addEventListener('input', function () {
 checkboxProjeto?.addEventListener('change', function () {
     const submitContainer = document.getElementById('submit-container');
     const linkInput = document.getElementById('p-link');
-
     if (this.checked) {
         projetoSection.style.display = 'block';
         setTimeout(() => projetoSection.classList.add('open'), 10);
@@ -103,7 +99,7 @@ checkboxProjeto?.addEventListener('change', function () {
     }
 });
 
-// Stepper Integrantes
+// Stepper
 document.getElementById('inc-int')?.addEventListener('click', () => {
     let v = parseInt(intInput.value);
     if (v < 5) { intInput.value = v + 1; intLabel.textContent = `${v + 1} Integrantes`; }
@@ -113,32 +109,26 @@ document.getElementById('dec-int')?.addEventListener('click', () => {
     if (v > 1) { intInput.value = v - 1; intLabel.textContent = (v - 1) === 1 ? '1 Integrante' : `${v - 1} Integrantes`; }
 });
 
-// SUBMIT PARTICIPANTE
+// Submit Participante
 document.getElementById('registroForm')?.addEventListener('submit', function (e) {
-
     const nomeField = document.getElementById('p-nome');
-    const nomeValor = nomeField.value.trim();
-
-    // Verifica se tem pelo menos 2 palavras (Nome e Sobrenome)
-    if (nomeValor.split(" ").length < 2) {
-        e.preventDefault();
-        nomeField.setCustomValidity("Por favor, informe seu nome e pelo menos um sobrenome.");
-        nomeField.reportValidity();
-        return;
-    }
-    
     const raField = document.getElementById('p-ra');
     const inscritos = getInscritos();
 
-    // 1. Validação de Tamanho do R.A. (8 números + traço + 1 número = 10 caracteres)
-    if (raField.value.length < 10) {
+    if (nomeField.value.trim().split(" ").length < 2) {
         e.preventDefault();
-        raField.setCustomValidity("O R.A. deve estar completo.");
-        raField.reportValidity(); // Força o balão do navegador a aparecer
+        nomeField.setCustomValidity("Informe seu nome e pelo menos um sobrenome.");
+        nomeField.reportValidity();
         return;
     }
 
-    // 2. Validação de Duplicidade
+    if (raField.value.length < 10) {
+        e.preventDefault();
+        raField.setCustomValidity("O R.A. deve estar completo.");
+        raField.reportValidity();
+        return;
+    }
+
     if (inscritos.some(i => i.ra === raField.value)) {
         e.preventDefault();
         raField.setCustomValidity("Este R.A. já está cadastrado.");
@@ -146,11 +136,10 @@ document.getElementById('registroForm')?.addEventListener('submit', function (e)
         return;
     }
 
-    // Se passou, salva
     e.preventDefault();
     addInscrito({
         tipo: 'participante',
-        nome: document.getElementById('p-nome').value.trim(),
+        nome: nomeField.value.trim(),
         ra: raField.value,
         curso: document.getElementById('p-curso').value,
         serie: document.getElementById('p-serie').value,
@@ -159,20 +148,13 @@ document.getElementById('registroForm')?.addEventListener('submit', function (e)
         integrantes: checkboxProjeto.checked ? intInput.value : '',
         link: checkboxProjeto.checked ? document.getElementById('p-link').value.trim() : ''
     });
-
     document.getElementById('form-part-wrap').style.display = 'none';
     document.getElementById('success-part').style.display = 'block';
 });
 
 /* ════════════════════════════════════════
-   PALESTRANTE (LOGICA SIMPLIFICADA)
+   PALESTRANTE (LOGICA)
    ════════════════════════════════════════ */
-function resetPalForm() {
-    document.getElementById('form-pal-wrap').style.display = 'block';
-    document.getElementById('success-pal').style.display = 'none';
-    document.getElementById('form-pal').reset();
-}
-
 document.getElementById('s-tel')?.addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, '');
     if (v.length > 11) v = v.substring(0, 11);
@@ -184,39 +166,72 @@ document.getElementById('s-tel')?.addEventListener('input', function (e) {
 });
 
 document.getElementById('form-pal')?.addEventListener('submit', async function (e) {
-    e.preventDefault();
+    const nomeField = document.getElementById('s-nome');
     const telField = document.getElementById('s-tel');
-    const telLimpo = telField.value.replace(/\D/g, "");
+    const emailField = document.getElementById('s-email');
+    const emailValue = emailField.value.trim();
 
-    // Validação de tamanho do telefone
-    if (telLimpo.length < 11) {
-        telField.setCustomValidity("O telefone deve ter 11 dígitos.");
-        telField.reportValidity();
+    // Regex que exige: texto + @ + texto + . + texto (mínimo 2 letras após o ponto)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    if (!emailRegex.test(emailValue)) {
+        e.preventDefault();
+        emailField.setCustomValidity("Informe um e-mail válido com domínio (ex: seunome@email.com).");
+        emailField.reportValidity();
         return;
     }
 
+    // 1. Limpa erros de validações anteriores (ESSENCIAL)
+    nomeField.setCustomValidity("");
+    telField.setCustomValidity("");
+
+    // 2. Validação de Nome Completo (Palestrante)
+    // Usamos um filtro para ignorar espaços duplos
+    const partesNome = nomeField.value.trim().split(/\s+/);
+    if (partesNome.length < 2) {
+        e.preventDefault();
+        nomeField.setCustomValidity("Por favor, informe o nome e pelo menos um sobrenome.");
+        nomeField.reportValidity();
+        return;
+    }
+
+    
+
+    // Se o navegador passar pelos 'required' do HTML e pelas validações acima:
+    e.preventDefault();
     const btn = document.getElementById('btn-do-pal');
     btn.disabled = true;
-    btn.innerText = "Enviando...";
 
-    const b64B = await fileToBase64(document.getElementById('s-briefing').files[0]);
-    const b64C = await fileToBase64(document.getElementById('s-curr').files[0]);
+    try {
+        const b64B = await fileToBase64(document.getElementById('s-briefing').files[0]);
+        const b64C = await fileToBase64(document.getElementById('s-curr').files[0]);
 
-    addInscrito({
-        tipo: 'palestrante',
-        nome: document.getElementById('s-nome').value.trim(),
-        email: document.getElementById('s-email').value.trim(),
-        telefone: telField.value,
-        tema: document.getElementById('s-tema').value.trim(),
-        tempo: document.getElementById('s-tempo').value,
-        briefing: b64B,
-        curriculo: b64C
-    });
+        addInscrito({
+            tipo: 'palestrante',
+            nome: nomeField.value.trim(),
+            email: document.getElementById('s-email').value.trim(),
+            telefone: telField.value,
+            tema: document.getElementById('s-tema').value.trim(),
+            tempo: document.getElementById('s-tempo').value,
+            briefing: b64B,
+            curriculo: b64C
+        });
 
-    document.getElementById('form-pal-wrap').style.display = 'none';
-    document.getElementById('success-pal').style.display = 'block';
-    btn.disabled = false;
-    btn.innerText = "Enviar Proposta";
+        document.getElementById('form-pal-wrap').style.display = 'none';
+        document.getElementById('success-pal').style.display = 'block';
+    } catch (err) {
+        alert("Erro ao processar arquivos. Tente novamente.");
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Enviar Proposta";
+    }
+});
+
+// Bloqueia números e caracteres especiais no nome do palestrante
+document.getElementById('s-nome')?.addEventListener('input', function () {
+    // Mantém apenas letras e espaços
+    this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
+    this.setCustomValidity("");
 });
 
 /* ════════════════════════════════════════
@@ -255,14 +270,9 @@ function renderTable() {
     const container = document.getElementById('admin-table-container');
     const all = getInscritos();
     const q = document.getElementById('admin-search-input').value.toLowerCase();
-
     let data = currentTab === 'todos' ? all : all.filter(i => i.tipo === currentTab);
     if (q) data = data.filter(i => i.nome.toLowerCase().includes(q) || (i.ra && i.ra.includes(q)));
-
-    if (!data.length) {
-        container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado.</p>";
-        return;
-    }
+    if (!data.length) { container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado.</p>"; return; }
 
     let html = `<thead><tr><th>#</th><th>Nome</th>`;
     if (currentTab === 'participante') html += `<th>R.A</th><th>Curso</th><th>Coffee</th><th>Projeto</th><th>GitHub</th>`;
@@ -274,19 +284,13 @@ function renderTable() {
         html += `<tr><td>${idx + 1}</td><td><strong>${i.nome}</strong></td>`;
         if (i.tipo === 'participante') {
             if (currentTab === 'participante' || currentTab === 'todos') {
-                if (currentTab === 'participante') {
-                    html += `<td>${i.ra}</td><td>${i.curso}</td><td>${i.coffee ? '✅' : '❌'}</td><td>${i.projeto ? 'Sim' : 'Não'}</td><td>${i.link ? '<a href="' + i.link + '" target="_blank">Link</a>' : '-'}</td>`;
-                } else {
-                    html += `<td>${i.ra}</td><td>Participante</td>`;
-                }
+                if (currentTab === 'participante') html += `<td>${i.ra}</td><td>${i.curso}</td><td>${i.coffee ? '✅' : '❌'}</td><td>${i.projeto ? 'Sim' : 'Não'}</td><td>${i.link ? '<a href="' + i.link + '" target="_blank">Link</a>' : '-'}</td>`;
+                else html += `<td>${i.ra}</td><td>Participante</td>`;
             }
         } else {
             if (currentTab === 'palestrante' || currentTab === 'todos') {
-                if (currentTab === 'palestrante') {
-                    html += `<td>${i.email}</td><td>${i.telefone}</td><td>${i.tema}</td>`;
-                } else {
-                    html += `<td>${i.telefone}</td><td>Palestrante</td>`;
-                }
+                if (currentTab === 'palestrante') html += `<td>${i.email}</td><td>${i.telefone}</td><td>${i.tema}</td>`;
+                else html += `<td>${i.telefone}</td><td>Palestrante</td>`;
             }
         }
         html += `<td>${i.data}</td></tr>`;
@@ -304,12 +308,7 @@ function switchTab(tab, btn) {
 function renderStats() {
     const all = getInscritos();
     const statsEl = document.getElementById('admin-stats');
-    if (statsEl) {
-        statsEl.innerHTML = `
-            <div class="stat-card"><div class="stat-label">Participantes</div><div class="stat-value">${all.filter(i => i.tipo === 'participante').length}</div></div>
-            <div class="stat-card"><div class="stat-label">Palestrantes</div><div class="stat-value">${all.filter(i => i.tipo === 'palestrante').length}</div></div>
-        `;
-    }
+    if (statsEl) statsEl.innerHTML = `<div class="stat-card"><div class="stat-label">Participantes</div><div class="stat-value">${all.filter(i => i.tipo === 'participante').length}</div></div><div class="stat-card"><div class="stat-label">Palestrantes</div><div class="stat-value">${all.filter(i => i.tipo === 'palestrante').length}</div></div>`;
 }
 
 function exportCSV() {
@@ -317,54 +316,64 @@ function exportCSV() {
     const header = 'Nome,Documento,Tipo,Curso,Coffee,Projeto,Data\n';
     const rows = all.map(i => `"${i.nome}","${i.ra || i.telefone}","${i.tipo}","${i.curso || ''}","${i.coffee ? 'Sim' : 'Nao'}","${i.projeto ? 'Sim' : 'Nao'}","${i.data}"`).join('\n');
     const blob = new Blob(['\ufeff' + header + rows], { type: 'text/csv;charset=utf-8;' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'inscritos_techweek.csv';
-    a.click();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'inscritos.csv'; a.click();
 }
 
 /* ════════════════════════════════════════
-   BOTÕES E EVENTOS UI
+   INICIALIZAÇÃO E EVENTOS DE CLIQUE
    ════════════════════════════════════════ */
-document.getElementById('btn-open-login').onclick = () => sessionStorage.getItem('tw_admin') === '1' ? openAdmin() : openModal('modal-login');
-
-document.getElementById('btn-open-part').onclick = () => {
-    document.getElementById('registroForm').reset();
-    document.getElementById('form-part-wrap').style.display = 'block';
-    document.getElementById('success-part').style.display = 'none';
+function init() {
+    // Esconder seção projeto por padrão
     if (projetoSection) projetoSection.style.display = 'none';
-    openModal('modal-part');
-};
 
-document.getElementById('btn-open-pal').onclick = () => {
-    resetPalForm();
-    openModal('modal-pal');
-};
+    // Botão Login
+    document.getElementById('btn-open-login').onclick = () => sessionStorage.getItem('tw_admin') === '1' ? openAdmin() : openModal('modal-login');
+    document.getElementById('btn-do-login').onclick = doLogin;
+    document.getElementById('close-login').onclick = () => closeModal('modal-login');
 
-document.getElementById('close-login').onclick = () => closeModal('modal-login');
-document.getElementById('close-part').onclick = () => closeModal('modal-part');
-document.getElementById('close-pal').onclick = () => closeModal('modal-pal');
-document.getElementById('btn-do-login').onclick = doLogin;
+    document.getElementById('s-email')?.addEventListener('input', function () {
+        this.setCustomValidity(""); // Limpa o erro assim que o usuário volta a digitar
+    });
 
-// Countdown
-const TARGET = new Date('2026-06-01T00:00:00-03:00').getTime();
-setInterval(() => {
-    const diff = TARGET - Date.now();
-    if (diff > 0) {
-        const t = Math.floor(diff / 1000);
-        document.getElementById('cd-d').textContent = String(Math.floor(t / 86400)).padStart(2, '0');
-        document.getElementById('cd-h').textContent = String(Math.floor(t / 3600) % 24).padStart(2, '0');
-        document.getElementById('cd-m').textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
-        document.getElementById('cd-s').textContent = String(t % 60).padStart(2, '0');
-    }
-}, 1000);
+    // Botão Participante
+    document.getElementById('btn-open-part').onclick = () => {
+        document.getElementById('registroForm').reset();
+        document.getElementById('form-part-wrap').style.display = 'block';
+        document.getElementById('success-part').style.display = 'none';
+        projetoSection.style.display = 'none';
+        openModal('modal-part');
+    };
+    document.getElementById('close-part').onclick = () => closeModal('modal-part');
 
-// Carousel
-const track = document.getElementById('track');
-let cur = 0;
-document.getElementById('next').onclick = () => { if (cur < 2) { cur++; track.style.transform = `translateX(-${cur * 33.3}%)`; } };
-document.getElementById('prev').onclick = () => { if (cur > 0) { cur--; track.style.transform = `translateX(-${cur * 33.3}%)`; } };
+    // Botão Palestrante
+    document.getElementById('btn-open-pal').onclick = () => {
+        document.getElementById('form-pal').reset();
+        document.getElementById('form-pal-wrap').style.display = 'block';
+        document.getElementById('success-pal').style.display = 'none';
+        openModal('modal-pal');
+    };
+    document.getElementById('close-pal').onclick = () => closeModal('modal-pal');
 
-window.onload = () => {
+    // Admin Session Check
     if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
-};
+
+    // Outros Componentes
+    const TARGET = new Date('2026-06-01T00:00:00-03:00').getTime();
+    setInterval(() => {
+        const diff = TARGET - Date.now();
+        if (diff > 0) {
+            const t = Math.floor(diff / 1000);
+            const d = document.getElementById('cd-d'); if (d) d.textContent = String(Math.floor(t / 86400)).padStart(2, '0');
+            const h = document.getElementById('cd-h'); if (h) h.textContent = String(Math.floor(t / 3600) % 24).padStart(2, '0');
+            const m = document.getElementById('cd-m'); if (m) m.textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
+            const s = document.getElementById('cd-s'); if (s) s.textContent = String(t % 60).padStart(2, '0');
+        }
+    }, 1000);
+
+    const track = document.getElementById('track');
+    let cur = 0;
+    document.getElementById('next').onclick = () => { if (cur < 2) { cur++; track.style.transform = `translateX(-${cur * 33.3}%)`; } };
+    document.getElementById('prev').onclick = () => { if (cur > 0) { cur--; track.style.transform = `translateX(-${cur * 33.3}%)`; } };
+}
+
+window.onload = init;
