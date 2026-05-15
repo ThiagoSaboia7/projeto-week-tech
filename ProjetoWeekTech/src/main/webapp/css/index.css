@@ -2353,3 +2353,12 @@ nav {
 body.admin-logged-in .faq-floating-container {
     display: none !important;
 }
+
+/* Efeito de Blur no FAQ quando um modal estiver aberto */
+body.modal-open .faq-floating-container {
+    filter: blur(5px);
+    pointer-events: none;
+    /* Impede que o usuário clique no FAQ enquanto está borrado */
+    user-select: none;
+    transition: filter 0.3s ease;
+}

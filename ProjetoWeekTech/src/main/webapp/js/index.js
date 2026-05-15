@@ -42,6 +42,7 @@ function openModal(id) {
     if (modal) {
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
     }
 }
 
@@ -50,6 +51,7 @@ function closeModal(id) {
     if (modal) {
         modal.classList.remove('open');
         document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
     }
 }
 
