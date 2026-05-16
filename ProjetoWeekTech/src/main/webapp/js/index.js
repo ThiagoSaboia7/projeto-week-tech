@@ -159,38 +159,15 @@ function doLogin() {
     }
 }
 
-function openAdmin() {
-    document.body.classList.add('admin-logged-in');
-    const panel = document.getElementById('admin-panel');
-    const faq = document.querySelector('.faq-floating-container');
-    if (panel) panel.style.display = 'block';
-    if (faq) faq.style.display = 'none';
-    renderStats();
-    renderTable();
-}
-
-function logout() {
-    sessionStorage.removeItem('tw_admin');
-    window.location.reload();
-}
-
-// Alterado para começar em 'participante' em vez de 'todos'
-let currentTab = 'participante';
-
-function switchTab(tab, btn) {
-    currentTab = tab;
-    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    renderTable();
-}
-
 function renderStats() {
     const all = getInscritos();
+    const total = all.length;
     const parts = all.filter(i => i.tipo === 'participante').length;
     const pals = all.filter(i => i.tipo === 'palestrante').length;
-    const total = all.length; // Soma de todos
 
+    // DEFINIÇÃO DA VARIÁVEL (O que estava faltando)
     const statsEl = document.getElementById('admin-stats');
+
     if (statsEl) {
         statsEl.innerHTML = `
             <div class="stat-card">
@@ -209,55 +186,102 @@ function renderStats() {
     }
 }
 
+function openAdmin() {
+    document.body.classList.add('admin-logged-in');
+    const panel = document.getElementById('admin-panel');
+    const faq = document.querySelector('.faq-floating-container');
+
+    if (panel) {
+        panel.style.display = 'block';
+
+        // --- NOVO: ATIVA O BOTÃO VISUALMENTE ---
+        const tabs = document.querySelectorAll('.admin-tab');
+        tabs.forEach(btn => {
+            // Se o texto do botão for 'Participantes', ele ganha a cor de ativo
+            if (btn.innerText.includes('Participantes')) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        renderStats();
+        renderTable();
+    }
+    if (faq) faq.style.display = 'none';
+}
+
+function logout() {
+    sessionStorage.removeItem('tw_admin');
+    window.location.reload();
+}
+
+let currentTab = 'participante';
+
+function switchTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable();
+}
+
 function renderTable() {
     const container = document.getElementById('admin-table-container');
     const all = getInscritos();
     const q = document.getElementById('admin-search-input').value.toLowerCase();
 
-    // 1. Primeiro filtramos pela aba ativa
     let data = all.filter(i => i.tipo === currentTab);
-
-    // 2. Aplicamos a pesquisa separada por categoria
     if (q) {
         data = data.filter(i => {
             const nomeMatch = i.nome.toLowerCase().includes(q);
-
             if (currentTab === 'participante') {
-                // Participante: Busca APENAS por Nome ou R.A.
-                const raMatch = i.ra && i.ra.toLowerCase().includes(q);
-                return nomeMatch || raMatch;
+                return nomeMatch || (i.ra && i.ra.toLowerCase().includes(q));
             } else {
-                // Palestrante: Busca APENAS por Nome ou E-mail
-                const emailMatch = i.email && i.email.toLowerCase().includes(q);
-                return nomeMatch || emailMatch;
+                return nomeMatch || (i.email && i.email.toLowerCase().includes(q));
             }
         });
     }
 
     if (!data.length) {
-        container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado para esta pesquisa.</p>";
+        container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado.</p>";
         return;
     }
 
-    // 3. Montagem do cabeçalho da tabela
+    // CABEÇALHO: Definido separadamente para cada aba
     let html = `<thead><tr><th>#</th><th>Nome</th>`;
     if (currentTab === 'participante') {
-        html += `<th>R.A</th><th>Curso</th><th>Coffee</th><th>Projeto</th><th>GitHub</th>`;
+        html += `<th>R.A</th><th>Curso</th><th>Coffee</th><th>Projeto</th><th>GitHub</th><th>Data</th>`;
     } else {
-        html += `<th>Email</th><th>Telefone</th><th>Tema</th>`;
+        html += `<th>Email</th><th>Telefone</th><th>Tema</th><th>Tempo</th><th>Briefing</th><th>Currículo</th><th>Data</th>`;
     }
-    html += `<th>Data</th></tr></thead><tbody>`;
+    html += `</tr></thead><tbody>`;
 
-    // 4. Montagem das linhas da tabela
+    // LINHAS
     data.forEach((i, idx) => {
-        html += `<tr><td>${idx + 1}</td><td><strong>${i.nome}</strong></td>`;
+        html += `<tr><td>${idx + 1}</td><td title="${i.nome}"><strong>${i.nome}</strong></td>`;
+
         if (currentTab === 'participante') {
             const projInfo = i.projeto ? `Sim (${i.integrantes})` : 'Não';
-            html += `<td>${i.ra}</td><td>${i.curso}</td><td>${i.coffee ? '✅' : '❌'}</td><td>${projInfo}</td><td>${i.link ? `<a href="${i.link}" target="_blank">Ver</a>` : '-'}</td>`;
+            html += `
+                <td>${i.ra}</td>
+                <td title="${i.curso}">${i.curso}</td>
+                <td>${i.coffee ? '✅ Sim' : '❌ Não'}</td>
+                <td>${projInfo}</td>
+                <td>${i.link ? `<a href="${i.link}" target="_blank" class="btn-download">Link</a>` : '-'}</td>
+                <td>${i.data}</td>`;
         } else {
-            html += `<td>${i.email}</td><td>${i.telefone}</td><td>${i.tema}</td>`;
+            const linkBriefing = i.briefing ? `<a href="${i.briefing}" download="briefing_${i.nome}" class="btn-download">📄 Briefing</a>` : '—';
+            const linkCurr = i.curriculo ? `<a href="${i.curriculo}" download="curriculo_${i.nome}" class="btn-download">👤 Currículo</a>` : '—';
+            html += `
+                <td title="${i.email}">${i.email}</td>
+                <td>${i.telefone}</td>
+                <td title="${i.tema}">${i.tema}</td>
+                <td>${i.tempo || '-'}</td>
+                <td>${linkBriefing}</td>
+                <td>${linkCurr}</td>
+                <td>${i.data}</td>`;
         }
-        html += `<td>${i.data}</td></tr>`;
+        html += `</tr>`;
     });
 
     container.innerHTML = `<table class="admin-table">${html}</tbody></table>`;
@@ -293,7 +317,6 @@ function init() {
         if (v > 1) { intInput.value = v - 1; intLabel.textContent = (v - 1 === 1) ? "1 Integrante" : (v - 1) + " Integrantes"; }
     };
 
-    // FAQ: Fechar ao clicar fora
     window.addEventListener('click', function (e) {
         const faqContainer = document.querySelector('.faq-floating-container');
         const faqToggle = document.getElementById('faq-toggle');
@@ -328,15 +351,30 @@ function init() {
     };
     document.getElementById('close-pal').onclick = () => closeModal('modal-pal');
 
-    // Máscaras e Limpezas
+    // Máscaras (BLOQUEIO DE NÚMEROS E MELHORIA NO BACKSPACE)
     document.getElementById('p-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); this.setCustomValidity(""); });
     document.getElementById('s-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); this.setCustomValidity(""); });
+
     document.getElementById('p-ra')?.addEventListener('input', function (e) {
         let v = e.target.value.replace(/\D/g, "");
-        if (v.length > 8) v = v.replace(/^(\d{8})(\d{1}).*/, "$1-$2");
-        e.target.value = v; this.setCustomValidity("");
+        v = v.substring(0, 9);
+        if (v.length > 8) v = v.replace(/^(\d{8})(\d)/, "$1-$2");
+        e.target.value = v;
+        this.setCustomValidity("");
     });
+
     document.getElementById('s-email')?.addEventListener('input', function () { this.setCustomValidity(""); });
+
+    // MÁSCARA TELEFONE CORRIGIDA PARA APAGAR FLUIDO
+    document.getElementById('s-tel')?.addEventListener('input', function (e) {
+        if (e.inputType === "deleteContentBackward") return; // Permite apagar sem conflito
+        let v = e.target.value.replace(/\D/g, '');
+        v = v.substring(0, 11);
+        if (v.length > 2) v = '(' + v.substring(0, 2) + ') ' + v.substring(2);
+        if (v.length > 9) v = v.substring(0, 10) + '-' + v.substring(10);
+        e.target.value = v;
+        this.setCustomValidity("");
+    });
 
     // Toggle Projeto
     document.getElementById('p-apresentar')?.addEventListener('change', function () {
@@ -378,15 +416,26 @@ function init() {
         });
         document.getElementById('form-part-wrap').style.display = 'none';
         document.getElementById('success-part').style.display = 'block';
-        renderStats(); // Atualiza painel admin se aberto
+        renderStats();
     };
 
     document.getElementById('form-pal').onsubmit = async function (e) {
         const nomeField = document.getElementById('s-nome');
         const emailField = document.getElementById('s-email');
+        const telField = document.getElementById('s-tel');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
         if (nomeField.value.trim().split(/\s+/).length < 2) {
             e.preventDefault(); nomeField.setCustomValidity("Informe nome e sobrenome."); nomeField.reportValidity(); return;
         }
+        if (!emailRegex.test(emailField.value.trim())) {
+            e.preventDefault(); emailField.setCustomValidity("E-mail inválido."); emailField.reportValidity(); return;
+        }
+        const telLimpo = telField.value.replace(/\D/g, "");
+        if (telLimpo.length < 11) {
+            e.preventDefault(); telField.setCustomValidity("Informe o telefone completo."); telField.reportValidity(); return;
+        }
+
         e.preventDefault();
         const btn = document.getElementById('btn-do-pal');
         btn.disabled = true;
@@ -395,18 +444,17 @@ function init() {
             const b64C = await fileToBase64(document.getElementById('s-curr').files[0]);
             addInscrito({
                 tipo: 'palestrante', nome: nomeField.value.trim(), email: emailField.value.trim(),
-                telefone: document.getElementById('s-tel').value, tema: document.getElementById('s-tema').value.trim(),
+                telefone: telField.value, tema: document.getElementById('s-tema').value.trim(),
                 tempo: document.getElementById('s-tempo').value, briefing: b64B, curriculo: b64C
             });
             document.getElementById('form-pal-wrap').style.display = 'none';
             document.getElementById('success-pal').style.display = 'block';
-            renderStats(); // Atualiza painel admin se aberto
+            renderStats();
         } catch (err) { alert("Erro nos arquivos."); } finally { btn.disabled = false; }
     };
 
     if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
 
-    // Countdown
     const TARGET = new Date('2026-06-01T19:00:00-03:00').getTime();
     setInterval(() => {
         const diff = TARGET - Date.now();

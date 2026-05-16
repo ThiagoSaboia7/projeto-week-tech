@@ -1484,12 +1484,24 @@ nav {
    ADMIN DASHBOARD
 ════════════════════════════════════════ */
 #admin-panel {
-    display: none;
     position: fixed;
     inset: 0;
     z-index: 2000;
     background: #f4f6fb;
     overflow-y: auto;
+}
+
+.admin-main {
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
 .admin-nav {
@@ -1617,6 +1629,137 @@ nav {
     margin-top: 4px;
 }
 
+/* 1. Container da tabela */
+#admin-table-container {
+    width: 100%;
+    overflow-x: auto;
+    max-height: 600px;
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+}
+
+/* 2. Configuração Base da Tabela */
+.admin-table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+    /* Mudei para collapse para bordas mais finas */
+    table-layout: fixed;
+    /* Ajuda a manter as larguras das colunas consistentes */
+}
+
+/* 3. Cabeçalho Fixo */
+.admin-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #fafbfd;
+    padding: 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: #8a93b8;
+    border-bottom: 2px solid #eef0f8;
+}
+
+/* 4. Células (Corrigido) */
+.admin-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #444;
+    border-bottom: 1px solid #f0f2f8;
+    vertical-align: middle;
+    /* Truncamento de texto simples e eficiente */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 5. Definição de Largura das Colunas (Ajuste conforme necessário) */
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+    width: 50px;
+}
+
+/* # */
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+    width: 200px;
+}
+
+/* Nome */
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3) {
+    width: 120px;
+}
+
+/* R.A */
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4) {
+    width: 180px;
+}
+
+/* Curso */
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5) {
+    width: 80px;
+}
+
+/* Coffee */
+.admin-table th:nth-child(6),
+.admin-table td:nth-child(6) {
+    width: 120px;
+}
+
+/* Projeto */
+.admin-table th:nth-child(7),
+.admin-table td:nth-child(7) {
+    width: 150px;
+}
+
+/* Github */
+.admin-table th:nth-child(8),
+.admin-table td:nth-child(8) {
+    width: 120px;
+}
+
+/* Data */
+
+/* 6. Efeito de Hover na Linha (Melhor UX) */
+.admin-table tr:hover td {
+    background-color: #f8faff;
+    white-space: normal;
+    /* Opcional: expande apenas se você quiser ver o texto todo */
+    overflow: visible;
+    word-break: break-word;
+    position: relative;
+}
+
+/* Ajuste específico para o checkbox ou ícones se houver */
+.admin-table td strong {
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* Estilo para o link de download */
+.btn-download {
+    padding: 6px 12px;
+    background: #f0f4ff;
+    color: #0c1d5e;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.btn-download:hover {
+    background: #0c1d5e;
+    color: #fff;
+}
+
 .admin-tabs {
     display: flex;
     gap: 4px;
@@ -1650,16 +1793,10 @@ nav {
     background: var(--white);
     border-radius: 16px;
     border: 1px solid #e8ecf6;
-    box-shadow: 0 2px 10px rgba(12, 29, 94, .04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-}
-
-#admin-table-container {
-    max-height: 600px;
-    overflow-y: auto;
-    position: relative;
 }
 
 .admin-table-header {
@@ -1670,15 +1807,6 @@ nav {
     border-bottom: 1px solid #eef0f8;
     flex-wrap: wrap;
     gap: 10px;
-}
-
-.admin-table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: #fafbfd;
-    padding: 14px 16px;
-    box-shadow: inset 0 -1px 0 #eef0f8;
 }
 
 #admin-table-container::-webkit-scrollbar {
@@ -1729,11 +1857,6 @@ nav {
     flex-shrink: 0;
 }
 
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
 .admin-table th {
     text-align: left;
     font-size: 10.5px;
@@ -1746,19 +1869,34 @@ nav {
     border-bottom: 1px solid #eef0f8;
 }
 
+/* Quando passar o mouse, a célula expande e mostra tudo */
+.admin-table td:hover {
+    white-space: normal;
+    /* Permite quebrar linha */
+    overflow: visible;
+    /* Mostra o texto que estava escondido */
+    word-break: break-all;
+    /* Garante que textos sem espaço (ex: ffffff) quebrem */
+    background: #f9faff;
+    /* Dá um leve destaque na célula que você está lendo */
+    position: relative;
+    z-index: 50;
+}
+
+.admin-table th,
 .admin-table td {
-    padding: 13px 16px;
-    font-size: 13px;
-    color: var(--text);
+    padding: 14px 16px;
+    text-align: left;
     border-bottom: 1px solid #f0f2f8;
+    vertical-align: middle;
+    /* ABAIXO: Garante que o texto longo não quebre a tabela */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .admin-table tr:last-child td {
     border-bottom: none;
-}
-
-.admin-table tr:hover td {
-    background: #fafbff;
 }
 
 .badge {
@@ -1920,7 +2058,7 @@ nav {
     }
 
     .admin-main {
-        padding: 24px 16px;
+        padding-top: 20px;
     }
 
     .admin-nav {
@@ -2338,6 +2476,10 @@ nav {
 
 body.admin-logged-in .faq-floating-container {
     display: none !important;
+}
+
+body.admin-logged-in {
+    overflow: hidden !important;
 }
 
 /* Efeito de Blur no FAQ quando um modal estiver aberto */
