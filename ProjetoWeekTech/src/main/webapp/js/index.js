@@ -56,7 +56,7 @@ function closeModal(id) {
 }
 
 /* ════════════════════════════════════════
-   LOGICA DO CAROUSEL
+   LOGICA DO CAROUSEL (3 DOTS + TRAVA DE FIM)
    ════════════════════════════════════════ */
 function setupCarousel() {
     const track = document.getElementById('track');
@@ -67,11 +67,7 @@ function setupCarousel() {
 
     if (!track || !dotsContainer) return;
 
-    let isDragging = false;
-    let startPos = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-    let currentIndex = 0;
+    let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0, currentIndex = 0;
 
     dotsContainer.innerHTML = '';
     for (let i = 0; i < 3; i++) {
@@ -83,9 +79,7 @@ function setupCarousel() {
     }
     const dots = Array.from(dotsContainer.children);
 
-    function getMaxTranslate() {
-        return track.scrollWidth - outer.offsetWidth;
-    }
+    function getMaxTranslate() { return track.scrollWidth - outer.offsetWidth; }
 
     function goToPage(index) {
         const maxScroll = getMaxTranslate();
@@ -107,102 +101,83 @@ function setupCarousel() {
         dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
     }
 
-    track.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startPos = e.pageX;
-        track.style.transition = 'none';
-        track.style.cursor = 'grabbing';
-    });
+    track.addEventListener('mousedown', dragStart);
+    track.addEventListener('mousemove', dragMove);
+    track.addEventListener('mouseup', dragEnd);
+    track.addEventListener('mouseleave', dragEnd);
+    track.addEventListener('touchstart', dragStart);
+    track.addEventListener('touchmove', dragMove);
+    track.addEventListener('touchend', dragEnd);
 
-    window.addEventListener('mousemove', (e) => {
+    function dragStart(e) { isDragging = true; startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; track.style.transition = 'none'; track.style.cursor = 'grabbing'; }
+    function dragMove(e) {
         if (!isDragging) return;
-        const currentPosition = e.pageX;
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
         let move = prevTranslate + currentPosition - startPos;
         if (move > 0) move = 0;
         const maxScroll = getMaxTranslate();
         if (move < -maxScroll) move = -maxScroll;
         currentTranslate = move;
         track.style.transform = `translateX(${currentTranslate}px)`;
-    });
-
-    window.addEventListener('mouseup', () => {
+    }
+    function dragEnd() {
         if (!isDragging) return;
-        isDragging = false;
-        track.style.cursor = 'grab';
+        isDragging = false; track.style.cursor = 'grab';
         prevTranslate = currentTranslate;
         const maxScroll = getMaxTranslate();
         const percent = Math.abs(currentTranslate) / (maxScroll || 1);
-        if (percent < 0.25) currentIndex = 0;
-        else if (percent < 0.75) currentIndex = 1;
-        else currentIndex = 2;
-        applyPosition();
-        updateDots();
-    });
-
+        if (percent < 0.25) currentIndex = 0; else if (percent < 0.75) currentIndex = 1; else currentIndex = 2;
+        applyPosition(); updateDots();
+    }
     if (nextBtn) nextBtn.onclick = () => { if (currentIndex < 2) goToPage(currentIndex + 1); };
     if (prevBtn) prevBtn.onclick = () => { if (currentIndex > 0) goToPage(currentIndex - 1); };
 }
 
 /* ════════════════════════════════════════
-   ADMIN E LOGIN
+   ADMIN: LOGIN E PAINEL
    ════════════════════════════════════════ */
+let currentTab = 'participante';
+
 function doLogin() {
     const emailField = document.getElementById('login-email');
     const senhaField = document.getElementById('login-senha');
-    if (emailField.value.trim() === ADMIN_EMAIL && senhaField.value === ADMIN_SENHA) {
-        sessionStorage.setItem('tw_admin', '1');
-        closeModal('modal-login');
-        openAdmin();
-    } else {
-        emailField.setCustomValidity("E-mail ou Senha incorretos.");
+
+    const email = emailField.value.trim();
+    const senha = senhaField.value.trim();
+
+    emailField.setCustomValidity('');
+    senhaField.setCustomValidity('');
+
+    if (!email || !senha) {
+        emailField.setCustomValidity("Preencha o E-mail e a Senha");
         emailField.reportValidity();
+        return;
     }
-}
 
-function renderStats() {
-    const all = getInscritos();
-    const total = all.length;
-    const parts = all.filter(i => i.tipo === 'participante').length;
-    const pals = all.filter(i => i.tipo === 'palestrante').length;
-
-    // DEFINIÇÃO DA VARIÁVEL (O que estava faltando)
-    const statsEl = document.getElementById('admin-stats');
-
-    if (statsEl) {
-        statsEl.innerHTML = `
-            <div class="stat-card">
-                <div class="stat-label">Total Geral</div>
-                <div class="stat-value">${total}</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Participantes</div>
-                <div class="stat-value">${parts}</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Palestrantes</div>
-                <div class="stat-value">${pals}</div>
-            </div>
-        `;
+    if (email !== ADMIN_EMAIL || senha !== ADMIN_SENHA) {
+        senhaField.setCustomValidity("E-mail ou Senha Incorretos");
+        senhaField.reportValidity();
+        return;
     }
+
+    sessionStorage.setItem('tw_admin', '1');
+    closeModal('modal-login');
+    openAdmin();
 }
 
 function openAdmin() {
     document.body.classList.add('admin-logged-in');
+
     const panel = document.getElementById('admin-panel');
     const faq = document.querySelector('.faq-floating-container');
 
     if (panel) {
         panel.style.display = 'block';
 
-        // --- NOVO: ATIVA O BOTÃO VISUALMENTE ---
         const tabs = document.querySelectorAll('.admin-tab');
         tabs.forEach(btn => {
-            // Se o texto do botão for 'Participantes', ele ganha a cor de ativo
-            if (btn.innerText.includes('Participantes')) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
+            if (btn.innerText.includes('Participantes')) btn.classList.add('active');
+            else btn.classList.remove('active');
         });
 
         renderStats();
@@ -216,8 +191,6 @@ function logout() {
     window.location.reload();
 }
 
-let currentTab = 'participante';
-
 function switchTab(tab, btn) {
     currentTab = tab;
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -225,29 +198,39 @@ function switchTab(tab, btn) {
     renderTable();
 }
 
+function renderStats() {
+    const all = getInscritos();
+    const parts = all.filter(i => i.tipo === 'participante').length;
+    const pals = all.filter(i => i.tipo === 'palestrante').length;
+    const total = all.length;
+    const statsEl = document.getElementById('admin-stats');
+    if (statsEl) {
+        statsEl.innerHTML = `
+            <div class="stat-card"><div class="stat-label">Total Geral</div><div class="stat-value">${total}</div></div>
+            <div class="stat-card"><div class="stat-label">Participantes</div><div class="stat-value">${parts}</div></div>
+            <div class="stat-card"><div class="stat-label">Palestrantes</div><div class="stat-value">${pals}</div></div>`;
+    }
+}
+
 function renderTable() {
     const container = document.getElementById('admin-table-container');
+    if (!container) return;
+
     const all = getInscritos();
     const q = document.getElementById('admin-search-input').value.toLowerCase();
 
     let data = all.filter(i => i.tipo === currentTab);
+
     if (q) {
         data = data.filter(i => {
-            const nomeMatch = i.nome.toLowerCase().includes(q);
-            if (currentTab === 'participante') {
-                return nomeMatch || (i.ra && i.ra.toLowerCase().includes(q));
-            } else {
-                return nomeMatch || (i.email && i.email.toLowerCase().includes(q));
-            }
+            const nMatch = i.nome.toLowerCase().includes(q);
+            if (currentTab === 'participante') return nMatch || (i.ra && i.ra.toLowerCase().includes(q));
+            return nMatch || (i.email && i.email.toLowerCase().includes(q));
         });
     }
 
-    if (!data.length) {
-        container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado.</p>";
-        return;
-    }
+    if (!data.length) { container.innerHTML = "<p style='padding:20px'>Nenhum registro encontrado.</p>"; return; }
 
-    // CABEÇALHO: Definido separadamente para cada aba
     let html = `<thead><tr><th>#</th><th>Nome</th>`;
     if (currentTab === 'participante') {
         html += `<th>R.A</th><th>Curso</th><th>Coffee</th><th>Projeto</th><th>GitHub</th><th>Data</th>`;
@@ -256,34 +239,18 @@ function renderTable() {
     }
     html += `</tr></thead><tbody>`;
 
-    // LINHAS
     data.forEach((i, idx) => {
         html += `<tr><td>${idx + 1}</td><td title="${i.nome}"><strong>${i.nome}</strong></td>`;
-
         if (currentTab === 'participante') {
             const projInfo = i.projeto ? `Sim (${i.integrantes})` : 'Não';
-            html += `
-                <td>${i.ra}</td>
-                <td title="${i.curso}">${i.curso}</td>
-                <td>${i.coffee ? '✅ Sim' : '❌ Não'}</td>
-                <td>${projInfo}</td>
-                <td>${i.link ? `<a href="${i.link}" target="_blank" class="btn-download">Link</a>` : '-'}</td>
-                <td>${i.data}</td>`;
+            html += `<td>${i.ra}</td><td title="${i.curso}">${i.curso}</td><td>${i.coffee ? '✅ Sim' : '❌ Não'}</td><td>${projInfo}</td><td>${i.link ? `<a href="${i.link}" target="_blank" class="btn-download">Ver</a>` : '-'}</td><td>${i.data}</td>`;
         } else {
             const linkBriefing = i.briefing ? `<a href="${i.briefing}" download="briefing_${i.nome}" class="btn-download">📄 Briefing</a>` : '—';
             const linkCurr = i.curriculo ? `<a href="${i.curriculo}" download="curriculo_${i.nome}" class="btn-download">👤 Currículo</a>` : '—';
-            html += `
-                <td title="${i.email}">${i.email}</td>
-                <td>${i.telefone}</td>
-                <td title="${i.tema}">${i.tema}</td>
-                <td>${i.tempo || '-'}</td>
-                <td>${linkBriefing}</td>
-                <td>${linkCurr}</td>
-                <td>${i.data}</td>`;
+            html += `<td>${i.email}</td><td>${i.telefone}</td><td title="${i.tema}">${i.tema}</td><td>${i.tempo || '-'}</td><td>${linkBriefing}</td><td>${linkCurr}</td><td>${i.data}</td>`;
         }
         html += `</tr>`;
     });
-
     container.innerHTML = `<table class="admin-table">${html}</tbody></table>`;
 }
 
@@ -296,7 +263,7 @@ function exportCSV() {
 }
 
 /* ════════════════════════════════════════
-   INICIALIZAÇÃO E EVENTOS
+   INICIALIZAÇÃO FINAL
    ════════════════════════════════════════ */
 function init() {
     setupCarousel();
@@ -305,7 +272,7 @@ function init() {
     const intInput = document.getElementById('p-integrantes');
     const intLabel = document.getElementById('integrantes-label');
 
-    // LOGICA DO STEPPER 
+    // Stepper Logica
     document.getElementById('inc-int').onclick = (e) => {
         e.preventDefault();
         let v = parseInt(intInput.value);
@@ -317,14 +284,14 @@ function init() {
         if (v > 1) { intInput.value = v - 1; intLabel.textContent = (v - 1 === 1) ? "1 Integrante" : (v - 1) + " Integrantes"; }
     };
 
-    window.addEventListener('click', function (e) {
+    // FAQ fechar fora
+    window.addEventListener('click', (e) => {
         const faqContainer = document.querySelector('.faq-floating-container');
         const faqToggle = document.getElementById('faq-toggle');
-        if (faqToggle?.checked && faqContainer && !faqContainer.contains(e.target)) {
-            faqToggle.checked = false;
-        }
+        if (faqToggle?.checked && faqContainer && !faqContainer.contains(e.target)) faqToggle.checked = false;
     });
 
+    // Cliques principais
     document.getElementById('btn-open-login').onclick = () => sessionStorage.getItem('tw_admin') === '1' ? openAdmin() : openModal('modal-login');
     document.getElementById('btn-do-login').onclick = doLogin;
     document.getElementById('close-login').onclick = () => closeModal('modal-login');
@@ -351,64 +318,53 @@ function init() {
     };
     document.getElementById('close-pal').onclick = () => closeModal('modal-pal');
 
-    // Máscaras (BLOQUEIO DE NÚMEROS E MELHORIA NO BACKSPACE)
-    document.getElementById('p-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); this.setCustomValidity(""); });
-    document.getElementById('s-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); this.setCustomValidity(""); });
-
-    document.getElementById('p-ra')?.addEventListener('input', function (e) {
-        let v = e.target.value.replace(/\D/g, "");
-        v = v.substring(0, 9);
-        if (v.length > 8) v = v.replace(/^(\d{8})(\d)/, "$1-$2");
-        e.target.value = v;
-        this.setCustomValidity("");
+    // Máscaras e Limpeza de Erro
+    const inputs = ['login-email', 'login-senha', 'p-nome', 'p-ra', 's-nome', 's-email', 's-tel'];
+    inputs.forEach(id => {
+        document.getElementById(id)?.addEventListener('input', function () { this.setCustomValidity(""); });
     });
 
-    document.getElementById('s-email')?.addEventListener('input', function () { this.setCustomValidity(""); });
+    document.getElementById('p-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); });
+    document.getElementById('s-nome')?.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ""); });
 
-    // MÁSCARA TELEFONE CORRIGIDA PARA APAGAR FLUIDO
+    document.getElementById('p-ra')?.addEventListener('input', function (e) {
+        let v = e.target.value.replace(/\D/g, "").substring(0, 9);
+        if (v.length > 8) v = v.replace(/^(\d{8})(\d)/, "$1-$2");
+        e.target.value = v;
+    });
+
     document.getElementById('s-tel')?.addEventListener('input', function (e) {
-        if (e.inputType === "deleteContentBackward") return; // Permite apagar sem conflito
-        let v = e.target.value.replace(/\D/g, '');
-        v = v.substring(0, 11);
+        if (e.inputType === "deleteContentBackward") return;
+        let v = e.target.value.replace(/\D/g, '').substring(0, 11);
         if (v.length > 2) v = '(' + v.substring(0, 2) + ') ' + v.substring(2);
         if (v.length > 9) v = v.substring(0, 10) + '-' + v.substring(10);
         e.target.value = v;
-        this.setCustomValidity("");
     });
 
     // Toggle Projeto
     document.getElementById('p-apresentar')?.addEventListener('change', function () {
-        const submitContainer = document.getElementById('submit-container');
-        const linkInput = document.getElementById('p-link');
+        const link = document.getElementById('p-link');
         if (this.checked) {
             projetoSection.style.display = 'block';
             setTimeout(() => projetoSection.classList.add('open'), 10);
-            projetoSection.after(submitContainer);
-            linkInput.required = true;
+            link.required = true;
         } else {
             projetoSection.classList.remove('open');
             setTimeout(() => { if (!this.checked) projetoSection.style.display = 'none'; }, 400);
-            document.getElementById('registroForm').appendChild(submitContainer);
-            linkInput.required = false;
+            link.required = false;
         }
     });
 
-    // Submits
+    // Submit Participante
     document.getElementById('registroForm').onsubmit = function (e) {
-        const nomeField = document.getElementById('p-nome');
-        const raField = document.getElementById('p-ra');
-        if (nomeField.value.trim().split(/\s+/).length < 2) {
-            e.preventDefault(); nomeField.setCustomValidity("Informe nome e sobrenome."); nomeField.reportValidity(); return;
-        }
-        if (raField.value.length < 10) {
-            e.preventDefault(); raField.setCustomValidity("O R.A. deve estar completo."); raField.reportValidity(); return;
-        }
-        if (getInscritos().some(i => i.ra === raField.value)) {
-            e.preventDefault(); raField.setCustomValidity("Este R.A. já está cadastrado."); raField.reportValidity(); return;
-        }
+        const n = document.getElementById('p-nome'), r = document.getElementById('p-ra');
+        if (n.value.trim().split(/\s+/).length < 2) { e.preventDefault(); n.setCustomValidity("Informe nome e sobrenome."); n.reportValidity(); return; }
+        if (r.value.length < 10) { e.preventDefault(); r.setCustomValidity("O R.A. deve estar completo."); r.reportValidity(); return; }
+        if (getInscritos().some(i => i.ra === r.value)) { e.preventDefault(); r.setCustomValidity("Este R.A. já está cadastrado."); r.reportValidity(); return; }
+
         e.preventDefault();
         addInscrito({
-            tipo: 'participante', nome: nomeField.value.trim(), ra: raField.value,
+            tipo: 'participante', nome: n.value.trim(), ra: r.value,
             curso: document.getElementById('p-curso').value, serie: document.getElementById('p-serie').value,
             coffee: document.getElementById('p-coffee').checked, projeto: document.getElementById('p-apresentar').checked,
             integrantes: document.getElementById('p-apresentar').checked ? intInput.value : '0',
@@ -419,32 +375,22 @@ function init() {
         renderStats();
     };
 
+    // Submit Palestrante
     document.getElementById('form-pal').onsubmit = async function (e) {
-        const nomeField = document.getElementById('s-nome');
-        const emailField = document.getElementById('s-email');
-        const telField = document.getElementById('s-tel');
+        const n = document.getElementById('s-nome'), em = document.getElementById('s-email'), t = document.getElementById('s-tel');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-        if (nomeField.value.trim().split(/\s+/).length < 2) {
-            e.preventDefault(); nomeField.setCustomValidity("Informe nome e sobrenome."); nomeField.reportValidity(); return;
-        }
-        if (!emailRegex.test(emailField.value.trim())) {
-            e.preventDefault(); emailField.setCustomValidity("E-mail inválido."); emailField.reportValidity(); return;
-        }
-        const telLimpo = telField.value.replace(/\D/g, "");
-        if (telLimpo.length < 11) {
-            e.preventDefault(); telField.setCustomValidity("Informe o telefone completo."); telField.reportValidity(); return;
-        }
+        if (n.value.trim().split(/\s+/).length < 2) { e.preventDefault(); n.setCustomValidity("Informe nome e sobrenome."); n.reportValidity(); return; }
+        if (!emailRegex.test(em.value.trim())) { e.preventDefault(); em.setCustomValidity("E-mail inválido."); em.reportValidity(); return; }
+        if (t.value.replace(/\D/g, "").length < 11) { e.preventDefault(); t.setCustomValidity("Telefone incompleto."); t.reportValidity(); return; }
 
         e.preventDefault();
-        const btn = document.getElementById('btn-do-pal');
-        btn.disabled = true;
+        const btn = document.getElementById('btn-do-pal'); btn.disabled = true;
         try {
             const b64B = await fileToBase64(document.getElementById('s-briefing').files[0]);
             const b64C = await fileToBase64(document.getElementById('s-curr').files[0]);
             addInscrito({
-                tipo: 'palestrante', nome: nomeField.value.trim(), email: emailField.value.trim(),
-                telefone: telField.value, tema: document.getElementById('s-tema').value.trim(),
+                tipo: 'palestrante', nome: n.value.trim(), email: em.value.trim(),
+                telefone: t.value, tema: document.getElementById('s-tema').value.trim(),
                 tempo: document.getElementById('s-tempo').value, briefing: b64B, curriculo: b64C
             });
             document.getElementById('form-pal-wrap').style.display = 'none';
@@ -453,9 +399,8 @@ function init() {
         } catch (err) { alert("Erro nos arquivos."); } finally { btn.disabled = false; }
     };
 
-    if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
-
-    const TARGET = new Date('2026-06-01T19:00:00-03:00').getTime();
+    // Countdown 19:00
+    const TARGET = new Date('2026-05-19T00:00:00-03:00').getTime();
     setInterval(() => {
         const diff = TARGET - Date.now();
         if (diff > 0) {
@@ -465,12 +410,13 @@ function init() {
             document.getElementById('cd-m').textContent = String(Math.floor(t / 60) % 60).padStart(2, '0');
             document.getElementById('cd-s').textContent = String(t % 60).padStart(2, '0');
         } else {
-            const msg = document.getElementById('fin-msg');
-            if (msg) msg.style.display = 'block';
-            const cd = document.getElementById('countdown');
-            if (cd) cd.style.display = 'none';
+            const msg = document.getElementById('fin-msg'); if (msg) msg.style.display = 'block';
+            const cd = document.getElementById('countdown'); if (cd) cd.style.display = 'none';
         }
     }, 1000);
+
+    // Persistência de Admin
+    if (sessionStorage.getItem('tw_admin') === '1') openAdmin();
 }
 
 window.onload = init;

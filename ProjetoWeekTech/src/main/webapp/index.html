@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tech Week UniCesumar</title>
+    <title>TechWeek UniCesumar</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="css/index.css" />
@@ -20,8 +20,8 @@
         <a class="logo" href="#topo">
             <img src="img/logo-unicesumar/UniCesumarLogoAzulTrans.png" alt="Logo UniCesumar">
             <div class="logo-text">
-                <div class="brand">UniCesumar</div>
-                <div class="sub">Tech Week</div>
+                <div class="brand-main">UniCesumar</div>
+                <div class="sub-main">Tech Week</div>
             </div>
         </a>
 
@@ -149,17 +149,17 @@
                         </div>
                     </div>
                     <div class="speaker-card">
-                        <img class="card-img" src="" alt="">
+                        <img class="card-img" src="img/palestrantes/palestrante-jessy.jpeg" alt="Palestrante Jessy">
                         <div class="card-body">
-                            <h3></h3>
-                            <p></p>
+                            <h3>Jessy Borges Ferracioli</h3>
+                            <p>Advogada, pesquisadora de direito e inteligência artificial na Lawgorithm, do núcleo IA e Raça.</p>
                         </div>
                     </div>
                     <div class="speaker-card">
-                        <img class="card-img" src="" alt="">
+                        <img class="card-img" src="img/palestrantes/palestrante-luciano.jpeg" alt="Palestrante Luciano">
                         <div class="card-body">
-                            <h3></h3>
-                            <p></p>
+                            <h3>Luciano Soller</h3>
+                            <p>Engenheiro da Computação, Mestre em Ciências da Computação e especialista em Engenharia de Software. Atua com desenvolvimento de Software e IA no IAPAR.</p>
                         </div>
                     </div>
                     <div class="speaker-card">
@@ -786,8 +786,7 @@
                             <div class="field">
                                 <label for="s-tempo">Tempo Estimado *</label>
                                 <select id="s-tempo" required>
-                                    <option value="">Selecione...</option>
-                                    <option value="45 minutos">45 minutos</option>
+                                    <option value="">Selecione...</option>                                 
                                     <option value="60 minutos">60 minutos</option>
                                 </select>
                             </div>
@@ -883,7 +882,7 @@
             </a>
             <div style="display:flex;align-items:center;gap:12px">
                 <span class="admin-badge">🔐 Administrador</span>
-                <button class="admin-logout" onclick="logout()">
+                <button id="btn-logout" class="admin-logout" onclick="logout()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                         <polyline points="16 17 21 12 16 7" />
