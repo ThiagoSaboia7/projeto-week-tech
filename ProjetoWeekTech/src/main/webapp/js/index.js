@@ -400,7 +400,7 @@ function init() {
     };
 
     // Countdown 19:00
-    const TARGET = new Date('2026-05-19T00:00:00-03:00').getTime();
+    const TARGET = new Date('2026-05-20T19:00:00-03:00').getTime();
     setInterval(() => {
         const diff = TARGET - Date.now();
         if (diff > 0) {
